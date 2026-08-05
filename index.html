@@ -478,44 +478,111 @@
 
     .chart-container--bubble {
       position: relative;
-      padding: 16px;
-      overflow: hidden;
+      padding: 20px 16px 12px;
+      overflow: visible;
+    }
+
+    .bubble-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin: 0 4px 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .bubble-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bubble-legend .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0.85;
+      flex-shrink: 0;
     }
 
     .bubble-chart {
       width: 100%;
-      height: min(72vw, 640px);
-      min-height: 420px;
+      height: min(78vw, 620px);
+      min-height: 440px;
     }
 
     .bubble-chart svg {
       width: 100%;
       height: 100%;
       display: block;
+      overflow: visible;
     }
 
-    .bubble-chart circle {
+    .bubble-chart .axis-line {
+      stroke: #ddd;
+      stroke-width: 1;
+    }
+
+    .bubble-chart .grid-line {
+      stroke: #eee;
+      stroke-width: 1;
+      stroke-dasharray: 4 4;
+    }
+
+    .bubble-chart .median-line {
+      stroke: #ccc;
+      stroke-width: 1.25;
+      stroke-dasharray: 6 4;
+    }
+
+    .bubble-chart .tick-label {
+      fill: #999;
+      font-family: inherit;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bubble-chart .axis-title {
+      fill: var(--muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .bubble-chart .plot-bg {
+      fill: #FBFBFB;
+    }
+
+    .bubble-chart circle.bubble {
       fill: var(--orange);
-      fill-opacity: 0.88;
+      fill-opacity: 0.72;
       stroke: #fff;
       stroke-width: 1.5;
       cursor: pointer;
-      transition: fill-opacity 0.2s, stroke-width 0.2s;
+      transition: fill-opacity 0.15s, stroke-width 0.15s;
     }
 
-    .bubble-chart circle:hover,
-    .bubble-chart circle.is-active {
+    .bubble-chart circle.bubble:hover,
+    .bubble-chart circle.bubble.is-active {
       fill-opacity: 1;
       stroke-width: 2.5;
+      stroke: #1A1A1A;
     }
 
     .bubble-chart .bubble-label {
-      fill: #fff;
+      fill: var(--text);
       font-family: inherit;
       font-weight: 600;
+      font-size: 11px;
       pointer-events: none;
-      text-anchor: middle;
+      text-anchor: start;
       dominant-baseline: middle;
+    }
+
+    .bubble-chart .bubble-label-bg {
+      fill: rgba(255, 255, 255, 0.88);
+      pointer-events: none;
     }
 
     .bubble-tooltip {
@@ -529,19 +596,31 @@
       font-size: 14px;
       line-height: 1.45;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-      max-width: 260px;
-      transform: translate(-50%, calc(-100% - 12px));
+      max-width: 280px;
+      transform: translate(-50%, calc(-100% - 14px));
     }
 
     .bubble-tooltip strong {
       display: block;
       font-size: 15px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+    }
+
+    .bubble-tooltip .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .bubble-tooltip .row span:first-child {
+      color: #bbb;
     }
 
     .bubble-tooltip .muted {
       color: #bbb;
       font-size: 13px;
+      margin-top: 6px;
     }
 
     .bubble-tooltip::after {
@@ -868,6 +947,7 @@
     <nav class="nav" id="nav">
       <a href="#about">О рейтинге</a>
       <a href="#rating">Рейтинг</a>
+      <a href="#scale">Карта эффекта</a>
       <a href="#method">Методология</a>
     </nav>
   </div>
@@ -931,14 +1011,18 @@
     </div>
   </section>
 
-  <!-- Scale -->
+  <!-- Scale × Efficiency scatter -->
   <section class="section section--alt" id="scale">
     <div class="container">
-      <h2 class="section-title">Объем экономик <span class="accent">агломераций</span></h2>
-      <p class="section-subtitle">По валовому городскому продукту (ВГП), доля от экономики Москвы</p>
+      <h2 class="section-title">Масштаб и <span class="accent">эффективность</span></h2>
+      <p class="section-subtitle">Каждый кружок — агломерация. Ось X — субиндекс масштаба, ось Y — субиндекс эффективности. Площадь круга пропорциональна абсолютному ВГП. Наведите курсор, чтобы увидеть цифры.</p>
 
       <div class="chart-container chart-container--bubble">
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма объема ВГП агломераций"></div>
+        <div class="bubble-legend" aria-hidden="true">
+          <span><i class="swatch"></i> Площадь = ВГП, трлн ₽</span>
+          <span>Пунктир — медианы по осям</span>
+        </div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, площадь круга — ВГП"></div>
         <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
       </div>
     </div>
@@ -1233,137 +1317,281 @@
     });
   });
 
-  /* Scale bubble chart */
-  function packBubbles(items, width, height) {
-    var maxVgp = items[0].vgp;
-    var maxR = Math.min(width, height) * 0.22;
-    var minR = 8;
-    var nodes = items.map(function (d) {
-      var r = Math.sqrt(d.vgp / maxVgp) * maxR;
-      return {
-        data: d,
-        r: Math.max(minR, r),
-        x: width / 2 + (Math.random() - 0.5) * width * 0.2,
-        y: height / 2 + (Math.random() - 0.5) * height * 0.2
-      };
-    });
+  /* Scale × Efficiency bubble scatter */
+  function median(values) {
+    var arr = values.slice().sort(function (a, b) { return a - b; });
+    var mid = Math.floor(arr.length / 2);
+    return arr.length % 2 ? arr[mid] : (arr[mid - 1] + arr[mid]) / 2;
+  }
 
-    // Sort large first — place biggest near center
-    nodes.sort(function (a, b) { return b.r - a.r; });
-    nodes[0].x = width / 2;
-    nodes[0].y = height / 2;
-
-    var padding = 2;
-    for (var iter = 0; iter < 220; iter++) {
-      for (var i = 0; i < nodes.length; i++) {
-        for (var j = i + 1; j < nodes.length; j++) {
-          var a = nodes[i], b = nodes[j];
-          var dx = b.x - a.x;
-          var dy = b.y - a.y;
-          var dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-          var minDist = a.r + b.r + padding;
-          if (dist < minDist) {
-            var push = (minDist - dist) / dist * 0.5;
-            var ox = dx * push;
-            var oy = dy * push;
-            if (i === 0) {
-              b.x += ox * 2;
-              b.y += oy * 2;
-            } else {
-              a.x -= ox;
-              a.y -= oy;
-              b.x += ox;
-              b.y += oy;
-            }
-          }
-        }
-      }
-      // Soft pull to center + keep in bounds
-      for (var k = 1; k < nodes.length; k++) {
-        var n = nodes[k];
-        n.x += (width / 2 - n.x) * 0.015;
-        n.y += (height / 2 - n.y) * 0.015;
-        n.x = Math.max(n.r + 4, Math.min(width - n.r - 4, n.x));
-        n.y = Math.max(n.r + 4, Math.min(height - n.r - 4, n.y));
-      }
-    }
-    return nodes;
+  function shortAggloName(name) {
+    return name
+      .replace(/ско-/g, '-')
+      .replace(/ская$/, '')
+      .replace(/ая$/, '');
   }
 
   function renderBubbleChart(containerId, items) {
     var wrap = document.getElementById(containerId);
     var tooltip = document.getElementById('bubbleTooltip');
-    var sorted = items.slice().sort(function (a, b) { return b.vgp - a.vgp; });
+    if (!wrap || !tooltip) return;
+
     var width = wrap.clientWidth || 1000;
     var height = wrap.clientHeight || 560;
-    var nodes = packBubbles(sorted, width, height);
+    var margin = { top: 18, right: 28, bottom: 48, left: 54 };
+    var plotW = Math.max(120, width - margin.left - margin.right);
+    var plotH = Math.max(120, height - margin.top - margin.bottom);
+
+    var maxVgp = Math.max.apply(null, items.map(function (d) { return d.vgp; }));
+    var maxR = Math.min(plotW, plotH) * 0.085;
+    var minR = 5;
+    var pad = maxR + 6;
+
+    function xOf(v) {
+      return margin.left + pad + v * (plotW - 2 * pad);
+    }
+    function yOf(v) {
+      return margin.top + pad + (1 - v) * (plotH - 2 * pad);
+    }
+    function rOf(vgp) {
+      return Math.max(minR, Math.sqrt(vgp / maxVgp) * maxR);
+    }
+
+    var medScale = median(items.map(function (d) { return d.scale; }));
+    var medEff = median(items.map(function (d) { return d.efficiency; }));
 
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-    nodes.forEach(function (n) {
-      var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-      var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', n.x.toFixed(1));
-      circle.setAttribute('cy', n.y.toFixed(1));
-      circle.setAttribute('r', n.r.toFixed(1));
-      circle.setAttribute('fill', '#FE6643');
-
-      circle.addEventListener('mouseenter', function (e) {
-        circle.classList.add('is-active');
-        var d = n.data;
-        var share = d.pctMoscow < 100
-          ? formatNum(d.pctMoscow, 1) + '% Москвы'
-          : 'эталон';
-        tooltip.innerHTML =
-          '<strong>' + d.name + '</strong>' +
-          'ВГП: ' + formatNum(d.vgp) + ' трлн ₽' +
-          '<div class="muted">' + share + '</div>';
-        tooltip.hidden = false;
-        positionTooltip(e);
+    function el(name, attrs) {
+      var node = document.createElementNS('http://www.w3.org/2000/svg', name);
+      Object.keys(attrs || {}).forEach(function (k) {
+        node.setAttribute(k, attrs[k]);
       });
-      circle.addEventListener('mousemove', positionTooltip);
-      circle.addEventListener('mouseleave', function () {
-        circle.classList.remove('is-active');
-        tooltip.hidden = true;
-      });
+      return node;
+    }
 
-      g.appendChild(circle);
+    // Plot background
+    svg.appendChild(el('rect', {
+      class: 'plot-bg',
+      x: margin.left,
+      y: margin.top,
+      width: plotW,
+      height: plotH,
+      rx: 8
+    }));
 
-      if (n.r >= 22) {
-        var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        label.setAttribute('class', 'bubble-label');
-        label.setAttribute('x', n.x.toFixed(1));
-        label.setAttribute('y', n.y.toFixed(1));
-        var fontSize = Math.max(9, Math.min(15, n.r * 0.28));
-        label.setAttribute('font-size', fontSize);
-        var shortName = n.data.name.replace(/ская$/, '').replace(/ая$/, '');
-        if (n.r < 36 && shortName.length > 10) {
-          shortName = shortName.slice(0, 9) + '…';
-        }
-        label.textContent = shortName;
-        g.appendChild(label);
+    // Grid + ticks
+    var ticks = [0, 0.25, 0.5, 0.75, 1];
+    ticks.forEach(function (t) {
+      var x = xOf(t);
+      var y = yOf(t);
+      if (t > 0 && t < 1) {
+        svg.appendChild(el('line', {
+          class: 'grid-line',
+          x1: x, y1: margin.top, x2: x, y2: margin.top + plotH
+        }));
+        svg.appendChild(el('line', {
+          class: 'grid-line',
+          x1: margin.left, y1: y, x2: margin.left + plotW, y2: y
+        }));
       }
+      var xLabel = el('text', {
+        class: 'tick-label',
+        x: x,
+        y: margin.top + plotH + 18,
+        'text-anchor': 'middle'
+      });
+      xLabel.textContent = String(t).replace('.', ',');
+      svg.appendChild(xLabel);
 
-      svg.appendChild(g);
+      var yLabel = el('text', {
+        class: 'tick-label',
+        x: margin.left - 10,
+        y: y + 4,
+        'text-anchor': 'end'
+      });
+      yLabel.textContent = String(t).replace('.', ',');
+      svg.appendChild(yLabel);
     });
 
-    wrap.innerHTML = '';
-    wrap.appendChild(svg);
+    // Axes
+    svg.appendChild(el('line', {
+      class: 'axis-line',
+      x1: margin.left, y1: margin.top + plotH,
+      x2: margin.left + plotW, y2: margin.top + plotH
+    }));
+    svg.appendChild(el('line', {
+      class: 'axis-line',
+      x1: margin.left, y1: margin.top,
+      x2: margin.left, y2: margin.top + plotH
+    }));
+
+    // Median guides
+    svg.appendChild(el('line', {
+      class: 'median-line',
+      x1: xOf(medScale), y1: margin.top,
+      x2: xOf(medScale), y2: margin.top + plotH
+    }));
+    svg.appendChild(el('line', {
+      class: 'median-line',
+      x1: margin.left, y1: yOf(medEff),
+      x2: margin.left + plotW, y2: yOf(medEff)
+    }));
+
+    // Axis titles
+    var xTitle = el('text', {
+      class: 'axis-title',
+      x: margin.left + plotW / 2,
+      y: height - 8,
+      'text-anchor': 'middle'
+    });
+    xTitle.textContent = 'Субиндекс масштаба →';
+    svg.appendChild(xTitle);
+
+    var yTitle = el('text', {
+      class: 'axis-title',
+      x: 16,
+      y: margin.top + plotH / 2,
+      'text-anchor': 'middle',
+      transform: 'rotate(-90 16 ' + (margin.top + plotH / 2) + ')'
+    });
+    yTitle.textContent = 'Субиндекс эффективности →';
+    svg.appendChild(yTitle);
+
+    // Nodes: large first (underneath), small on top for hit-testing
+    var nodes = items.map(function (d) {
+      return {
+        data: d,
+        x: xOf(d.scale),
+        y: yOf(d.efficiency),
+        r: rOf(d.vgp)
+      };
+    }).sort(function (a, b) { return b.r - a.r; });
+
+    var bubblesLayer = el('g', { class: 'bubbles' });
+    var labelsLayer = el('g', { class: 'labels' });
+    var activeCircle = null;
+    var pinned = false;
+
+    function hideTooltip() {
+      if (pinned) return;
+      if (activeCircle) activeCircle.classList.remove('is-active');
+      activeCircle = null;
+      tooltip.hidden = true;
+    }
+
+    function showTooltip(n, circle, evt) {
+      if (activeCircle && activeCircle !== circle) {
+        activeCircle.classList.remove('is-active');
+      }
+      activeCircle = circle;
+      circle.classList.add('is-active');
+      var d = n.data;
+      tooltip.innerHTML =
+        '<strong>' + d.name + '</strong>' +
+        '<div class="row"><span>Масштаб</span><span>' + formatNum(d.scale) + '</span></div>' +
+        '<div class="row"><span>Эффективность</span><span>' + formatNum(d.efficiency) + '</span></div>' +
+        '<div class="row"><span>ВГП</span><span>' + formatNum(d.vgp) + ' трлн ₽</span></div>' +
+        '<div class="row"><span>Место в рейтинге</span><span>' + d.rank + '</span></div>' +
+        '<div class="muted">Площадь круга ∝ ВГП</div>';
+      tooltip.hidden = false;
+      positionTooltip(evt);
+    }
 
     function positionTooltip(e) {
       var host = wrap.parentElement;
       var rect = host.getBoundingClientRect();
       var x = e.clientX - rect.left;
       var y = e.clientY - rect.top;
+      var tipW = tooltip.offsetWidth || 200;
+      x = Math.max(tipW / 2 + 8, Math.min(rect.width - tipW / 2 - 8, x));
+      y = Math.max(12, y);
       tooltip.style.left = x + 'px';
       tooltip.style.top = y + 'px';
     }
+
+    nodes.forEach(function (n) {
+      var circle = el('circle', {
+        class: 'bubble',
+        cx: n.x.toFixed(2),
+        cy: n.y.toFixed(2),
+        r: n.r.toFixed(2)
+      });
+
+      circle.addEventListener('mouseenter', function (e) {
+        if (pinned) return;
+        showTooltip(n, circle, e);
+      });
+      circle.addEventListener('mousemove', function (e) {
+        if (tooltip.hidden) return;
+        if (pinned && activeCircle !== circle) return;
+        positionTooltip(e);
+      });
+      circle.addEventListener('mouseleave', function () {
+        if (!pinned) hideTooltip();
+      });
+      circle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (pinned && activeCircle === circle) {
+          pinned = false;
+          hideTooltip();
+          return;
+        }
+        pinned = true;
+        showTooltip(n, circle, e);
+      });
+
+      bubblesLayer.appendChild(circle);
+    });
+
+    svg.appendChild(bubblesLayer);
+
+    // Labels for largest and/or top-efficiency outliers that aren't tiny
+    var labelCandidates = nodes
+      .filter(function (n) { return n.r >= 10 || n.data.efficiency >= 0.9 || n.data.scale >= 0.9; })
+      .slice()
+      .sort(function (a, b) {
+        return (b.data.integral50 || 0) - (a.data.integral50 || 0);
+      })
+      .slice(0, 12);
+
+    labelCandidates.forEach(function (n) {
+      var name = shortAggloName(n.data.name);
+      if (name.length > 14) name = name.slice(0, 13) + '…';
+      var lx = n.x + n.r + 6;
+      var ly = n.y;
+      // Flip label left if near right edge
+      var anchor = 'start';
+      if (lx + name.length * 6.5 > margin.left + plotW - 4) {
+        lx = n.x - n.r - 6;
+        anchor = 'end';
+      }
+      var label = el('text', {
+        class: 'bubble-label',
+        x: lx.toFixed(1),
+        y: ly.toFixed(1),
+        'text-anchor': anchor
+      });
+      label.textContent = name;
+      labelsLayer.appendChild(label);
+    });
+
+    svg.appendChild(labelsLayer);
+
+    wrap.innerHTML = '';
+    wrap.appendChild(svg);
+
+    // Click empty space to unpin
+    svg.addEventListener('click', function () {
+      if (!pinned) return;
+      pinned = false;
+      hideTooltip();
+    });
   }
 
-  var scaleAll = DATA.slice().sort(function (a, b) { return b.vgp - a.vgp; });
+  var scaleAll = DATA.slice();
   renderBubbleChart('scaleChart', scaleAll);
 
   window.addEventListener('resize', function () {

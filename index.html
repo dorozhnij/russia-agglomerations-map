@@ -345,7 +345,7 @@
     th.active .sort-icon { opacity: 1; }
 
     td {
-      padding: 13px 18px;
+      padding: 16px 18px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
 
@@ -373,11 +373,18 @@
 
     .score-bar {
       display: inline-block;
-      height: 6px;
-      border-radius: 3px;
+      height: 14px;
+      border-radius: 4px;
       background: var(--orange);
       min-width: 4px;
-      max-width: 72px;
+      max-width: 96px;
+      transform-origin: left center;
+      transition: transform 0.18s ease;
+      cursor: pointer;
+    }
+
+    .score-bar:hover {
+      transform: scaleY(1.5) scaleX(1.06);
     }
 
     .score-text { font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -1453,7 +1460,7 @@
   }
 
   function scoreBar(value, maxW) {
-    maxW = maxW || 72;
+    maxW = maxW || 96;
     var w = Math.max(4, Math.round(Math.max(0, Math.min(1, value)) * maxW));
     return '<span class="score-bar" style="width:' + w + 'px"></span>';
   }

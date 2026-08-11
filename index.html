@@ -494,6 +494,12 @@
       position: relative;
       padding: 20px 16px 12px;
       overflow: visible;
+      margin-top: 36px;
+    }
+
+    .chart-subtitle {
+      margin: 0 4px 16px;
+      max-width: none;
     }
 
     .bubble-legend {
@@ -1175,29 +1181,14 @@
   <section class="section section--alt" id="clusters">
     <div class="container">
       <h2 class="section-title">Четыре группы <span class="accent">агломераций</span></h2>
-      <p class="section-subtitle">Граница квадратов — медиана масштаба 0,26 и эффективности 0,34. Экспертные переносы: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в высокоинтенсивные узлы. Площадь круга пропорциональна ВГП. Цвет круга — группа. Внутри группы — по убыванию интегрального индекса.</p>
-
-      <div class="chart-container chart-container--bubble">
-        <div class="bubble-legend" aria-hidden="true">
-          <span><i class="swatch swatch--anchors"></i> Экономические якоря</span>
-          <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
-          <span><i class="swatch swatch--dense"></i> Высокоинтенсивные узлы</span>
-          <span><i class="swatch swatch--weak"></i> Слабо вовлеченные</span>
-          <span>Пунктир — медианы</span>
-        </div>
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, цвет — группа, площадь круга — ВГП"></div>
-        <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
-      </div>
+      <p class="section-subtitle">Граница квадратов — медиана масштаба 0,26 и эффективности 0,34. Экспертные переносы: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в высокоинтенсивные узлы. Внутри группы — по убыванию интегрального индекса.</p>
 
       <div class="cluster-grid">
         <article class="cluster-card cluster-card--anchors">
-          <div class="cluster-visual">
-            <img src="chess/rook.png" alt="Ладья — экономические якоря" width="120" height="130" loading="lazy">
-          </div>
           <h3>Экономические якоря <span class="cluster-count">(8)</span></h3>
           <div class="cluster-meta">Высокий масштаб + высокая эффективность · ~62% ВГП · ~44% населения</div>
-          <p class="cluster-desc">Дают около 62% ВГП набора из 52 агломераций при ~44% населения: и крупные по объему экономики, и сильные по эффективности. Столицы и промышленно-ресурсные узлы вроде Сургута и Набережных Челнов. Интегральный рейтинг складывает масштаб и эффективность поровну, поэтому компактный Сургут обходит Петербург: у Петербурга больше ВГП, у Сургута выше отгрузка и инвестиции на жителя и занятость.</p>
-          <ol class="cluster-list">
+          <p class="cluster-desc">Дают около 62% ВГП набора из 52 агломераций при ~44% населения: и крупные по объему экономики, и сильные по эффективности.</p>
+          <ul class="cluster-list">
             <li>Московская</li>
             <li>Сургутская</li>
             <li>Санкт-Петербургская</li>
@@ -1206,17 +1197,14 @@
             <li>Екатеринбургская</li>
             <li>Нижегородская</li>
             <li>Казанская</li>
-          </ol>
+          </ul>
         </article>
 
         <article class="cluster-card cluster-card--large">
-          <div class="cluster-visual">
-            <img src="chess/bishop.png" alt="Слон — крупные низкоинтенсивные" width="120" height="130" loading="lazy">
-          </div>
           <h3>Крупные низкоинтенсивные <span class="cluster-count">(15)</span></h3>
           <div class="cluster-meta">Высокий масштаб + низкая эффективность · ~21% ВГП · ~29% населения</div>
-          <p class="cluster-desc">Крупные региональные центры с заметным вкладом в экономику (~21% ВГП и ~29% населения), но с отгрузкой, инвестициями на жителя и занятостью ниже, чем у якорей. Сюда же экспертно отнесены Уфимская, Ижевская и Оренбургская: по объему рядом с Челябинском и Тюменью, по плотности — не тянут на якорь. Главный резерв — подтянуть интенсивность, а не наращивать размер «второй Москвы».</p>
-          <ol class="cluster-list">
+          <p class="cluster-desc">Крупные региональные центры с заметным вкладом в экономику (~21% ВГП и ~29% населения), но с отгрузкой, инвестициями на жителя и занятостью ниже, чем у якорей. Сюда же экспертно отнесены Уфимская, Ижевская и Оренбургская.</p>
+          <ul class="cluster-list">
             <li>Уфимская</li>
             <li>Самарско-Тольяттинская</li>
             <li>Краснодарская</li>
@@ -1232,17 +1220,14 @@
             <li>Волгоградская</li>
             <li>Саратовская</li>
             <li>Ставропольская</li>
-          </ol>
+          </ul>
         </article>
 
         <article class="cluster-card cluster-card--dense">
-          <div class="cluster-visual">
-            <img src="chess/knight.png" alt="Конь — высокоинтенсивные узлы" width="120" height="130" loading="lazy">
-          </div>
           <h3>Высокоинтенсивные узлы <span class="cluster-count">(15)</span></h3>
           <div class="cluster-meta">Низкий масштаб + высокая эффективность · ~10% ВГП · ~13% населения</div>
-          <p class="cluster-desc">Небольшой вклад в общий ВГП (~10%), но на жителя выше отгрузка, инвестиции и занятость. Специализированные промышленные, портовые и ресурсные узлы: Сахалин, Мурманск, Альметьевск, Тула–Новомосковск, Липецк, Владивосток, Иркутск и другие. Экономический эффект здесь не сводится к людности.</p>
-          <ol class="cluster-list">
+          <p class="cluster-desc">Небольшой вклад в общий ВГП (~10%), но на жителя выше отгрузка, инвестиции и занятость.</p>
+          <ul class="cluster-list">
             <li>Южно-Сахалинская</li>
             <li>Мурманская</li>
             <li>Альметьевская</li>
@@ -1258,17 +1243,14 @@
             <li>Орская</li>
             <li>Рязанская</li>
             <li>Кировская</li>
-          </ol>
+          </ul>
         </article>
 
         <article class="cluster-card cluster-card--weak">
-          <div class="cluster-visual">
-            <img src="chess/pawn.png" alt="Пешка — слабо вовлеченные" width="120" height="130" loading="lazy">
-          </div>
           <h3>Слабо вовлеченные агломерации <span class="cluster-count">(14)</span></h3>
           <div class="cluster-meta">Низкий масштаб + низкая эффективность · ~7% ВГП · ~14% населения</div>
           <p class="cluster-desc">Слабый вклад в ВГП (~7%) при заметной доле населения (~14%). Объем экономики невелик, а отгрузка, инвестиции на жителя и занятость ниже медианы. Для макроэкономики это скорее демографический и социальный контур, чем двигатель ВВП.</p>
-          <ol class="cluster-list">
+          <ul class="cluster-list">
             <li>Кемеровская</li>
             <li>Калининградская</li>
             <li>Ульяновско-Димитровградская</li>
@@ -1283,15 +1265,28 @@
             <li>Златоустско-Миасская</li>
             <li>Улан-Удэнская</li>
             <li>Абаканская</li>
-          </ol>
+          </ul>
         </article>
+      </div>
+
+      <div class="chart-container chart-container--bubble">
+        <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб, чем выше — тем больше эффективность, площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
+        <div class="bubble-legend" aria-hidden="true">
+          <span><i class="swatch swatch--anchors"></i> Экономические якоря</span>
+          <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
+          <span><i class="swatch swatch--dense"></i> Высокоинтенсивные узлы</span>
+          <span><i class="swatch swatch--weak"></i> Слабо вовлеченные</span>
+          <span>Пунктир — медианы</span>
+        </div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, цвет — группа, площадь круга — ВГП"></div>
+        <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
       </div>
     </div>
   </section>
 
 
-  <!-- Efficiency -->
-  <section class="section" id="efficiency">
+  <!-- Efficiency (скрыто, покажем позже) -->
+  <section class="section" id="efficiency" hidden>
     <div class="container">
       <h2 class="section-title">Кто работает <span class="accent">эффективнее всех</span></h2>
       <p class="section-subtitle">Рейтинг по субиндексу эффективности. Рядом — отгрузка и инвестиции на душу, уровень занятости. Клик по заголовку — сортировка.</p>
@@ -1743,7 +1738,7 @@
       y: height - 8,
       'text-anchor': 'middle'
     });
-    xTitle.textContent = 'Субиндекс масштаба →';
+    xTitle.textContent = 'масштаб →';
     svg.appendChild(xTitle);
 
     var yTitle = el('text', {
@@ -1753,7 +1748,7 @@
       'text-anchor': 'middle',
       transform: 'rotate(-90 16 ' + (margin.top + plotH / 2) + ')'
     });
-    yTitle.textContent = 'Субиндекс эффективности →';
+    yTitle.textContent = 'эффективность →';
     svg.appendChild(yTitle);
 
     // Nodes: large first (underneath), small on top for hit-testing

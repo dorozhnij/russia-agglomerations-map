@@ -569,8 +569,7 @@
     }
 
     .bubble-chart circle.bubble {
-      fill: var(--orange);
-      fill-opacity: 0.72;
+      fill-opacity: 0.88;
       stroke: #fff;
       stroke-width: 1.5;
       cursor: pointer;
@@ -1055,6 +1054,39 @@
       color: var(--muted);
     }
 
+    .bubble-legend .swatch--anchors { background: #FE6643; }
+    .bubble-legend .swatch--large { background: #B7E7FC; }
+    .bubble-legend .swatch--dense { background: #FFD3F0; }
+    .bubble-legend .swatch--weak { background: #F5C700; }
+
+    .bubble-chart circle.bubble {
+      fill-opacity: 0.88;
+    }
+
+    .cluster-card--anchors { border-top: 4px solid #FE6643; }
+    .cluster-card--large { border-top: 4px solid #B7E7FC; }
+    .cluster-card--dense { border-top: 4px solid #FFD3F0; }
+    .cluster-card--weak { border-top: 4px solid #F5C700; }
+
+    .cluster-count {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.85em;
+    }
+
+    .cluster-list {
+      margin: 12px 0 0;
+      padding-left: 22px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .cluster-list li {
+      padding: 2px 0;
+    }
+
+
     @media (max-width: 768px) {
       .cluster-grid { grid-template-columns: 1fr; }
       .hero-cta { flex-direction: row; gap: 16px; }
@@ -1081,8 +1113,7 @@
     <nav class="nav" id="nav">
       <a href="#about">О рейтинге</a>
       <a href="#rating">Рейтинг</a>
-      <a href="#scale">Карта эффекта</a>
-      <a href="#clusters">Кластеры</a>
+      <a href="#clusters">Группы</a>
       <a href="#method">Методология</a>
       <a class="nav-brand" href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
     </nav>
@@ -1129,103 +1160,124 @@
     </div>
   </section>
 
-  <!-- How to read ranking -->
-  <section class="section section--alt" id="explain">
-    <div class="container">
-      <h2 class="section-title">Как читать <span class="accent">рейтинг</span></h2>
-      <div class="prose-block">
-        <p>Рейтинг отвечает на вопрос: насколько агломерация важна для экономики страны — и по объему, и по эффективности работы. В выборке 52 агломерации с суммарным валовым городским продуктом 156,6 трлн руб. и населением 78,9 млн человек.</p>
-        <p>Высокая позиция — у тех, кто либо очень крупный, либо очень эффективный, либо и то и другое.</p>
-        <p>Лидеры 2024 года: Московская агломерация (около 40% ВГП всего набора), Сургутская, Санкт-Петербургская, Набережночелнинская и Южно-Сахалинская. Сургут и Набережные Челны показывают, что компактный промышленный узел может обойти многие миллионники по интегральному баллу. В Сургутской агломерации доля сектора добычи сырья составляет 70%, что и определяет высокие позиции в рейтинге. В Набережночелнинскую агломерацию входят как сами Челны, так и города Елабуга с особой экономической зоной, Нижнекамск (ПАО «Нижнекамскнефтехим») и другие населенные пункты.</p>
-        <p>В хвосте рейтинга — Абаканская, Улан-Удэнская, Златоустско-Миасская, Кавминводская и Стерлитамакская агломерации. У них небольшой масштаб и слабая интенсивность: вклад в экономику страны ограничен.</p>
-      </div>
-    </div>
-  </section>
 
 
 
-  <section class="section section--alt" id="explain">
-    <div class="container">
-      <h2 class="section-title">Что показывает <span class="accent">рейтинг</span></h2>
-      <div class="prose-block">
-        <p>Рейтинг отвечает на вопрос: насколько агломерация важна для экономики страны — и по объему, и по плотности работы. В наборе 52 агломерации с суммарным валовым городским продуктом 156,6 трлн руб. и населением 78,9 млн человек.</p>
-        <p><strong>Валовой городской продукт (ВГП)</strong> — аналог ВВП для агломерации: сколько экономики она создает за год. На нем строится субиндекс масштаба. Чем выше ВГП, тем больше вклад агломерации в общий выпуск.</p>
-        <p><strong>Субиндекс эффективности</strong> показывает, насколько интенсивно экономика работает относительно населения. В него входят три показателя: отгрузка товаров собственного производства на душу, инвестиции в основной капитал на душу и уровень занятости.</p>
-        <p><strong>Интегральный индекс</strong> складывает масштаб и эффективность в равных долях. Высокая позиция — у тех, кто либо очень крупный, либо очень интенсивный, либо и то и другое.</p>
-        <p>Лидеры 2024 года: Московская агломерация (около 40% ВГП всего набора), Сургутская, Санкт-Петербургская, Набережночелнинская и Южно-Сахалинская. Сургут и Челны показывают, что компактный промышленный узел может обойти многие миллионники по интегральному баллу.</p>
-        <p>В хвосте рейтинга — Абаканская, Улан-Удэнская, Златоустско-Миасская, Кавминводская и Стерлитамакская агломерации. У них небольшой масштаб и слабая интенсивность: вклад в выпуск страны ограничен.</p>
-        <p>Москва и Санкт-Петербург вместе дают около половины ВГП набора. Топ-10 — около 68%. Младшие 26 агломераций — около 14% ВГП при примерно 23% населения.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Scale × Efficiency scatter -->
-  <section class="section" id="scale">
-    <div class="container">
-      <h2 class="section-title">Масштаб и <span class="accent">эффективность</span></h2>
-      <p class="section-subtitle">Каждый кружок — агломерация. Ось X — субиндекс масштаба, ось Y — субиндекс эффективности. Площадь круга пропорциональна абсолютному ВГП. Наведите курсор, чтобы увидеть цифры.</p>
-
-      <div class="chart-container chart-container--bubble">
-        <div class="bubble-legend" aria-hidden="true">
-          <span><i class="swatch"></i> Площадь = ВГП, трлн ₽</span>
-          <span>Пунктир — медианы по осям</span>
-        </div>
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, площадь круга — ВГП"></div>
-        <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Four clusters -->
+  <!-- Four groups + chart -->
   <section class="section section--alt" id="clusters">
     <div class="container">
       <h2 class="section-title">Четыре группы <span class="accent">агломераций</span></h2>
-      <p class="section-subtitle">График выше делится на четыре квадрата по медианам масштаба (0,26) и эффективности (0,34). У каждой группы своя роль в экономике.</p>
+      <p class="section-subtitle">Граница квадратов — медиана масштаба 0,26 и эффективности 0,34. Площадь круга пропорциональна ВГП. Внутри группы агломерации идут по убыванию интегрального индекса.</p>
+
+      <div class="chart-container chart-container--bubble">
+        <div class="bubble-legend" aria-hidden="true">
+          <span><i class="swatch swatch--anchors"></i> Экономические якоря</span>
+          <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
+          <span><i class="swatch swatch--dense"></i> Высокоинтенсивные узлы</span>
+          <span><i class="swatch swatch--weak"></i> Слабо вовлеченные</span>
+          <span>Пунктир — медианы</span>
+        </div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, цвет — группа, площадь круга — ВГП"></div>
+        <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
+      </div>
 
       <div class="cluster-grid">
-        <article class="cluster-card">
+        <article class="cluster-card cluster-card--anchors">
           <div class="cluster-visual">
             <img src="chess/rook.png" alt="Ладья — экономические якоря" width="120" height="130" loading="lazy">
           </div>
-          <h3>Экономические якоря</h3>
-          <div class="cluster-meta">Высокий масштаб + высокая эффективность · 14 агломераций · ~69% ВГП</div>
-          <p>Реальные двигатели выпуска: и размер, и плотность. Сюда входят Москва, Санкт-Петербург, Сургут, Екатеринбург, Казань, Нижний Новгород, Уфа, Пермь, Набережные Челны и еще пять агломераций.</p>
-          <p class="cluster-examples">Также: Владивосток, Ижевск, Тула–Новомосковск, Иркутск, Оренбург.</p>
+          <h3>Экономические якоря <span class="cluster-count">(14)</span></h3>
+          <div class="cluster-meta">Высокий масштаб + высокая эффективность</div>
+          <ol class="cluster-list">
+            <li>Московская</li>
+            <li>Сургутская</li>
+            <li>Санкт-Петербургская</li>
+            <li>Набережночелнинская</li>
+            <li>Пермская</li>
+            <li>Екатеринбургская</li>
+            <li>Нижегородская</li>
+            <li>Казанская</li>
+            <li>Тульско-Новомосковская</li>
+            <li>Владивостокская</li>
+            <li>Иркутская</li>
+            <li>Уфимская</li>
+            <li>Ижевская</li>
+            <li>Оренбургская</li>
+          </ol>
         </article>
 
-        <article class="cluster-card">
+        <article class="cluster-card cluster-card--large">
           <div class="cluster-visual">
             <img src="chess/bishop.png" alt="Слон — крупные низкоинтенсивные" width="120" height="130" loading="lazy">
           </div>
-          <h3>Крупные низкоинтенсивные</h3>
-          <div class="cluster-meta">Высокий масштаб + низкая эффективность · 12 агломераций · ~17% ВГП</div>
-          <p>Много экономики и людей при слабой интенсивности на душу. Главный резерв — производительность и инвестиции, а не попытка «стать второй Москвой».</p>
-          <p class="cluster-examples">Самара–Тольятти, Краснодар, Ростов, Новосибирск, Красноярск, Челябинск, Тюмень, Омск, Воронеж, Волгоград, Ставрополь, Саратов.</p>
+          <h3>Крупные низкоинтенсивные <span class="cluster-count">(12)</span></h3>
+          <div class="cluster-meta">Высокий масштаб + низкая эффективность</div>
+          <ol class="cluster-list">
+            <li>Самарско-Тольяттинская</li>
+            <li>Краснодарская</li>
+            <li>Ростовская</li>
+            <li>Новосибирская</li>
+            <li>Челябинская</li>
+            <li>Тюменская</li>
+            <li>Воронежская</li>
+            <li>Омская</li>
+            <li>Красноярская</li>
+            <li>Волгоградская</li>
+            <li>Саратовская</li>
+            <li>Ставропольская</li>
+          </ol>
         </article>
 
-        <article class="cluster-card">
+        <article class="cluster-card cluster-card--dense">
           <div class="cluster-visual">
             <img src="chess/knight.png" alt="Конь — высокоинтенсивные узлы" width="120" height="130" loading="lazy">
           </div>
-          <h3>Высокоинтенсивные узлы</h3>
-          <div class="cluster-meta">Низкий масштаб + высокая эффективность · 12 агломераций · ~7% ВГП</div>
-          <p>Небольшой вклад в общий объем, но высокая плотность экономики. Узкая специализация дает эффект сильнее, чем ожидаешь по размеру города.</p>
-          <p class="cluster-examples">Южно-Сахалинская, Ярославско-Рыбинская, Новокузнецкая, Хабаровская, Липецкая, Рязанская, Нижнетагильская, Мурманская, Альметьевская, Кировская, Орская, Старооскольская.</p>
+          <h3>Высокоинтенсивные узлы <span class="cluster-count">(12)</span></h3>
+          <div class="cluster-meta">Низкий масштаб + высокая эффективность</div>
+          <ol class="cluster-list">
+            <li>Южно-Сахалинская</li>
+            <li>Мурманская</li>
+            <li>Альметьевская</li>
+            <li>Липецкая</li>
+            <li>Нижнетагильская</li>
+            <li>Старооскольская</li>
+            <li>Хабаровская</li>
+            <li>Новокузнецкая</li>
+            <li>Ярославско-Рыбинская</li>
+            <li>Орская</li>
+            <li>Рязанская</li>
+            <li>Кировская</li>
+          </ol>
         </article>
 
-        <article class="cluster-card">
+        <article class="cluster-card cluster-card--weak">
           <div class="cluster-visual">
             <img src="chess/pawn.png" alt="Пешка — слабо вовлеченные" width="120" height="130" loading="lazy">
           </div>
-          <h3>Слабо вовлеченные</h3>
-          <div class="cluster-meta">Низкий масштаб + низкая эффективность · 14 агломераций · ~7% ВГП</div>
-          <p>Слабый вклад в выпуск при заметной доле населения. Здесь важнее социальные и демографические вопросы, чем ставка на быстрый макроэффект.</p>
-          <p class="cluster-examples">Астрахань, Калининград, Кемерово, Махачкала, Ульяновск–Димитровград, Барнаул, Томск, Пенза, Кавминводы, Чебоксары, Златоуст–Миасс, Улан-Удэ, Стерлитамак, Абакан.</p>
+          <h3>Слабо вовлеченные агломерации <span class="cluster-count">(14)</span></h3>
+          <div class="cluster-meta">Низкий масштаб + низкая эффективность</div>
+          <ol class="cluster-list">
+            <li>Кемеровская</li>
+            <li>Калининградская</li>
+            <li>Ульяновско-Димитровградская</li>
+            <li>Барнаульская</li>
+            <li>Астраханская</li>
+            <li>Пензенская</li>
+            <li>Томская</li>
+            <li>Чебоксарская</li>
+            <li>Махачкалинская</li>
+            <li>Стерлитамакская</li>
+            <li>Кавминводская</li>
+            <li>Златоустско-Миасская</li>
+            <li>Улан-Удэнская</li>
+            <li>Абаканская</li>
+          </ol>
         </article>
       </div>
     </div>
   </section>
+
 
   <!-- Efficiency -->
   <section class="section" id="efficiency">
@@ -1516,6 +1568,30 @@
   });
 
   /* Scale × Efficiency bubble scatter */
+  var MED_SCALE = 0.26;
+  var MED_EFF = 0.34;
+  var CLUSTER_COLORS = {
+    anchors: '#FE6643',
+    large: '#B7E7FC',
+    dense: '#FFD3F0',
+    weak: '#F5C700'
+  };
+  var CLUSTER_LABELS = {
+    anchors: 'Экономические якоря',
+    large: 'Крупные низкоинтенсивные',
+    dense: 'Высокоинтенсивные узлы',
+    weak: 'Слабо вовлеченные'
+  };
+
+  function clusterKey(d) {
+    var hiS = d.scale >= MED_SCALE;
+    var hiE = d.efficiency >= MED_EFF;
+    if (hiS && hiE) return 'anchors';
+    if (hiS && !hiE) return 'large';
+    if (!hiS && hiE) return 'dense';
+    return 'weak';
+  }
+
   function median(values) {
     var arr = values.slice().sort(function (a, b) { return a - b; });
     var mid = Math.floor(arr.length / 2);
@@ -1555,8 +1631,8 @@
       return Math.max(minR, Math.sqrt(vgp / maxVgp) * maxR);
     }
 
-    var medScale = median(items.map(function (d) { return d.scale; }));
-    var medEff = median(items.map(function (d) { return d.efficiency; }));
+    var medScale = MED_SCALE;
+    var medEff = MED_EFF;
 
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
@@ -1693,6 +1769,7 @@
         '<div class="row"><span>Эффективность</span><span>' + formatNum(d.efficiency) + '</span></div>' +
         '<div class="row"><span>ВГП</span><span>' + formatNum(d.vgp) + ' трлн ₽</span></div>' +
         '<div class="row"><span>Место в рейтинге</span><span>' + d.rank + '</span></div>' +
+        '<div class="row"><span>Группа</span><span>' + CLUSTER_LABELS[clusterKey(d)] + '</span></div>' +
         '<div class="muted">Площадь круга ∝ ВГП</div>';
       tooltip.hidden = false;
       positionTooltip(evt);
@@ -1711,11 +1788,13 @@
     }
 
     nodes.forEach(function (n) {
+      var cKey = clusterKey(n.data);
       var circle = el('circle', {
         class: 'bubble',
         cx: n.x.toFixed(2),
         cy: n.y.toFixed(2),
-        r: n.r.toFixed(2)
+        r: n.r.toFixed(2),
+        fill: CLUSTER_COLORS[cKey]
       });
 
       circle.addEventListener('mouseenter', function (e) {

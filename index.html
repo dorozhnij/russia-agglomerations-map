@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Рейтинг агломераций по экономической эффективности — Урбаника</title>
+  <title>Рейтинг агломераций РФ по экономической эффективности — Урбаника</title>
   <meta name="description" content="Рейтинг 52 агломераций РФ по масштабу и экономической эффективности за 2024 год.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -166,7 +166,7 @@
     .hero {
       position: relative;
       padding: 110px 0 100px;
-      text-align: center;
+      text-align: left;
       overflow: hidden;
       background: #FAFAFA;
     }
@@ -196,14 +196,19 @@
 
     .hero .container { position: relative; z-index: 1; }
 
+    .hero-copy {
+      position: relative;
+      max-width: 720px;
+    }
+
     .hero h1 {
       position: relative;
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      max-width: 780px;
-      margin: 0 auto 20px;
+      max-width: 720px;
+      margin: 0 0 20px;
       color: var(--text);
     }
 
@@ -212,10 +217,19 @@
     .hero .lead {
       position: relative;
       font-size: clamp(17px, 2vw, 20px);
-      color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto 36px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 0 16px;
       line-height: 1.55;
+    }
+
+    .hero .hero-desc {
+      position: relative;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 0 36px;
+      line-height: 1.6;
     }
 
     /* Stats */
@@ -1043,7 +1057,7 @@
 
     @media (max-width: 768px) {
       .cluster-grid { grid-template-columns: 1fr; }
-      .hero-cta { flex-direction: column; gap: 16px; }
+      .hero-cta { flex-direction: row; gap: 16px; }
     }
 
 
@@ -1080,15 +1094,18 @@
   <section class="hero" id="about">
     <div class="hero-map" aria-hidden="true"></div>
     <div class="container">
-      <h1>Рейтинг агломераций по <span class="accent">экономической эффективности</span></h1>
-      <p class="lead">Интегральный рейтинг, который показывает вклад каждой агломерации в экономику страны</p>
-      <div class="hero-cta">
-        <a href="#rating" class="btn-primary">Смотреть рейтинг</a>
-        <a href="#rating" class="hero-scroll" aria-label="Перейти к рейтингу">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 9l6 6 6-6"/>
-          </svg>
-        </a>
+      <div class="hero-copy">
+        <h1>Рейтинг агломераций РФ по <span class="accent">экономической эффективности</span></h1>
+        <p class="lead">Рассчитывается компанией «Урбаника». Позволяет сравнивать и анализировать агломерации, определять зоны развития.</p>
+        <p class="hero-desc">Рейтинг считается из двух индексов: масштаба — по объему ВГП (аналогу ВВП) каждой агломерации — и эффективности: насколько интенсивно экономика работает относительно населения — отгрузка товаров, инвестиции и уровень занятости.</p>
+        <div class="hero-cta">
+          <a href="#rating" class="btn-primary">Смотреть рейтинг</a>
+          <a href="#rating" class="hero-scroll" aria-label="Перейти к рейтингу">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>

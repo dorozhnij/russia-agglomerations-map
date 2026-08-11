@@ -1074,7 +1074,7 @@
 
 <header class="site-header" id="header">
   <div class="container header-inner">
-    <a href="#" class="logo">Рейтинг Агломераций РФ</a>
+    <a href="#" class="logo">Урбаника<span>. Агломерации</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1100,11 +1100,6 @@
         <p class="hero-desc">Рейтинг считается из двух индексов: масштаба — по объему ВГП (аналогу ВВП) каждой агломерации — и эффективности: насколько интенсивно экономика работает относительно населения — отгрузка товаров, инвестиции и уровень занятости.</p>
         <div class="hero-cta">
           <a href="#rating" class="btn-primary">Смотреть рейтинг</a>
-          <a href="#rating" class="hero-scroll" aria-label="Перейти к рейтингу">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </a>
         </div>
       </div>
     </div>
@@ -1123,8 +1118,8 @@
               <th data-sort="rank" data-table="rating" class="active" data-dir="asc">Место <span class="sort-icon">▲</span></th>
               <th data-sort="name" data-table="rating">Агломерация <span class="sort-icon">▼</span></th>
               <th data-sort="integral50" data-table="rating">Интегральный индекс, балл <span class="sort-icon">▼</span></th>
-              <th data-sort="efficiency" data-table="rating">Субиндекс по эффективности <span class="sort-icon">▼</span></th>
               <th data-sort="scale" data-table="rating">Субиндекс по масштабу <span class="sort-icon">▼</span></th>
+              <th data-sort="efficiency" data-table="rating">Субиндекс по эффективности <span class="sort-icon">▼</span></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -1134,7 +1129,21 @@
     </div>
   </section>
 
-  <!-- How we counted + leaders -->
+  <!-- How to read ranking -->
+  <section class="section section--alt" id="explain">
+    <div class="container">
+      <h2 class="section-title">Как читать <span class="accent">рейтинг</span></h2>
+      <div class="prose-block">
+        <p>Рейтинг отвечает на вопрос: насколько агломерация важна для экономики страны — и по объему, и по эффективности работы. В выборке 52 агломерации с суммарным валовым городским продуктом 156,6 трлн руб. и населением 78,9 млн человек.</p>
+        <p>Высокая позиция — у тех, кто либо очень крупный, либо очень эффективный, либо и то и другое.</p>
+        <p>Лидеры 2024 года: Московская агломерация (около 40% ВГП всего набора), Сургутская, Санкт-Петербургская, Набережночелнинская и Южно-Сахалинская. Сургут и Набережные Челны показывают, что компактный промышленный узел может обойти многие миллионники по интегральному баллу. В Сургутской агломерации доля сектора добычи сырья составляет 70%, что и определяет высокие позиции в рейтинге. В Набережночелнинскую агломерацию входят как сами Челны, так и города Елабуга с особой экономической зоной, Нижнекамск (ПАО «Нижнекамскнефтехим») и другие населенные пункты.</p>
+        <p>В хвосте рейтинга — Абаканская, Улан-Удэнская, Златоустско-Миасская, Кавминводская и Стерлитамакская агломерации. У них небольшой масштаб и слабая интенсивность: вклад в экономику страны ограничен.</p>
+      </div>
+    </div>
+  </section>
+
+
+
   <section class="section section--alt" id="explain">
     <div class="container">
       <h2 class="section-title">Что показывает <span class="accent">рейтинг</span></h2>
@@ -1297,7 +1306,7 @@
 
 <footer>
   <div class="container footer-inner">
-    <a href="https://www.urbanica.spb.ru/" class="logo" target="_blank" rel="noopener">Урбаника<span>&nbsp;·&nbsp;Агломерации</span></a>
+    <a href="https://www.urbanica.spb.ru/" class="logo" target="_blank" rel="noopener">Урбаника<span>. Агломерации</span></a>
     <div class="footer-links">
       <a href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">© 2026 Урбаника</a>
       <button type="button" class="share-btn" id="shareBtn">Поделиться</button>
@@ -1447,8 +1456,8 @@
         '<td class="' + rankClass + '">' + d.rank + '</td>' +
         '<td class="agglo-name">' + d.name + '</td>' +
         '<td><span class="score-cell">' + scoreBar(d.integral50) + '<span class="score-text">' + formatNum(d.integral50) + '</span></span></td>' +
-        '<td class="num">' + formatNum(d.efficiency) + '</td>' +
-        '<td class="num">' + formatNum(d.scale) + '</td>';
+        '<td class="num">' + formatNum(d.scale) + '</td>' +
+        '<td class="num">' + formatNum(d.efficiency) + '</td>';
       ratingBody.appendChild(tr);
     });
   }

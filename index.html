@@ -347,22 +347,55 @@
     td {
       padding: 16px 18px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      transition: padding 0.18s ease, font-size 0.18s ease, color 0.18s ease;
     }
 
     tr:last-child td { border-bottom: none; }
+
+    #ratingTable tbody tr {
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+
+    #ratingTable tbody tr:hover {
+      background: rgba(254, 102, 67, 0.06);
+    }
+
+    #ratingTable tbody tr:hover td {
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
+
+    #ratingTable tbody tr:hover .agglo-name {
+      color: var(--orange);
+    }
+
+    #ratingTable tbody tr:hover .score-text,
+    #ratingTable tbody tr:hover .rank {
+      font-size: 1.08em;
+    }
+
+    #ratingTable tbody tr:hover .score-bar {
+      transform: scaleY(1.35) scaleX(1.08);
+    }
 
     .rank {
       font-weight: 700;
       color: #888;
       width: 56px;
       font-variant-numeric: tabular-nums;
+      transition: font-size 0.18s ease, color 0.18s ease;
     }
 
     .rank-1 { color: var(--orange); font-weight: 800; }
     .rank-2 { color: #e07050; font-weight: 700; }
     .rank-3 { color: #d09070; font-weight: 700; }
 
-    .agglo-name { font-weight: 600; color: var(--text); }
+    .agglo-name {
+      font-weight: 600;
+      color: var(--text);
+      transition: color 0.18s ease;
+    }
 
     .score-cell {
       display: flex;
@@ -373,21 +406,20 @@
 
     .score-bar {
       display: inline-block;
-      height: 14px;
-      border-radius: 4px;
+      height: 22px;
+      border-radius: 5px;
       background: var(--orange);
       min-width: 4px;
-      max-width: 96px;
+      max-width: 110px;
       transform-origin: left center;
       transition: transform 0.18s ease;
-      cursor: pointer;
     }
 
-    .score-bar:hover {
-      transform: scaleY(1.5) scaleX(1.06);
+    .score-text {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      transition: font-size 0.18s ease;
     }
-
-    .score-text { font-weight: 600; font-variant-numeric: tabular-nums; }
 
     .num { font-variant-numeric: tabular-nums; }
 
@@ -1460,7 +1492,7 @@
   }
 
   function scoreBar(value, maxW) {
-    maxW = maxW || 96;
+    maxW = maxW || 110;
     var w = Math.max(4, Math.round(Math.max(0, Math.min(1, value)) * maxW));
     return '<span class="score-bar" style="width:' + w + 'px"></span>';
   }

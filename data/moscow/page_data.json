@@ -1,0 +1,156 @@
+{
+  "title": "Московская агломерация",
+  "year": 2024,
+  "boundariesSource": "https://dorozhnij.github.io/russia-agglomerations-map/map",
+  "headline": {
+    "vgp": 62.1371640109,
+    "population": 19.060792,
+    "shipments": 37.2871740515,
+    "employees": 5.412658,
+    "investments": 7.500923055,
+    "shipmentsPerCapita": 1956.223752481,
+    "investmentsPerCapita": 393.5263054652,
+    "employmentRate": 28.3968158301,
+    "efficiency": 0.9854132247,
+    "scale": 1.0,
+    "integral": 0.9941652899
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 17.730249
+      },
+      {
+        "year": 2020,
+        "value": 17.895016
+      },
+      {
+        "year": 2021,
+        "value": 18.271762
+      },
+      {
+        "year": 2022,
+        "value": 18.346502
+      },
+      {
+        "year": 2023,
+        "value": 18.942647
+      },
+      {
+        "year": 2024,
+        "value": 19.060792
+      },
+      {
+        "year": 2025,
+        "value": 19.312189
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 33.87735778096859
+      },
+      {
+        "year": 2020,
+        "value": 30.99213921091432
+      },
+      {
+        "year": 2021,
+        "value": 38.834813127401276
+      },
+      {
+        "year": 2022,
+        "value": 46.93869898189526
+      },
+      {
+        "year": 2023,
+        "value": 56.858030294598166
+      },
+      {
+        "year": 2024,
+        "value": 61.76030274732562
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 21.340731973500002
+      },
+      {
+        "year": 2020,
+        "value": 20.540757402900002
+      },
+      {
+        "year": 2021,
+        "value": 28.211283847500003
+      },
+      {
+        "year": 2022,
+        "value": 29.352059457
+      },
+      {
+        "year": 2023,
+        "value": 31.750415235899997
+      },
+      {
+        "year": 2024,
+        "value": 37.2871740515
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 4.471076
+      },
+      {
+        "year": 2020,
+        "value": 4.761740199999999
+      },
+      {
+        "year": 2021,
+        "value": 5.0140310999999995
+      },
+      {
+        "year": 2022,
+        "value": 5.191279
+      },
+      {
+        "year": 2023,
+        "value": 5.220672
+      },
+      {
+        "year": 2024,
+        "value": 5.412658
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 3.048157537
+      },
+      {
+        "year": 2020,
+        "value": 3.31562626
+      },
+      {
+        "year": 2021,
+        "value": 4.293791921
+      },
+      {
+        "year": 2022,
+        "value": 5.263122317
+      },
+      {
+        "year": 2023,
+        "value": 6.377808963
+      },
+      {
+        "year": 2024,
+        "value": 7.500923055
+      }
+    ]
+  },
+  "municipalityCount": 33,
+  "matchedCount": 33
+}

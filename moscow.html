@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Московская агломерация — Урбаника</title>
+  <meta name="description" content="Ключевые экономические показатели Московской агломерации, динамика и интерактивная карта муниципалитетов.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root {
+      --surface: #ffffff;
+      --surface-soft: #f7f7f5;
+      --ink: #121212;
+      --ink-muted: #5c5c5c;
+      --ink-subtle: #8a8a8a;
+      --hairline: #e6e6e6;
+      --hairline-strong: #cfcfcf;
+      --accent: #fe6643;
+      --map-bg: #f4f4f2;
+      --font: "Jost", sans-serif;
+      --radius: 12px;
+      --page: 1120px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      max-width: var(--page);
+      margin: 0 auto;
+      padding: 0 28px 96px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .back {
+      text-decoration: none;
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .back:hover { color: var(--accent); }
+    .back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .hero {
+      text-align: center;
+      padding: 48px 0 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5.8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .hero-hint {
+      margin-top: 14px;
+      color: var(--ink-muted);
+      font-size: 16px;
+    }
+
+    .map-legend {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 22px auto 14px;
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .map-legend-title {
+      font-size: 13px;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .map-legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .map-legend-label {
+      font-size: 13px;
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .map-legend-scale {
+      display: flex;
+      width: min(220px, 42vw);
+      height: 12px;
+      overflow: hidden;
+    }
+
+    .map-legend-scale span {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .muni-stage {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: stretch;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: 0;
+      min-height: min(72vh, 760px);
+      height: min(72vh, 760px);
+      border: none;
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      border-radius: 0;
+      overflow: hidden;
+      background: var(--map-bg);
+    }
+
+    .muni-stage.is-open {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    }
+
+    .map-shell {
+      position: relative;
+      min-height: inherit;
+      height: 100%;
+      background: var(--map-bg);
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .panel {
+      display: none;
+      background: var(--surface);
+      padding: 22px 20px 20px;
+      flex-direction: column;
+      border-left: 1px solid var(--hairline);
+      min-height: 100%;
+      grid-column: 2;
+      grid-row: 1;
+      position: relative;
+    }
+
+    .muni-stage.is-open .panel {
+      display: flex;
+    }
+
+    .panel-close {
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .panel-close:hover {
+      color: var(--ink);
+      background: var(--surface-soft);
+    }
+
+    .panel-close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .panel-kicker {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-subtle);
+      margin-bottom: 8px;
+      font-weight: 500;
+      padding-right: 36px;
+    }
+
+    .panel h3 {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 4px;
+      padding-right: 28px;
+    }
+
+    .panel-region {
+      color: var(--ink-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .panel-stats { display: flex; flex-direction: column; flex: 1; }
+
+    .panel-stat {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 11px 0;
+      border-top: 1px solid var(--hairline);
+      align-items: baseline;
+    }
+
+    .panel-stat:last-child { border-bottom: 1px solid var(--hairline); }
+    .panel-stat dt { color: var(--ink-muted); font-size: 14px; }
+
+    .panel-stat dd {
+      font-variant-numeric: tabular-nums;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      text-align: right;
+    }
+
+    .panel-note {
+      margin-top: auto;
+      padding-top: 16px;
+      font-size: 12px;
+      color: var(--ink-subtle);
+      line-height: 1.45;
+    }
+
+    #map {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+    }
+
+    .leaflet-container {
+      background: transparent;
+      font: 13px/1.4 var(--font);
+    }
+
+    .leaflet-control-attribution {
+      background: rgba(255, 255, 255, 0.75) !important;
+      font-size: 10px !important;
+      color: var(--ink-subtle) !important;
+      border-radius: 6px 0 0 0;
+      margin: 0 !important;
+      max-width: 70%;
+    }
+
+    .leaflet-control-attribution a { color: var(--ink-muted) !important; }
+
+    /* Leaflet prefix sometimes includes Ukraine flag SVG */
+    .leaflet-control-attribution .leaflet-attribution-flag,
+    .leaflet-control-attribution svg,
+    .leaflet-control-attribution img {
+      display: none !important;
+    }
+
+    .leaflet-bar {
+      border: 1px solid var(--hairline-strong) !important;
+      border-radius: 8px !important;
+      overflow: hidden;
+      box-shadow: none !important;
+    }
+
+    .leaflet-bar a {
+      background: #fff !important;
+      color: var(--ink) !important;
+      border-bottom-color: var(--hairline) !important;
+      width: 30px !important;
+      height: 30px !important;
+      line-height: 30px !important;
+    }
+
+    .leaflet-bar a:hover {
+      background: var(--surface-soft) !important;
+      color: var(--accent) !important;
+    }
+
+    .agg-section {
+      margin-top: 40px;
+    }
+
+    .metric-charts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: 24px 22px 18px;
+      display: grid;
+      gap: 2px;
+      min-height: 230px;
+      position: relative;
+    }
+
+    .metric-card .value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .metric-card .value {
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(2rem, 3.2vw, 2.55rem);
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .metric-card .unit {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-muted);
+    }
+
+    .metric-card .caption {
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--ink-subtle);
+    }
+
+    .metric-card .per-capita {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-card .hover-readout {
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+      color: var(--ink-muted);
+      min-height: 1.25em;
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.12s;
+    }
+
+    .metric-card.is-hovering .hover-readout { opacity: 1; }
+
+    .chart-wrap {
+      position: relative;
+      height: 120px;
+      margin-top: 10px;
+      cursor: crosshair;
+    }
+
+    .chart-wrap svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .chart-dot {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      margin-left: -4.5px;
+      margin-top: -4.5px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(18, 18, 18, 0.08);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .chart-guide {
+      position: absolute;
+      top: 8px;
+      bottom: 4px;
+      width: 1px;
+      background: rgba(18, 18, 18, 0.18);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .chart-axis {
+      display: flex;
+      justify-content: space-between;
+      font-variant-numeric: tabular-nums;
+      font-size: 11px;
+      color: var(--ink-subtle);
+      margin-top: 6px;
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--ink);
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+      padding: 7px 9px;
+      border-radius: 8px;
+      pointer-events: none;
+      white-space: nowrap;
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .chart-tooltip strong { font-weight: 600; }
+
+    footer.page-foot {
+      margin-top: 56px;
+      padding-top: 22px;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--ink-subtle);
+      font-size: 13px;
+    }
+
+    footer.page-foot a {
+      color: var(--ink-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--hairline-strong);
+    }
+
+    footer.page-foot a:hover { color: var(--accent); border-color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .metric-charts { grid-template-columns: 1fr; }
+      .muni-stage,
+      .muni-stage.is-open {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .muni-stage.is-open .panel {
+        grid-column: 1;
+        grid-row: 2;
+        border-left: none;
+        border-top: 1px solid var(--hairline);
+      }
+      .muni-stage {
+        min-height: 58vh;
+        height: 58vh;
+      }
+      .hero { padding: 36px 0 14px; }
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 0 18px 72px; }
+      body { font-size: 17px; }
+      .metric-card { padding: 20px 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="back" href="index.html">← К рейтингу агломераций</a>
+    </header>
+
+    <section class="hero">
+      <h1>Московская агломерация</h1>
+      <p class="hero-hint">Кликните на муниципалитет и узнайте подробности</p>
+    </section>
+
+    <div class="map-legend" id="mapLegend" aria-label="Легенда ВГП 2024"></div>
+
+    <section class="muni-stage" id="municipalities" aria-label="Карта муниципалитетов">
+      <div class="map-shell">
+        <div id="map" role="img" aria-label="Интерактивная карта муниципалитетов Московской агломерации"></div>
+      </div>
+      <aside class="panel" id="panel" hidden>
+        <button type="button" class="panel-close" id="panelClose" aria-label="Закрыть">×</button>
+        <p class="panel-kicker">Муниципалитет</p>
+        <h3 id="panelTitle"></h3>
+        <p class="panel-region" id="panelRegion"></p>
+        <dl class="panel-stats" id="panelStats"></dl>
+        <p class="panel-note">Источник: БДМО / расчет ВГП. Нулевые значения — нет данных или ЗАТО.</p>
+      </aside>
+    </section>
+
+    <section class="agg-section" id="indicators" aria-label="Показатели агломерации">
+      <div class="metric-charts" id="metricCharts"></div>
+    </section>
+
+    <footer class="page-foot">
+      <span>Урбаника · Московская агломерация</span>
+      <span>
+        <a href="index.html">Рейтинг</a> ·
+        <a href="https://dorozhnij.github.io/russia-agglomerations-map/map" target="_blank" rel="noopener">Границы агломераций</a>
+      </span>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const fmt = {
+      num(value, digits = 1) {
+        if (value == null || Number.isNaN(value)) return "—";
+        return value.toLocaleString("ru-RU", {
+          minimumFractionDigits: digits,
+          maximumFractionDigits: digits,
+        });
+      },
+      int(value) {
+        if (value == null || Number.isNaN(value)) return "—";
+        return Math.round(value).toLocaleString("ru-RU");
+      },
+      moneyThousand(value) {
+        if (value == null || Number.isNaN(value)) return "—";
+        if (value <= 0) return "0";
+        if (value >= 1e9) return `${fmt.num(value / 1e9, 2)} трлн руб.`;
+        if (value >= 1e6) return `${fmt.num(value / 1e6, 1)} млрд руб.`;
+        if (value >= 1e3) return `${fmt.num(value / 1e3, 1)} млн руб.`;
+        return `${fmt.num(value, 0)} тыс. руб.`;
+      },
+      people(value) {
+        if (value == null || Number.isNaN(value)) return "—";
+        if (value >= 1e6) return `${fmt.num(value / 1e6, 2)} млн чел.`;
+        return `${fmt.int(value)} чел.`;
+      },
+      seriesValue(value, digits) {
+        return fmt.num(value, value >= 10 ? Math.min(digits, 1) : digits);
+      },
+    };
+
+    function buildInteractiveChart(card, points, unit, digits) {
+      const wrap = card.querySelector(".chart-wrap");
+      const readout = card.querySelector(".hover-readout");
+      const w = 360;
+      const h = 120;
+      const padX = 8;
+      const padY = 14;
+      const values = points.map((p) => p.value);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const span = max - min || 1;
+
+      const coords = points.map((p, i) => {
+        const x = padX + (i / Math.max(points.length - 1, 1)) * (w - padX * 2);
+        const y = h - padY - ((p.value - min) / span) * (h - padY * 2);
+        return { ...p, x, y, xPct: (x / w) * 100, yPct: (y / h) * 100 };
+      });
+
+      const line = coords.map((c, i) => `${i ? "L" : "M"}${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");
+      const area = `${line} L${coords.at(-1).x.toFixed(1)},${h} L${coords[0].x.toFixed(1)},${h} Z`;
+      const gradId = `grad-${card.dataset.key}`;
+
+      wrap.innerHTML = `
+        <div class="chart-tooltip" hidden></div>
+        <div class="chart-guide"></div>
+        <div class="chart-dot"></div>
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="Динамика">
+          <defs>
+            <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fe6643" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#fe6643" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="${area}" fill="url(#${gradId})"></path>
+          <path d="${line}" fill="none" stroke="#fe6643" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          ${coords.map((c, i) => `
+            <rect class="hit" data-i="${i}" x="${(c.x - (w / points.length) / 2).toFixed(1)}" y="0" width="${(w / points.length).toFixed(1)}" height="${h}" fill="transparent"></rect>
+          `).join("")}
+        </svg>
+      `;
+
+      const svg = wrap.querySelector("svg");
+      const guide = wrap.querySelector(".chart-guide");
+      const dot = wrap.querySelector(".chart-dot");
+      const tip = wrap.querySelector(".chart-tooltip");
+
+      function showPoint(i) {
+        const c = coords[i];
+        const label = `${c.year}: ${fmt.seriesValue(c.value, digits)} ${unit}`;
+        guide.style.left = `${c.xPct}%`;
+        guide.style.opacity = "1";
+        dot.style.left = `${c.xPct}%`;
+        dot.style.top = `${c.yPct}%`;
+        dot.style.opacity = "1";
+        tip.hidden = false;
+        tip.innerHTML = `<strong>${c.year}</strong> · ${fmt.seriesValue(c.value, digits)} ${unit}`;
+        tip.style.left = `${c.xPct}%`;
+        tip.style.opacity = "1";
+        tip.style.transform = `translate(${c.xPct < 15 ? "0" : c.xPct > 85 ? "-100%" : "-50%"}, -110%)`;
+        readout.textContent = label;
+        card.classList.add("is-hovering");
+      }
+
+      function hidePoint() {
+        guide.style.opacity = "0";
+        dot.style.opacity = "0";
+        tip.style.opacity = "0";
+        tip.hidden = true;
+        readout.textContent = "";
+        card.classList.remove("is-hovering");
+      }
+
+      svg.querySelectorAll(".hit").forEach((hit) => {
+        hit.addEventListener("mouseenter", () => showPoint(Number(hit.dataset.i)));
+        hit.addEventListener("mousemove", () => showPoint(Number(hit.dataset.i)));
+        hit.addEventListener("click", (e) => {
+          e.preventDefault();
+          showPoint(Number(hit.dataset.i));
+        });
+      });
+      wrap.addEventListener("mouseleave", hidePoint);
+    }
+
+    function renderMetricCharts(headline, dynamics) {
+      // трлн руб / млн чел → тыс. руб. на душу: (VGP/pop) * 1000
+      const vgpPerCapita = (headline.vgp / headline.population) * 1000;
+
+      const specs = [
+        {
+          key: "vgp",
+          value: headline.vgp,
+          digits: 1,
+          unit: "трлн руб.",
+          caption: "Валовой городской продукт",
+          perCapita: `${fmt.num(vgpPerCapita, 0)} тыс. руб. на душу в 2024 году`,
+          points: dynamics.vgp,
+        },
+        {
+          key: "population",
+          value: headline.population,
+          digits: 2,
+          unit: "млн чел.",
+          caption: "Численность населения на 1 января",
+          perCapita: null,
+          points: dynamics.population,
+        },
+        {
+          key: "shipments",
+          value: headline.shipments,
+          digits: 1,
+          unit: "трлн руб.",
+          caption: "Отгружено товаров, работ и услуг",
+          perCapita: `${fmt.num(headline.shipmentsPerCapita, 1)} тыс. руб. на душу в 2024 году`,
+          points: dynamics.shipments,
+        },
+        {
+          key: "employees",
+          value: headline.employees,
+          digits: 2,
+          unit: "млн чел.",
+          caption: "Среднесписочная численность занятых",
+          perCapita: `${fmt.num(headline.employmentRate, 1)}% населения в 2024 году`,
+          points: dynamics.employees,
+        },
+        {
+          key: "investments",
+          value: headline.investments,
+          digits: 1,
+          unit: "трлн руб.",
+          caption: "Инвестиции в основной капитал",
+          perCapita: `${fmt.num(headline.investmentsPerCapita, 1)} тыс. руб. на душу в 2024 году`,
+          points: dynamics.investments,
+        },
+      ];
+
+      const root = document.getElementById("metricCharts");
+      root.innerHTML = specs.map((spec) => {
+        const first = spec.points[0].year;
+        const last = spec.points.at(-1).year;
+        return `
+          <article class="metric-card" data-key="${spec.key}">
+            <div class="value-row">
+              <div class="value">${fmt.num(spec.value, spec.digits)}</div>
+              <div class="unit">${spec.unit}</div>
+            </div>
+            <div class="caption">${spec.caption}</div>
+            ${spec.perCapita ? `<div class="per-capita">${spec.perCapita}</div>` : ""}
+            <div class="hover-readout" aria-live="polite"></div>
+            <div class="chart-wrap"></div>
+            <div class="chart-axis"><span>${first}</span><span>${last}</span></div>
+          </article>
+        `;
+      }).join("");
+
+      specs.forEach((spec) => {
+        const card = root.querySelector(`[data-key="${spec.key}"]`);
+        buildInteractiveChart(card, spec.points, spec.unit, spec.digits);
+      });
+    }
+
+    function openPanel(props) {
+      const stage = document.getElementById("municipalities");
+      const panel = document.getElementById("panel");
+      const stats = document.getElementById("panelStats");
+      document.getElementById("panelTitle").textContent = props.name;
+      document.getElementById("panelRegion").textContent = props.region || "";
+
+      if (props.vgp2024 == null) {
+        stats.innerHTML = `<p style="color:var(--ink-muted);font-size:14px;margin-top:8px">По этому муниципалитету нет сопоставленных показателей.</p>`;
+      } else {
+        stats.innerHTML = `
+          <div class="panel-stat"><dt>ВГП, 2024</dt><dd>${fmt.moneyThousand(props.vgp2024)}</dd></div>
+          <div class="panel-stat"><dt>Население, 1 янв. 2024</dt><dd>${fmt.people(props.pop2024)}</dd></div>
+          <div class="panel-stat"><dt>Отгрузка, 2024</dt><dd>${fmt.moneyThousand(props.ship2024)}</dd></div>
+          <div class="panel-stat"><dt>Занятые, 2024</dt><dd>${fmt.people(props.emp2024)}</dd></div>
+          <div class="panel-stat"><dt>Инвестиции, 2024</dt><dd>${fmt.moneyThousand(props.inv2024)}</dd></div>
+        `;
+      }
+
+      panel.hidden = false;
+      stage.classList.add("is-open");
+    }
+
+    function closePanel() {
+      const stage = document.getElementById("municipalities");
+      const panel = document.getElementById("panel");
+      panel.hidden = true;
+      stage.classList.remove("is-open");
+      document.getElementById("panelTitle").textContent = "";
+      document.getElementById("panelRegion").textContent = "";
+      document.getElementById("panelStats").innerHTML = "";
+    }
+
+    // ВГП в данных — тыс. руб. → млрд руб.
+    function vgpToBillion(value) {
+      if (value == null || value <= 0) return 0;
+      return Math.round(value / 1e6);
+    }
+
+    function initMap(geojson) {
+      const values = geojson.features
+        .map((f) => f.properties.vgp2024 || 0)
+        .filter((v) => v > 0)
+        .sort((a, b) => a - b);
+
+      // Светлый → темный по ВГП 2024 (квантили)
+      const VGP_COLORS = ["#fde8e1", "#fbb79e", "#fe8f6a", "#fe6643", "#a3341f"];
+      const NO_DATA = "#d9d6d0";
+      const nClasses = VGP_COLORS.length;
+
+      function classIndex(vgp) {
+        if (!vgp || vgp <= 0 || !values.length) return -1;
+        const rank = values.findIndex((v) => vgp <= v);
+        const t = (rank < 0 ? values.length - 1 : rank) / Math.max(values.length - 1, 1);
+        return Math.min(nClasses - 1, Math.floor(t * nClasses));
+      }
+
+      function fillFor(vgp) {
+        const idx = classIndex(vgp);
+        return idx < 0 ? NO_DATA : VGP_COLORS[idx];
+      }
+
+      // Границы классов для легенды
+      const classBreaks = [];
+      for (let i = 0; i <= nClasses; i++) {
+        const idx = Math.min(
+          values.length - 1,
+          Math.round((i / nClasses) * (values.length - 1))
+        );
+        classBreaks.push(values[idx] || 0);
+      }
+
+      const legendEl = document.getElementById("mapLegend");
+      const minBln = vgpToBillion(values[0]);
+      const maxBln = vgpToBillion(values[values.length - 1]);
+      legendEl.innerHTML = `
+        <div class="map-legend-title">ВГП, млрд руб.</div>
+        <div class="map-legend-row">
+          <span class="map-legend-label">${fmt.int(minBln)}</span>
+          <div class="map-legend-scale" aria-hidden="true">
+            ${VGP_COLORS.map((c) => `<span style="background:${c}"></span>`).join("")}
+          </div>
+          <span class="map-legend-label">${fmt.int(maxBln)}</span>
+        </div>
+      `;
+
+      // Bbox Московской области (+ небольшой запас)
+      const moscowOblastBounds = L.latLngBounds(
+        [54.25, 35.05],
+        [56.96, 40.25]
+      );
+
+      function styleFeature(feature) {
+        const vgp = feature.properties.vgp2024 || 0;
+        const isCity = feature.properties.isCity;
+        return {
+          color: "#ffffff",
+          weight: isCity ? 1.2 : 0.75,
+          opacity: 1,
+          fillColor: fillFor(vgp),
+          fillOpacity: 0.7,
+        };
+      }
+
+      const map = L.map("map", {
+        zoomControl: false,
+        attributionControl: true,
+        dragging: true,
+        scrollWheelZoom: true,
+        doubleClickZoom: true,
+        boxZoom: true,
+        keyboard: true,
+        maxBounds: moscowOblastBounds.pad(0.05),
+        maxBoundsViscosity: 1,
+        minZoom: 7,
+        maxZoom: 14,
+      });
+
+      map.attributionControl.setPrefix(false);
+
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: "abcd",
+        maxZoom: 19,
+      }).addTo(map);
+
+      L.control.zoom({ position: "bottomright" }).addTo(map);
+
+      let selected = null;
+
+      function fitAgglomeration() {
+        map.fitBounds(layer.getBounds(), { padding: [0, 0], maxZoom: 12, animate: false });
+      }
+
+      function clearSelection() {
+        if (selected) {
+          layer.resetStyle(selected);
+          selected = null;
+        }
+        closePanel();
+        requestAnimationFrame(() => {
+          map.invalidateSize();
+          fitAgglomeration();
+        });
+      }
+
+      const layer = L.geoJSON(geojson, {
+        style: styleFeature,
+        onEachFeature(feature, lyr) {
+          lyr.on({
+            mouseover(e) {
+              if (selected === lyr) return;
+              e.target.setStyle({
+                weight: 1.6,
+                color: "#121212",
+                fillOpacity: 0.85,
+              });
+              e.target.bringToFront();
+            },
+            mouseout(e) {
+              if (selected === lyr) return;
+              layer.resetStyle(e.target);
+            },
+            click(e) {
+              if (selected && selected !== e.target) layer.resetStyle(selected);
+              selected = e.target;
+              selected.setStyle({
+                weight: 2.2,
+                color: "#121212",
+                fillOpacity: 0.9,
+              });
+              selected.bringToFront();
+              openPanel(feature.properties);
+              requestAnimationFrame(() => map.invalidateSize());
+              L.DomEvent.stopPropagation(e);
+            },
+          });
+        },
+      }).addTo(map);
+
+      // Кончики полигонов касаются краев карты
+      fitAgglomeration();
+      map.setMaxBounds(moscowOblastBounds.pad(0.05));
+
+      document.getElementById("panelClose").addEventListener("click", (e) => {
+        e.stopPropagation();
+        clearSelection();
+      });
+
+      const syncSize = () => map.invalidateSize();
+      requestAnimationFrame(syncSize);
+      window.addEventListener("resize", syncSize);
+
+      const stage = document.getElementById("municipalities");
+      if (stage && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) syncSize();
+          },
+          { threshold: 0.1 }
+        );
+        io.observe(stage);
+      }
+    }
+
+    async function boot() {
+      const [pageData, geojson] = await Promise.all([
+        fetch("data/moscow/page_data.json").then((r) => r.json()),
+        fetch("data/moscow/municipalities.geojson").then((r) => r.json()),
+      ]);
+      renderMetricCharts(pageData.headline, pageData.dynamics);
+      initMap(geojson);
+    }
+
+    boot().catch((err) => {
+      console.error(err);
+    });
+  </script>
+</body>
+</html>

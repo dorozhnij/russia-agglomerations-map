@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Рейтинг агломераций РФ по масштабу и интенсивности экономики — 2024 — Урбаника</title>
+  <meta name="description" content="Рейтинг 52 городских агломераций РФ по масштабу и интенсивности экономики за 2024 год. Институт территориального планирования «Урбаника».">
+  <meta property="og:title" content="Рейтинг агломераций РФ по масштабу и интенсивности экономики — 2024">
+  <meta property="og:description" content="Рейтинг 52 городских агломераций РФ по масштабу и интенсивности экономики — 2024. Институт территориального планирования «Урбаника».">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --surface: #FAFAFA;
+      --surface-elevated: #FFFFFF;
+      --surface-sunken: #F4F4F2;
+      --ink: #1A1A1A;
+      --ink-muted: #5C5C5C;
+      --ink-subtle: #8A8A8A;
+      --hairline: #E8E8E6;
+      --hairline-strong: #D4D4D2;
+      --accent: #FE6643;
+      --accent-hover: #e05535;
+      --accent-ink: #FFFFFF;
+      --accent-soft: rgba(254, 102, 67, 0.08);
+      --anchors: #FE6643;
+      --large: #7EC8E8;
+      --dense: #E8A0C8;
+      --weak: #F5C700;
+      --radius: 8px;
+      --measure: 680px;
+      --container: 1120px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .measure {
+      max-width: var(--measure);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background: rgba(250, 250, 250, 0.96);
+      border-bottom-color: var(--hairline);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 24px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--ink-muted);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: color 0.15s ease;
+    }
+
+    .nav a:hover { color: var(--accent); }
+    .nav a.is-current { color: var(--ink); }
+
+    .nav a.nav-brand {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+    }
+
+    .btn--primary:hover { background: var(--accent-hover); }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--hairline-strong);
+    }
+
+    .btn--ghost:hover {
+      border-color: var(--ink);
+    }
+
+    /* Masthead */
+    .masthead {
+      padding: 72px 0 48px;
+    }
+
+    .masthead h1 {
+      font-family: Inter, sans-serif;
+      font-size: clamp(1.85rem, 4.2vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 28ch;
+      margin: 0;
+    }
+
+    /* Lead */
+    .lead-block {
+      background: var(--surface-elevated);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--accent);
+      padding: 28px 32px 24px;
+      margin-bottom: 56px;
+    }
+
+    .lead-block p {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .lead-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* Stats strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      margin: 0 0 72px;
+    }
+
+    .stat {
+      padding: 22px 20px 22px 0;
+    }
+
+    .stat + .stat {
+      border-left: 1px solid var(--hairline);
+      padding-left: 24px;
+    }
+
+    .stat .num {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+
+    .stat .label {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.35;
+    }
+
+    /* Article */
+    .section {
+      padding: 0 0 72px;
+    }
+
+    .section h2 {
+      font-family: Inter, sans-serif;
+      font-size: clamp(1.55rem, 2.8vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin: 0 0 20px;
+    }
+
+    .prose p {
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: var(--measure);
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .prose a:hover { text-decoration: underline; }
+
+    /* Table */
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 36px 0 12px;
+    }
+
+    .table-toolbar .hint {
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      background: var(--surface-elevated);
+      border: 1px solid var(--hairline);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 480px;
+    }
+
+    th {
+      background: var(--surface-sunken);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--ink-muted);
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid var(--hairline-strong);
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+    }
+
+    th:hover { color: var(--accent); }
+
+    th .sort-icon {
+      display: inline-block;
+      margin-left: 4px;
+      opacity: 0.35;
+      font-size: 11px;
+      vertical-align: middle;
+    }
+
+    th.active { color: var(--accent); }
+    th.active .sort-icon { opacity: 1; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    #ratingTable tbody tr {
+      cursor: default;
+      transition: background 0.15s ease;
+    }
+
+    #ratingTable tbody tr:hover {
+      background: var(--accent-soft);
+    }
+
+    #ratingTable tbody tr:hover .agglo-name { color: var(--accent); }
+
+    .rank {
+      font-weight: 700;
+      color: var(--ink-subtle);
+      width: 56px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rank-1 { color: var(--accent); }
+    .rank-2 { color: #e07050; }
+    .rank-3 { color: #c48868; }
+
+    .agglo-name { font-weight: 600; }
+
+    .score-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-bar {
+      display: inline-block;
+      height: 18px;
+      border-radius: 3px;
+      background: var(--accent);
+      min-width: 4px;
+      max-width: 110px;
+      transform-origin: left center;
+    }
+
+    .score-text {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .num { font-variant-numeric: tabular-nums; }
+
+    /* Chart */
+    .chart-container {
+      position: relative;
+      background: var(--surface-elevated);
+      border: 1px solid var(--hairline);
+      padding: 20px 16px 12px;
+      overflow: visible;
+      margin: 28px 0 8px;
+    }
+
+    .chart-subtitle {
+      margin: 0 4px 16px;
+      font-size: 14px;
+      color: var(--ink-muted);
+      max-width: none;
+    }
+
+    .bubble-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin: 0 4px 14px;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .bubble-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bubble-legend .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .swatch--anchors { background: var(--anchors); }
+    .swatch--large { background: #B7E7FC; }
+    .swatch--dense { background: #FFD3F0; }
+    .swatch--weak { background: var(--weak); }
+
+    .bubble-chart {
+      width: 100%;
+      height: min(78vw, 620px);
+      min-height: 440px;
+    }
+
+    .bubble-chart svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .bubble-chart .axis-line { stroke: #ddd; stroke-width: 1; }
+    .bubble-chart .grid-line { stroke: #eee; stroke-width: 1; stroke-dasharray: 4 4; }
+    .bubble-chart .median-line { stroke: #ccc; stroke-width: 1.25; stroke-dasharray: 6 4; }
+    .bubble-chart .tick-label {
+      fill: #999;
+      font-family: inherit;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+    .bubble-chart .axis-title {
+      fill: var(--ink-muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .bubble-chart .plot-bg { fill: #FBFBFB; }
+    .bubble-chart circle.bubble {
+      fill-opacity: 0.88;
+      stroke: #fff;
+      stroke-width: 1.5;
+      cursor: pointer;
+    }
+    .bubble-chart circle.bubble:hover,
+    .bubble-chart circle.bubble.is-active {
+      fill-opacity: 1;
+      stroke-width: 2.5;
+      stroke: var(--ink);
+    }
+    .bubble-chart .bubble-label {
+      fill: var(--ink);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 11px;
+      pointer-events: none;
+      text-anchor: start;
+      dominant-baseline: middle;
+    }
+
+    .bubble-tooltip {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 280px;
+      transform: translate(-50%, calc(-100% - 14px));
+    }
+
+    .bubble-tooltip strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .bubble-tooltip .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .bubble-tooltip .row span:first-child { color: #bbb; }
+    .bubble-tooltip .muted { color: #bbb; font-size: 13px; margin-top: 6px; }
+
+    .bubble-tooltip::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--ink);
+      border-bottom: 0;
+    }
+
+    /* Groups */
+    .group {
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 0 28px;
+      margin-top: 40px;
+      padding-top: 8px;
+    }
+
+    .group-bar { background: var(--anchors); }
+
+    .group--anchors .group-bar { background: var(--anchors); }
+    .group--large .group-bar { background: #B7E7FC; }
+    .group--dense .group-bar { background: #FFD3F0; }
+    .group--weak .group-bar { background: var(--weak); }
+
+    .group h3 {
+      font-family: Inter, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 6px;
+    }
+
+    .group .count {
+      font-family: Inter, sans-serif;
+      font-size: 0.7em;
+      font-weight: 500;
+      color: var(--ink-subtle);
+    }
+
+    .group .meta {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+    }
+
+    .group p {
+      max-width: var(--measure);
+      margin-bottom: 12px;
+    }
+
+    .group-list {
+      columns: 2;
+      column-gap: 32px;
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--ink-muted);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 640px;
+    }
+
+    .group-list li { break-inside: avoid; padding: 1px 0; }
+
+    .case-figure {
+      margin: 28px 0;
+      max-width: 860px;
+    }
+
+    .case-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: var(--surface-elevated);
+      border: 1px solid var(--hairline);
+    }
+
+    .case-figure figcaption {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: #aaa;
+      padding: 40px 0;
+      margin-top: 24px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-inner .logo { color: #fff; }
+    .footer-inner a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-inner a:hover { color: #fff; }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat + .stat { border-left: none; padding-left: 0; }
+      .stat:nth-child(odd) { padding-right: 20px; }
+      .stat:nth-child(2),
+      .stat:nth-child(4) { border-left: 1px solid var(--hairline); padding-left: 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .masthead { padding: 48px 0 32px; }
+      .section { padding: 0 0 56px; }
+      .menu-toggle { display: flex; }
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 24px 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        gap: 4px;
+      }
+      .nav.open { display: flex; }
+      .nav a {
+        padding: 12px 8px;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .header-inner { position: relative; }
+      .group-list { columns: 1; }
+      .lead-block { padding: 22px 20px 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat, .stat + .stat, .stat:nth-child(2), .stat:nth-child(4) {
+        border-left: none;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .stat:last-child { border-bottom: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Урбаника<span>. Агломерации</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Карта</a>
+      <a href="#rating">Рейтинг</a>
+      <a href="#groups">Группы</a>
+      <a href="#sakhalin">Сахалин</a>
+      <a href="#method">Методика</a>
+      <a class="is-current" href="media.html">Для СМИ</a>
+      <a class="nav-brand" href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <header class="masthead">
+    <div class="container">
+      <h1>Рейтинг агломераций РФ по масштабу и интенсивности экономики — 2024. Институт территориального планирования «Урбаника»</h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="lead-block" id="lead">
+      <p>Институт территориального планирования «Урбаника» составил рейтинг 52 городских агломераций России по масштабу и интенсивности экономики за 2024 год. На эти 52 агломерации пришлось 84% ВРП страны при 54% населения. Первая в рейтинге — Московская агломерация: почти 40% ВГП всех обследованных агломераций при 24% их населения. Вторая — Сургутская, с населением 829 тыс. человек. Санкт-Петербургская — третья. Новосибирская при ВГП 3,2 трлн руб. занимает 24-е место.</p>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="container prose">
+      <p>«Урбаника» опубликовала рейтинг 52 российских городских агломераций за 2024 год. Индекс отвечает на два вопроса: насколько велика экономика агломерации — и какова ее интенсивность, то есть сколько она отгружает товаров, получает инвестиций и какова занятость на жителя.</p>
+      <p>В этих 52 агломерациях живут 78,9 млн человек — 54% населения России. Их суммарный валовой городской продукт (ВГП, оценка экономики агломерации по методике Института экономики города) — 156,6 трлн руб. Это 84% ВРП страны.</p>
+      <p>Границы агломераций и метод расчета ВГП — по материалам Фонда «Институт экономики города». Субиндекс интенсивности рассчитывается отдельно: отгрузка товаров и услуг, объем инвестиций на жителя и доля занятых.</p>
+    </div>
+  </section>
+
+  <section class="section" id="rating">
+    <div class="container">
+      <h2>Рейтинг агломераций — 2024</h2>
+      <div class="table-toolbar">
+        <p class="hint">Клик по заголовку столбца — сортировка. Интегральный индекс — среднее субиндексов масштаба и интенсивности, в баллах от 0 до 100.</p>
+      </div>
+      <div class="table-wrapper">
+        <table id="ratingTable">
+          <thead>
+            <tr>
+              <th data-sort="rank" data-table="rating" class="active" data-dir="asc">Место <span class="sort-icon">▲</span></th>
+              <th data-sort="name" data-table="rating">Агломерация <span class="sort-icon">▼</span></th>
+              <th data-sort="integral50" data-table="rating">Интегральный индекс, баллов <span class="sort-icon">▼</span></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="container prose">
+      <h2>Почему считаем агломерации, а не города</h2>
+      <p>Экономика страны сконцентрирована в плотных агломерационных контурах: 54% населения и 84% ВРП страны. Рейтинг городов берет только административные границы города, не учитывая области, население которых активно вовлечено в экономику города. Рейтинг регионов размазывает показатели по всей территории, занижая их. Простой пример — средняя зарплата в Москве в апреле 2026 года по данным Росстата — 196 825 рублей, в Московской области — 130 556 рублей. Также зарплата внутри региона может сильно отличаться в зависимости от муниципалитета.</p>
+      <p>Границы агломераций взяты из исследования Института экономики города, часть городов (ЗАТО) не вошли в исследование по причине отсутствия данных. Например, Набережночелнинская агломерация в этом исследовании включает Челны, Елабугу с особой экономической зоной и Нижнекамск с крупнейшим НПЗ. По отдельным городам экономический эффект не очевиден, в рейтинге агломераций он на 4-м месте.</p>
+    </div>
+  </section>
+
+  <section class="section" id="groups">
+    <div class="container">
+      <h2>Четыре группы агломераций</h2>
+      <p class="chart-subtitle" style="margin: 0 0 8px;">Агломерации разделены на группы по медиане масштаба и интенсивности. Крупные — выше медианы ВГП, небольшие — ниже. Высокоинтенсивные — выше медианы субиндекса интенсивности на жителя, низкоинтенсивные — ниже.</p>
+      <p class="chart-subtitle">Шесть агломераций экспертно разнесены по группам: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в небольшие высокоинтенсивные. Пунктир на графике — медианы 0,26 и 0,34.</p>
+
+      <div class="chart-container chart-container--bubble">
+        <p class="chart-subtitle">Чем правее — тем выше масштаб, чем выше — тем больше интенсивность, площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
+        <div class="bubble-legend" aria-hidden="true">
+          <span><i class="swatch swatch--anchors"></i> Крупные высокоинтенсивные</span>
+          <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
+          <span><i class="swatch swatch--dense"></i> Небольшие высокоинтенсивные</span>
+          <span><i class="swatch swatch--weak"></i> Небольшие низкоинтенсивные</span>
+          <span>Пунктир — медианы</span>
+        </div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, интенсивность по оси Y, цвет — группа, площадь круга — ВГП"></div>
+        <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
+      </div>
+
+      <article class="group group--anchors">
+        <div class="group-bar" aria-hidden="true"></div>
+        <div>
+          <h3>Крупные высокоинтенсивные <span class="count">(8)</span></h3>
+          <p class="meta">62% ВГП · 44% населения · ВГП на жителя 2,8 млн руб.</p>
+          <p>Лидеры по масштабу и интенсивности. 62% ВГП всех обследованных агломераций и 44% их населения. ВГП на жителя в группе — 2,8 млн руб., выше среднего по всем агломерациям. Медиана отгрузки на человека — 1,66 млн руб., инвестиций — 284 тыс., занятости — 28%.</p>
+          <p>В этой группе Москва дает 62,1 трлн руб. ВГП — больше, чем остальные семь вместе взятые. Петербург — 15,6 трлн и третье место. Вторая строка рейтинга — Сургутская агломерация: 5,4 трлн при 829 тыс. жителей, отгрузка на человека 8,2 млн руб., такой эффект достигается за счет высокой доли добычи сырья (70%). Набережночелнинская (4-е место) попадает за счет того, что включает крупные предприятия Набережных Челнов, Елабуги и Нижнекамска. В Пермской занятость 44% населения — максимум из всех, поэтому попадает в топ.</p>
+          <ul class="group-list">
+            <li>Московская</li>
+            <li>Сургутская</li>
+            <li>Санкт-Петербургская</li>
+            <li>Набережночелнинская</li>
+            <li>Пермская</li>
+            <li>Екатеринбургская</li>
+            <li>Нижегородская</li>
+            <li>Казанская</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="group group--large">
+        <div class="group-bar" aria-hidden="true"></div>
+        <div>
+          <h3>Крупные низкоинтенсивные <span class="count">(15)</span></h3>
+          <p class="meta">21% ВГП · почти треть населения</p>
+          <p>На всю группу 21% ВГП и почти треть населения. Это региональные центры с большим объемом экономики и интенсивностью на жителя ниже медианы по всем агломерациям. Это происходит из-за того, что в крупных городах меньше объемов отгрузки, так как много экономики сосредоточено в сфере услуг, которую сложнее отследить таким методом.</p>
+          <p>Краснодарская (21-е место), Ростовская (23-е) и Новосибирская (24-е) крупнее Пермской и Набережночелнинской по ВГП и стоят ниже по интегральному баллу. У Ставропольской субиндекс интенсивности близок к нулю: отгрузка 544 тыс. руб. на человека, занятость 18%. Это характерно для многих южных агломераций, где доля теневых доходов и занятость ниже.</p>
+          <ul class="group-list">
+            <li>Уфимская</li>
+            <li>Самарско-Тольяттинская</li>
+            <li>Краснодарская</li>
+            <li>Ростовская</li>
+            <li>Новосибирская</li>
+            <li>Челябинская</li>
+            <li>Ижевская</li>
+            <li>Оренбургская</li>
+            <li>Тюменская</li>
+            <li>Воронежская</li>
+            <li>Омская</li>
+            <li>Красноярская</li>
+            <li>Волгоградская</li>
+            <li>Саратовская</li>
+            <li>Ставропольская</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="group group--dense">
+        <div class="group-bar" aria-hidden="true"></div>
+        <div>
+          <h3>Небольшие высокоинтенсивные <span class="count">(15)</span></h3>
+          <p class="meta">10% ВГП · 13% населения</p>
+          <p>10% ВГП и 13% населения. Объем ВГП ниже среднего, отгрузка, инвестиции и занятость на жителя близки к крупным высокоинтенсивным.</p>
+          <p>В эту группу входят промышленные агломерации с высокой отгрузкой и занятостью. Южно-Сахалинская — 5-е место при ВГП 1,27 трлн руб., Мурманская — 9-е место. Отгрузка товаров и услуг в Альметьевской агломерации составляет 5,1 млн руб. на человека, что в 2,5 раза больше, чем в Москве.</p>
+          <ul class="group-list">
+            <li>Южно-Сахалинская</li>
+            <li>Мурманская</li>
+            <li>Альметьевская</li>
+            <li>Тульско-Новомосковская</li>
+            <li>Липецкая</li>
+            <li>Владивостокская</li>
+            <li>Иркутская</li>
+            <li>Нижнетагильская</li>
+            <li>Старооскольская</li>
+            <li>Хабаровская</li>
+            <li>Новокузнецкая</li>
+            <li>Ярославско-Рыбинская</li>
+            <li>Орская</li>
+            <li>Рязанская</li>
+            <li>Кировская</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="group group--weak">
+        <div class="group-bar" aria-hidden="true"></div>
+        <div>
+          <h3>Небольшие низкоинтенсивные <span class="count">(14)</span></h3>
+          <p class="meta">7% ВГП · 14% населения · ВГП на жителя 1 млн руб.</p>
+          <p>Всего 7% ВГП и 14% населения: доля людей вдвое больше доли экономики. ВГП на жителя в два раза меньше среднего — 1 млн руб.</p>
+          <p>В этих агломерациях низкая доля занятых: в Махачкалинской она 13%, в Кавминводской 11% — минимум из всех обследованных агломераций, это связано с высокой долей рынка туристических услуг. В эту же группу попала Абаканская агломерация, которая замыкает рейтинг: 0,33 трлн руб. ВГП.</p>
+          <ul class="group-list">
+            <li>Кемеровская</li>
+            <li>Калининградская</li>
+            <li>Ульяновско-Димитровградская</li>
+            <li>Барнаульская</li>
+            <li>Астраханская</li>
+            <li>Пензенская</li>
+            <li>Томская</li>
+            <li>Чебоксарская</li>
+            <li>Махачкалинская</li>
+            <li>Стерлитамакская</li>
+            <li>Кавминводская</li>
+            <li>Златоустско-Миасская</li>
+            <li>Улан-Удэнская</li>
+            <li>Абаканская</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="moscow">
+    <div class="container prose">
+      <h2>Почему Москва лидирует</h2>
+      <p>Занимает первое место в рейтинге, относится к группе крупных высокоинтенсивных. Почти 40% ВГП всех обследованных агломераций при почти четверти их населения.</p>
+      <p>Среди всех обследованных агломераций на Москву приходится 35% отгрузки, 39% инвестиций и 27% занятых. Петербург меньше вчетверо по ВГП. Москва дает ВГП больше, чем семь других крупных высокоинтенсивных вместе взятых.</p>
+      <p>Москва — одна из самых быстрорастущих агломераций, с 2019 года население выросло с 17,7 до 19,1 млн человек, номинальный ВГП — с 33,9 до 62,1 трлн руб., объем отгрузки — с 21,3 до 37,3 трлн, инвестиции — с 3,0 до 7,5 трлн.</p>
+      <p>Почти 40% этой отгрузки Москвы — обрабатывающие производства, 4% — добыча полезных ископаемых.</p>
+
+      <figure class="case-figure">
+        <img src="data/media/moscow-shipments-structure.png" alt="Структура отгрузки Москвы по отраслям: обрабатывающие производства 39%, транспортировка и хранение 19%, ИКТ 16%, строительство 9%, прочие услуги 9%, добыча 4%, торговля 4%">
+      </figure>
+
+      <p>В добыче отгрузка связана не столько с нефтью и газом, сколько с услугами в этой сфере. Основной вклад дает нефтепереработка: по отгрузке этих товаров регион тоже лидер в стране. Московский НПЗ в 2024 году перерабатывал около 12 млн тонн нефти при общестрановом объеме порядка 260 млн тонн.</p>
+
+      <figure class="case-figure">
+        <img src="data/media/moscow-mining-shares.png" alt="Доля Москвы в отгрузке добычи: нефть 38% сектора и 4% по стране; услуги бурения 38% сектора и 64% по стране; монтаж буровых вышек 1% и 14%; прочие услуги добычи 16% и 21%">
+      </figure>
+      <p>Москва также в лидерах по производству алюминия, драгоценных металлов и азотных удобрений — при том что крупных мощностей на территории нет. По летательным аппаратам и самолетам в 2024 году столица — абсолютный лидер по отгрузке.</p>
+      <p>Это происходит потому, что компании регистрируются в Москве и частично сдают статистику по подразделениям в других регионах. Факт отгрузки попадает в отчетность головного офиса, особенно по товарам, близким к готовым изделиям. В статистику могут попадать и переданные полуфабрикаты, которые потом возвращаются на предприятия.</p>
+      <p>Общий объем искажения — деятельность, зачтенная Москве, но ведущаяся не в ней — однозначно оценить нельзя. По оценке института «Урбаника», вклад таких отраслей может составлять 61% отгрузки товаров в обрабатывающих производствах и 26% всей отгрузки товаров, работ и услуг Москвы за 2024 год.</p>
+    </div>
+  </section>
+
+  <section class="section" id="sakhalin">
+    <div class="container prose">
+      <h2>Кейс Сахалин</h2>
+      <p>Текст по Южно-Сахалинской агломерации будет позже.</p>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container prose">
+      <h2>Как считали</h2>
+      <p>Интегральный индекс, на котором основан рейтинг, складывается из двух субиндексов с равным весом.</p>
+      <p>Масштаб — по логарифму ВГП. Логарифм сглаживает разрыв между Москвой и остальными, иначе рейтинг схлопнулся бы в одну строку.</p>
+      <p>Интенсивность — среднее из трех показателей на жителя: отгрузка товаров собственного производства, инвестиции в основной капитал, доля занятых в населении. Каждый показатель нормирован по перцентилям P10–P90, чтобы выбросы не завышали шкалу.</p>
+      <p>В расчете субиндексы и интегральный индекс лежат на шкале от 0 до 1. Для публикации индекс умножается на 100 и округляется до целого: 0,99 читается как 99 баллов. Так проще сравнивать места в рейтинге, сами пропорции не меняются.</p>
+      <p>Группы «режутся» по медиане двух субиндексов. Шесть агломераций экспертно перенесены: Уфимская, Ижевская, Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская, Иркутская — в небольшие высокоинтенсивные.</p>
+      <p>Этот рейтинг за 2024 год, он будет обновляться по мере поступления данных в БДМО.</p>
+      <p>Границы агломераций и методика ВГП — «Институт экономики города». Показатели собраны по муниципальным образованиям в составе агломераций из базы данных муниципальных образований (БДМО).</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">Урбаника<span>. Агломерации</span></a>
+    <a href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">© 2026 Урбаника</a>
+  </div>
+</footer>
+
+<script src="js/agglomeration-data.js"></script>
+<script src="js/rating-widgets.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var W = window.UrbanicaWidgets;
+  var DATA = window.AGGLOMERATION_DATA;
+  var prepared = W.prepareData(DATA);
+  var MEDIA_LABELS = {
+    anchors: 'Крупные высокоинтенсивные',
+    large: 'Крупные низкоинтенсивные',
+    dense: 'Небольшие высокоинтенсивные',
+    weak: 'Небольшие низкоинтенсивные'
+  };
+
+  W.bindRatingSort('rating', document.getElementById('tableBody'), prepared.byIntegral50, {
+    compact: true,
+    scoreAsPoints: true
+  });
+
+  function drawChart() {
+    W.renderBubbleChart({
+      containerId: 'scaleChart',
+      tooltipId: 'bubbleTooltip',
+      items: DATA,
+      labels: MEDIA_LABELS,
+      yAxisTitle: 'интенсивность →',
+      xAxisTitle: 'масштаб →',
+      intensityLabel: 'Интенсивность'
+    });
+  }
+  drawChart();
+  window.addEventListener('resize', function () {
+    clearTimeout(window.__bubbleResizeTimer);
+    window.__bubbleResizeTimer = setTimeout(drawChart, 180);
+  });
+
+  var header = document.getElementById('header');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var menuToggle = document.getElementById('menuToggle');
+  var nav = document.getElementById('nav');
+  menuToggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      nav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -197,11 +197,12 @@
     var labels = opts.labels || DEFAULT_CLUSTER_LABELS;
     var yAxisTitle = opts.yAxisTitle || 'эффективность →';
     var xAxisTitle = opts.xAxisTitle || 'масштаб →';
+    var asPoints = !!opts.scoreAsPoints;
     if (!wrap || !tooltip) return;
 
     var width = wrap.clientWidth || 1000;
     var height = wrap.clientHeight || 560;
-    var margin = { top: 18, right: 28, bottom: 48, left: 54 };
+    var margin = { top: 18, right: 28, bottom: 48, left: asPoints ? 62 : 54 };
     var plotW = Math.max(120, width - margin.left - margin.right);
     var plotH = Math.max(120, height - margin.top - margin.bottom);
 
@@ -261,7 +262,7 @@
         y: margin.top + plotH + 18,
         'text-anchor': 'middle'
       });
-      xLabel.textContent = String(t).replace('.', ',');
+      xLabel.textContent = asPoints ? String(Math.round(t * 100)) : String(t).replace('.', ',');
       svg.appendChild(xLabel);
 
       var yLabel = el('text', {
@@ -270,7 +271,7 @@
         y: y + 4,
         'text-anchor': 'end'
       });
-      yLabel.textContent = String(t).replace('.', ',');
+      yLabel.textContent = asPoints ? String(Math.round(t * 100)) : String(t).replace('.', ',');
       svg.appendChild(yLabel);
     });
 
@@ -345,8 +346,8 @@
       var d = n.data;
       tooltip.innerHTML =
         '<strong>' + d.name + '</strong>' +
-        '<div class="row"><span>Масштаб</span><span>' + formatNum(d.scale) + '</span></div>' +
-        '<div class="row"><span>' + (opts.intensityLabel || 'Эффективность') + '</span><span>' + formatNum(d.efficiency) + '</span></div>' +
+        '<div class="row"><span>Масштаб</span><span>' + (asPoints ? scorePoints(d.scale) : formatNum(d.scale)) + '</span></div>' +
+        '<div class="row"><span>' + (opts.intensityLabel || 'Эффективность') + '</span><span>' + (asPoints ? scorePoints(d.efficiency) : formatNum(d.efficiency)) + '</span></div>' +
         '<div class="row"><span>ВГП</span><span>' + formatNum(d.vgp) + ' трлн ₽</span></div>' +
         '<div class="row"><span>Место в рейтинге</span><span>' + d.rank + '</span></div>' +
         '<div class="row"><span>Группа</span><span>' + labels[clusterKey(d)] + '</span></div>' +

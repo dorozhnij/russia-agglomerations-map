@@ -306,16 +306,37 @@
       'marker-end': 'url(#' + arrowId + ')'
     }));
 
+    var medX = xOf(MED_SCALE);
+    var medY = yOf(MED_EFF);
+
     svg.appendChild(el('line', {
       class: 'median-line',
-      x1: xOf(MED_SCALE), y1: margin.top,
-      x2: xOf(MED_SCALE), y2: margin.top + plotH
+      x1: medX, y1: margin.top,
+      x2: medX, y2: margin.top + plotH
     }));
     svg.appendChild(el('line', {
       class: 'median-line',
-      x1: margin.left, y1: yOf(MED_EFF),
-      x2: margin.left + plotW, y2: yOf(MED_EFF)
+      x1: margin.left, y1: medY,
+      x2: margin.left + plotW, y2: medY
     }));
+
+    var xMedLabel = el('text', {
+      class: 'median-label',
+      x: medX + 4,
+      y: margin.top + 14,
+      'text-anchor': 'start'
+    });
+    xMedLabel.textContent = 'медиана';
+    svg.appendChild(xMedLabel);
+
+    var yMedLabel = el('text', {
+      class: 'median-label',
+      x: margin.left + plotW - 4,
+      y: medY - 6,
+      'text-anchor': 'end'
+    });
+    yMedLabel.textContent = 'медиана';
+    svg.appendChild(yMedLabel);
 
     var xTitle = el('text', {
       class: 'axis-title',
@@ -323,7 +344,7 @@
       y: height - 8,
       'text-anchor': 'middle'
     });
-    xTitle.textContent = xAxisTitle;
+    xTitle.textContent = xAxisTitle + ' →';
     svg.appendChild(xTitle);
 
     var yTitle = el('text', {
@@ -333,7 +354,7 @@
       'text-anchor': 'middle',
       transform: 'rotate(-90 14 ' + (margin.top + plotH / 2) + ')'
     });
-    yTitle.textContent = yAxisTitle;
+    yTitle.textContent = yAxisTitle + ' →';
     svg.appendChild(yTitle);
 
     var nodes = items.map(function (d) {

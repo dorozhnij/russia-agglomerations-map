@@ -883,7 +883,7 @@
       <p class="chart-subtitle">Шесть агломераций экспертно разнесены по группам: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в небольшие высокоинтенсивные. Пунктир на графике — медианы обоих индексов.</p>
 
       <div class="chart-container chart-container--bubble">
-        <p class="chart-subtitle">Чем правее — тем выше масштаб, чем выше — тем больше интенсивность. Оси — в баллах от 0 до 100, как в рейтинге. Площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
+        <p class="chart-subtitle">Чем правее — тем выше масштаб экономики, чем выше — тем больше интенсивность экономики. Оси — в баллах от 0 до 100, как в рейтинге. Площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
         <div class="bubble-legend" aria-hidden="true">
           <span><i class="swatch swatch--anchors"></i> «Медведи»</span>
           <span><i class="swatch swatch--large"></i> «Лоси»</span>
@@ -891,7 +891,7 @@
           <span><i class="swatch swatch--weak"></i> «Барсуки»</span>
           <span>Пунктир — медианы</span>
         </div>
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X в баллах от 0 до 100, интенсивность по оси Y в баллах от 0 до 100, цвет — группа, площадь круга — ВГП"></div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб экономики по оси X, интенсивность экономики по оси Y в баллах от 0 до 100, цвет — группа, площадь круга — ВГП"></div>
         <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
       </div>
 
@@ -1087,8 +1087,6 @@
       tooltipId: 'bubbleTooltip',
       items: DATA,
       labels: MEDIA_LABELS,
-      yAxisTitle: 'интенсивность, баллов →',
-      xAxisTitle: 'масштаб, баллов →',
       intensityLabel: 'Интенсивность',
       scoreAsPoints: true
     });

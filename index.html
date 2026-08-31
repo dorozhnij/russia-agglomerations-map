@@ -1319,7 +1319,7 @@
       </div>
 
       <div class="chart-container chart-container--bubble">
-        <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб, чем выше — тем больше эффективность, площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
+        <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб экономики, чем выше — тем больше интенсивность экономики, площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
         <div class="bubble-legend" aria-hidden="true">
           <span><i class="swatch swatch--anchors"></i> Экономические якоря</span>
           <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
@@ -1327,7 +1327,7 @@
           <span><i class="swatch swatch--weak"></i> Слабо вовлеченные</span>
           <span>Пунктир — медианы</span>
         </div>
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб по оси X, эффективность по оси Y, цвет — группа, площадь круга — ВГП"></div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб экономики по оси X, интенсивность экономики по оси Y, цвет — группа, площадь круга — ВГП"></div>
         <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
       </div>
     </div>
@@ -1678,7 +1678,7 @@
 
     var width = wrap.clientWidth || 1000;
     var height = wrap.clientHeight || 560;
-    var margin = { top: 18, right: 28, bottom: 48, left: 54 };
+    var margin = { top: 18, right: 28, bottom: 48, left: 64 };
     var plotW = Math.max(120, width - margin.left - margin.right);
     var plotH = Math.max(120, height - margin.top - margin.bottom);
 
@@ -1787,17 +1787,17 @@
       y: height - 8,
       'text-anchor': 'middle'
     });
-    xTitle.textContent = 'масштаб →';
+    xTitle.textContent = 'масштаб экономики';
     svg.appendChild(xTitle);
 
     var yTitle = el('text', {
       class: 'axis-title',
-      x: 16,
+      x: 14,
       y: margin.top + plotH / 2,
       'text-anchor': 'middle',
-      transform: 'rotate(-90 16 ' + (margin.top + plotH / 2) + ')'
+      transform: 'rotate(-90 14 ' + (margin.top + plotH / 2) + ')'
     });
-    yTitle.textContent = 'эффективность →';
+    yTitle.textContent = 'интенсивность экономики';
     svg.appendChild(yTitle);
 
     // Nodes: large first (underneath), small on top for hit-testing

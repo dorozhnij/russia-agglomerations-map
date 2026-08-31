@@ -195,14 +195,14 @@
     var tooltip = document.getElementById(opts.tooltipId);
     var items = opts.items;
     var labels = opts.labels || DEFAULT_CLUSTER_LABELS;
-    var yAxisTitle = opts.yAxisTitle || 'эффективность →';
-    var xAxisTitle = opts.xAxisTitle || 'масштаб →';
+    var yAxisTitle = opts.yAxisTitle || 'интенсивность экономики';
+    var xAxisTitle = opts.xAxisTitle || 'масштаб экономики';
     var asPoints = !!opts.scoreAsPoints;
     if (!wrap || !tooltip) return;
 
     var width = wrap.clientWidth || 1000;
     var height = wrap.clientHeight || 560;
-    var margin = { top: 18, right: 28, bottom: 48, left: asPoints ? 62 : 54 };
+    var margin = { top: 18, right: 28, bottom: 48, left: asPoints ? 68 : 64 };
     var plotW = Math.max(120, width - margin.left - margin.right);
     var plotH = Math.max(120, height - margin.top - margin.bottom);
 
@@ -308,10 +308,10 @@
 
     var yTitle = el('text', {
       class: 'axis-title',
-      x: 16,
+      x: 14,
       y: margin.top + plotH / 2,
       'text-anchor': 'middle',
-      transform: 'rotate(-90 16 ' + (margin.top + plotH / 2) + ')'
+      transform: 'rotate(-90 14 ' + (margin.top + plotH / 2) + ')'
     });
     yTitle.textContent = yAxisTitle;
     svg.appendChild(yTitle);

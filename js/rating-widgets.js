@@ -275,15 +275,35 @@
       svg.appendChild(yLabel);
     });
 
+    var defs = el('defs', {});
+    var arrowId = 'axis-arrow-' + opts.containerId;
+    var arrowMarker = el('marker', {
+      id: arrowId,
+      viewBox: '0 0 8 8',
+      refX: 7,
+      refY: 4,
+      markerWidth: 7,
+      markerHeight: 7,
+      orient: 'auto'
+    });
+    arrowMarker.appendChild(el('path', {
+      d: 'M0,0 L8,4 L0,8 Z',
+      fill: '#bbb'
+    }));
+    defs.appendChild(arrowMarker);
+    svg.appendChild(defs);
+
     svg.appendChild(el('line', {
       class: 'axis-line',
       x1: margin.left, y1: margin.top + plotH,
-      x2: margin.left + plotW, y2: margin.top + plotH
+      x2: margin.left + plotW, y2: margin.top + plotH,
+      'marker-end': 'url(#' + arrowId + ')'
     }));
     svg.appendChild(el('line', {
       class: 'axis-line',
-      x1: margin.left, y1: margin.top,
-      x2: margin.left, y2: margin.top + plotH
+      x1: margin.left, y1: margin.top + plotH,
+      x2: margin.left, y2: margin.top,
+      'marker-end': 'url(#' + arrowId + ')'
     }));
 
     svg.appendChild(el('line', {

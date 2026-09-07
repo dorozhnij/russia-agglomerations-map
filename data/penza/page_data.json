@@ -1,0 +1,156 @@
+{
+  "title": "Пензенская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 0.8806773191,
+    "population": 0.681894,
+    "shipments": 0.3646511204,
+    "employees": 0.144171,
+    "investments": 0.054824215,
+    "shipmentsPerCapita": 534.7621776992,
+    "investmentsPerCapita": 80.3999081969,
+    "employmentRate": 21.1427289285,
+    "efficiency": 0.0893146981,
+    "scale": 0.1865428444,
+    "integral": 0.1476515859
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 0.72265
+      },
+      {
+        "year": 2020,
+        "value": 0.720023
+      },
+      {
+        "year": 2021,
+        "value": 0.714617
+      },
+      {
+        "year": 2022,
+        "value": 0.707505
+      },
+      {
+        "year": 2023,
+        "value": 0.686258
+      },
+      {
+        "year": 2024,
+        "value": 0.681894
+      },
+      {
+        "year": 2025,
+        "value": 0.680696
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.48166558229568684
+      },
+      {
+        "year": 2020,
+        "value": 0.5175970841022038
+      },
+      {
+        "year": 2021,
+        "value": 0.5203988448877586
+      },
+      {
+        "year": 2022,
+        "value": 0.6793314541076215
+      },
+      {
+        "year": 2023,
+        "value": 0.757791944980949
+      },
+      {
+        "year": 2024,
+        "value": 0.876669656708132
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.17965495469999998
+      },
+      {
+        "year": 2020,
+        "value": 0.2026952274
+      },
+      {
+        "year": 2021,
+        "value": 0.24354143690000002
+      },
+      {
+        "year": 2022,
+        "value": 0.26358738439999996
+      },
+      {
+        "year": 2023,
+        "value": 0.297150099
+      },
+      {
+        "year": 2024,
+        "value": 0.3646511204
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.153693
+      },
+      {
+        "year": 2020,
+        "value": 0.153271
+      },
+      {
+        "year": 2021,
+        "value": 0.152399
+      },
+      {
+        "year": 2022,
+        "value": 0.150723
+      },
+      {
+        "year": 2023,
+        "value": 0.150399
+      },
+      {
+        "year": 2024,
+        "value": 0.144171
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.026993794
+      },
+      {
+        "year": 2020,
+        "value": 0.029864159
+      },
+      {
+        "year": 2021,
+        "value": 0.033947357
+      },
+      {
+        "year": 2022,
+        "value": 0.037179849
+      },
+      {
+        "year": 2023,
+        "value": 0.049913981
+      },
+      {
+        "year": 2024,
+        "value": 0.054824215
+      }
+    ]
+  },
+  "municipalityCount": 5,
+  "matchedCount": 5
+}

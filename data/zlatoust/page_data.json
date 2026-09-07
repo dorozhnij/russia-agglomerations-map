@@ -1,0 +1,156 @@
+{
+  "title": "Златоустско-Миасская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 0.5130233534,
+    "population": 0.63999,
+    "shipments": 0.4367357232,
+    "employees": 0.127038,
+    "investments": 0.042738053,
+    "shipmentsPerCapita": 682.4102301598,
+    "investmentsPerCapita": 66.7792512383,
+    "employmentRate": 19.8499976562,
+    "efficiency": 0.0808506169,
+    "scale": 0.0832708469,
+    "integral": 0.0823027549
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 0.665652
+      },
+      {
+        "year": 2020,
+        "value": 0.661682
+      },
+      {
+        "year": 2021,
+        "value": 0.65597
+      },
+      {
+        "year": 2022,
+        "value": 0.648607
+      },
+      {
+        "year": 2023,
+        "value": 0.644001
+      },
+      {
+        "year": 2024,
+        "value": 0.63999
+      },
+      {
+        "year": 2025,
+        "value": 0.634894
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.27530809216746865
+      },
+      {
+        "year": 2020,
+        "value": 0.27349656775544323
+      },
+      {
+        "year": 2021,
+        "value": 0.26955104596823887
+      },
+      {
+        "year": 2022,
+        "value": 0.4350601767741283
+      },
+      {
+        "year": 2023,
+        "value": 0.4845330620804295
+      },
+      {
+        "year": 2024,
+        "value": 0.5099606490121394
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.21401470339999998
+      },
+      {
+        "year": 2020,
+        "value": 0.2177329358
+      },
+      {
+        "year": 2021,
+        "value": 0.261393608
+      },
+      {
+        "year": 2022,
+        "value": 0.3160832221
+      },
+      {
+        "year": 2023,
+        "value": 0.3876578483
+      },
+      {
+        "year": 2024,
+        "value": 0.4367357232
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.133833
+      },
+      {
+        "year": 2020,
+        "value": 0.12961
+      },
+      {
+        "year": 2021,
+        "value": 0.127369
+      },
+      {
+        "year": 2022,
+        "value": 0.133632
+      },
+      {
+        "year": 2023,
+        "value": 0.132868
+      },
+      {
+        "year": 2024,
+        "value": 0.127038
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.016029705
+      },
+      {
+        "year": 2020,
+        "value": 0.017649747
+      },
+      {
+        "year": 2021,
+        "value": 0.023312642
+      },
+      {
+        "year": 2022,
+        "value": 0.034116396
+      },
+      {
+        "year": 2023,
+        "value": 0.03295398
+      },
+      {
+        "year": 2024,
+        "value": 0.042738053
+      }
+    ]
+  },
+  "municipalityCount": 11,
+  "matchedCount": 11
+}

@@ -1,0 +1,156 @@
+{
+  "title": "Стерлитамакская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 0.4863013832,
+    "population": 0.557609,
+    "shipments": 0.6187901175,
+    "employees": 0.098717,
+    "investments": 0.044435073,
+    "shipmentsPerCapita": 1109.7204627257,
+    "investmentsPerCapita": 79.6885864468,
+    "employmentRate": 17.7036238655,
+    "efficiency": 0.1347116781,
+    "scale": 0.0730476487,
+    "integral": 0.0977132605
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 0.55928
+      },
+      {
+        "year": 2020,
+        "value": 0.556653
+      },
+      {
+        "year": 2021,
+        "value": 0.552575
+      },
+      {
+        "year": 2022,
+        "value": 0.550832
+      },
+      {
+        "year": 2023,
+        "value": 0.557961
+      },
+      {
+        "year": 2024,
+        "value": 0.557609
+      },
+      {
+        "year": 2025,
+        "value": 0.554905
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.31752179764384886
+      },
+      {
+        "year": 2020,
+        "value": 0.3048730020907206
+      },
+      {
+        "year": 2021,
+        "value": 0.29506482838208414
+      },
+      {
+        "year": 2022,
+        "value": 0.402971057754706
+      },
+      {
+        "year": 2023,
+        "value": 0.42899785413108343
+      },
+      {
+        "year": 2024,
+        "value": 0.48353458728272175
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.42842516429999994
+      },
+      {
+        "year": 2020,
+        "value": 0.3764319141
+      },
+      {
+        "year": 2021,
+        "value": 0.5405261282
+      },
+      {
+        "year": 2022,
+        "value": 0.5121249690999999
+      },
+      {
+        "year": 2023,
+        "value": 0.5436046478
+      },
+      {
+        "year": 2024,
+        "value": 0.6187901174999999
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.111337
+      },
+      {
+        "year": 2020,
+        "value": 0.10926
+      },
+      {
+        "year": 2021,
+        "value": 0.106992
+      },
+      {
+        "year": 2022,
+        "value": 0.103461
+      },
+      {
+        "year": 2023,
+        "value": 0.100789
+      },
+      {
+        "year": 2024,
+        "value": 0.098717
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.03661928
+      },
+      {
+        "year": 2020,
+        "value": 0.030646778
+      },
+      {
+        "year": 2021,
+        "value": 0.028938525
+      },
+      {
+        "year": 2022,
+        "value": 0.035225895
+      },
+      {
+        "year": 2023,
+        "value": 0.03755176
+      },
+      {
+        "year": 2024,
+        "value": 0.044435073
+      }
+    ]
+  },
+  "municipalityCount": 4,
+  "matchedCount": 4
+}

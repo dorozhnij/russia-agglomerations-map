@@ -1,0 +1,156 @@
+{
+  "title": "Улан-Удэнская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 0.5098560205,
+    "population": 0.607145,
+    "shipments": 0.1459202124,
+    "employees": 0.106294,
+    "investments": 0.07465137,
+    "shipmentsPerCapita": 240.3383251118,
+    "investmentsPerCapita": 122.9547636891,
+    "employmentRate": 17.5071852688,
+    "efficiency": 0.0435943174,
+    "scale": 0.082087282,
+    "integral": 0.0666900962
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 0.591444
+      },
+      {
+        "year": 2020,
+        "value": 0.600175
+      },
+      {
+        "year": 2021,
+        "value": 0.602145
+      },
+      {
+        "year": 2022,
+        "value": 0.603875
+      },
+      {
+        "year": 2023,
+        "value": 0.604914
+      },
+      {
+        "year": 2024,
+        "value": 0.607145
+      },
+      {
+        "year": 2025,
+        "value": 0.609172
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.2901691528352349
+      },
+      {
+        "year": 2020,
+        "value": 0.29969974582235925
+      },
+      {
+        "year": 2021,
+        "value": 0.27954920376016895
+      },
+      {
+        "year": 2022,
+        "value": 0.4434997297118789
+      },
+      {
+        "year": 2023,
+        "value": 0.46964547561468317
+      },
+      {
+        "year": 2024,
+        "value": 0.5073475566106087
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.12394311929999999
+      },
+      {
+        "year": 2020,
+        "value": 0.1435178508
+      },
+      {
+        "year": 2021,
+        "value": 0.160717353
+      },
+      {
+        "year": 2022,
+        "value": 0.197403489
+      },
+      {
+        "year": 2023,
+        "value": 0.19419177629999998
+      },
+      {
+        "year": 2024,
+        "value": 0.14592021239999997
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.109941
+      },
+      {
+        "year": 2020,
+        "value": 0.109944
+      },
+      {
+        "year": 2021,
+        "value": 0.107966
+      },
+      {
+        "year": 2022,
+        "value": 0.106835
+      },
+      {
+        "year": 2023,
+        "value": 0.10667
+      },
+      {
+        "year": 2024,
+        "value": 0.106294
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.00322695
+      },
+      {
+        "year": 2020,
+        "value": 0.00237502
+      },
+      {
+        "year": 2021,
+        "value": 0.04326777596
+      },
+      {
+        "year": 2022,
+        "value": 0.08946186
+      },
+      {
+        "year": 2023,
+        "value": 0.0909373
+      },
+      {
+        "year": 2024,
+        "value": 0.07465137
+      }
+    ]
+  },
+  "municipalityCount": 5,
+  "matchedCount": 5
+}

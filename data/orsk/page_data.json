@@ -1,0 +1,156 @@
+{
+  "title": "Орская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 0.6003954479,
+    "population": 0.332215,
+    "shipments": 0.4083558566,
+    "employees": 0.080473,
+    "investments": 0.070407239,
+    "shipmentsPerCapita": 1229.191507307,
+    "investmentsPerCapita": 211.9327513809,
+    "employmentRate": 24.2231687311,
+    "efficiency": 0.4894478687,
+    "scale": 0.1133267254,
+    "integral": 0.2637751827
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 0.393416
+      },
+      {
+        "year": 2020,
+        "value": 0.389746
+      },
+      {
+        "year": 2021,
+        "value": 0.385779
+      },
+      {
+        "year": 2022,
+        "value": 0.381443
+      },
+      {
+        "year": 2023,
+        "value": 0.334361
+      },
+      {
+        "year": 2024,
+        "value": 0.332215
+      },
+      {
+        "year": 2025,
+        "value": 0.328762
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.30539412498908985
+      },
+      {
+        "year": 2020,
+        "value": 0.29202867093108165
+      },
+      {
+        "year": 2021,
+        "value": 0.3737006771320027
+      },
+      {
+        "year": 2022,
+        "value": 0.44395685926842704
+      },
+      {
+        "year": 2023,
+        "value": 0.49480973082491775
+      },
+      {
+        "year": 2024,
+        "value": 0.5969819967507495
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.2030588089
+      },
+      {
+        "year": 2020,
+        "value": 0.20539187800000003
+      },
+      {
+        "year": 2021,
+        "value": 0.3078660282999999
+      },
+      {
+        "year": 2022,
+        "value": 0.3324025373
+      },
+      {
+        "year": 2023,
+        "value": 0.3895439821
+      },
+      {
+        "year": 2024,
+        "value": 0.40835585659999996
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.08642
+      },
+      {
+        "year": 2020,
+        "value": 0.083472
+      },
+      {
+        "year": 2021,
+        "value": 0.080919
+      },
+      {
+        "year": 2022,
+        "value": 0.079576
+      },
+      {
+        "year": 2023,
+        "value": 0.08061
+      },
+      {
+        "year": 2024,
+        "value": 0.080473
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.023749734
+      },
+      {
+        "year": 2020,
+        "value": 0.019848586
+      },
+      {
+        "year": 2021,
+        "value": 0.02163342
+      },
+      {
+        "year": 2022,
+        "value": 0.029343051
+      },
+      {
+        "year": 2023,
+        "value": 0.04981041
+      },
+      {
+        "year": 2024,
+        "value": 0.070407239
+      }
+    ]
+  },
+  "municipalityCount": 4,
+  "matchedCount": 4
+}

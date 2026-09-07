@@ -1,0 +1,156 @@
+{
+  "title": "Ярославско-Рыбинская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 1.1077062075,
+    "population": 0.972272,
+    "shipments": 0.7643292801,
+    "employees": 0.257768,
+    "investments": 0.125532541,
+    "shipmentsPerCapita": 786.1270098285,
+    "investmentsPerCapita": 129.1125744648,
+    "employmentRate": 26.5119225896,
+    "efficiency": 0.3761926636,
+    "scale": 0.2303757588,
+    "integral": 0.2887025207
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 1.030697
+      },
+      {
+        "year": 2020,
+        "value": 1.027328
+      },
+      {
+        "year": 2021,
+        "value": 1.01821
+      },
+      {
+        "year": 2022,
+        "value": 1.008051
+      },
+      {
+        "year": 2023,
+        "value": 0.97688
+      },
+      {
+        "year": 2024,
+        "value": 0.972272
+      },
+      {
+        "year": 2025,
+        "value": 0.966903
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.6102067598790891
+      },
+      {
+        "year": 2020,
+        "value": 0.6117101557812405
+      },
+      {
+        "year": 2021,
+        "value": 0.6852656538486245
+      },
+      {
+        "year": 2022,
+        "value": 0.847207392704992
+      },
+      {
+        "year": 2023,
+        "value": 0.9806645842909043
+      },
+      {
+        "year": 2024,
+        "value": 1.1016336374046465
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.46963304420000007
+      },
+      {
+        "year": 2020,
+        "value": 0.4703874404
+      },
+      {
+        "year": 2021,
+        "value": 0.5796337616
+      },
+      {
+        "year": 2022,
+        "value": 0.6047487479
+      },
+      {
+        "year": 2023,
+        "value": 0.7116769904999999
+      },
+      {
+        "year": 2024,
+        "value": 0.7643292801
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.269717
+      },
+      {
+        "year": 2020,
+        "value": 0.265333
+      },
+      {
+        "year": 2021,
+        "value": 0.26371
+      },
+      {
+        "year": 2022,
+        "value": 0.260149
+      },
+      {
+        "year": 2023,
+        "value": 0.258714
+      },
+      {
+        "year": 2024,
+        "value": 0.257768
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.061737952
+      },
+      {
+        "year": 2020,
+        "value": 0.064450368
+      },
+      {
+        "year": 2021,
+        "value": 0.076968612
+      },
+      {
+        "year": 2022,
+        "value": 0.080618114
+      },
+      {
+        "year": 2023,
+        "value": 0.101846422
+      },
+      {
+        "year": 2024,
+        "value": 0.125532541
+      }
+    ]
+  },
+  "municipalityCount": 7,
+  "matchedCount": 7
+}

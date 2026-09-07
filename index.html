@@ -352,7 +352,8 @@
 
     tr:last-child td { border-bottom: none; }
 
-    #ratingTable tbody tr {
+    #ratingTable tbody tr,
+    #efficiencyTable tbody tr {
       cursor: pointer;
       transition: background 0.18s ease;
     }
@@ -1527,7 +1528,42 @@
     'Владивостокская': 'vladivostok.html',
     'Иркутская': 'irkutsk.html',
     'Нижнетагильская': 'nizhnitagil.html',
-    'Старооскольская': 'staryoskol.html'
+    'Старооскольская': 'staryoskol.html',
+    'Хабаровская': 'khabarovsk.html',
+    'Уфимская': 'ufa.html',
+    'Самарско-Тольяттинская': 'samara.html',
+    'Краснодарская': 'krasnodar.html',
+    'Новокузнецкая': 'novokuznetsk.html',
+    'Ростовская': 'rostov.html',
+    'Новосибирская': 'novosibirsk.html',
+    'Челябинская': 'chelyabinsk.html',
+    'Ижевская': 'izhevsk.html',
+    'Оренбургская': 'orenburg.html',
+    'Тюменская': 'tyumen.html',
+    'Ярославско-Рыбинская': 'yaroslavl.html',
+    'Орская': 'orsk.html',
+    'Рязанская': 'ryazan.html',
+    'Воронежская': 'voronezh.html',
+    'Омская': 'omsk.html',
+    'Красноярская': 'krasnoyarsk.html',
+    'Кировская': 'kirov.html',
+    'Волгоградская': 'volgograd.html',
+    'Кемеровская': 'kemerovo.html',
+    'Калининградская': 'kaliningrad.html',
+    'Саратовская': 'saratov.html',
+    'Ульяновско-Димитровградская': 'ulyanovsk.html',
+    'Барнаульская': 'barnaul.html',
+    'Астраханская': 'astrakhan.html',
+    'Ставропольская': 'stavropol.html',
+    'Пензенская': 'penza.html',
+    'Томская': 'tomsk.html',
+    'Чебоксарская': 'cheboksary.html',
+    'Махачкалинская': 'makhachkala.html',
+    'Стерлитамакская': 'sterlitamak.html',
+    'Кавминводская': 'kavminvody.html',
+    'Златоустско-Миасская': 'zlatoust.html',
+    'Улан-Удэнская': 'ulanude.html',
+    'Абаканская': 'abakan.html'
   };
 
   function aggloNameCell(name) {
@@ -1645,13 +1681,21 @@
       else if (d.effRank === 3) rankClass += ' rank-3';
       var tr = document.createElement('tr');
       if (i % 2 === 1) tr.style.background = '#F9F9F9';
+      var pageHref = PAGE_URLS[d.name];
+      if (pageHref) tr.dataset.href = pageHref;
       tr.innerHTML =
         '<td class="' + rankClass + '">' + d.effRank + '</td>' +
-        '<td class="agglo-name">' + d.name + '</td>' +
+        aggloNameCell(d.name) +
         '<td><span class="score-cell">' + scoreBar(d.efficiency) + '<span class="score-text">' + formatNum(d.efficiency) + '</span></span></td>' +
         '<td class="num">' + formatNum(d.shipmentsPc, 1) + '</td>' +
         '<td class="num">' + formatNum(d.investmentsPc, 1) + '</td>' +
         '<td class="num">' + formatNum(d.employmentRate, 1) + '</td>';
+      if (pageHref) {
+        tr.addEventListener('click', function (e) {
+          if (e.target.closest('a')) return;
+          window.location.href = pageHref;
+        });
+      }
       effBody.appendChild(tr);
     });
   }

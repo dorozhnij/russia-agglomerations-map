@@ -445,6 +445,48 @@
 
     .chart-tooltip strong { font-weight: 600; }
 
+    .related {
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .related-kicker {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-subtle);
+      margin-bottom: 4px;
+    }
+
+    .related-list a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      padding: 16px 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .related-list a:last-child { border-bottom: none; }
+
+    .related-name {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .related-meta {
+      font-size: 14px;
+      color: var(--ink-subtle);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .related-list a:hover .related-name { color: var(--accent); }
+    .related-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
     footer.page-foot {
       margin-top: 56px;
       padding-top: 22px;
@@ -489,6 +531,8 @@
       .page { padding: 0 18px 72px; }
       body { font-size: 17px; }
       .metric-card { padding: 20px 18px 16px; }
+      .related-list a { flex-direction: column; gap: 4px; padding: 14px 0; }
+      .related-name { font-size: 20px; }
     }
   </style>
 </head>
@@ -522,6 +566,8 @@
     <section class="agg-section" id="indicators" aria-label="Показатели агломерации">
       <div class="metric-charts" id="metricCharts"></div>
     </section>
+
+    <nav class="related" id="relatedAggs" aria-label="Другие агломерации"></nav>
 
     <footer class="page-foot">
       <span>Урбаника · Калининградская агломерация</span>
@@ -941,5 +987,6 @@
       console.error(err);
     });
   </script>
+  <script src="js/related-agglomerations.js"></script>
 </body>
 </html>

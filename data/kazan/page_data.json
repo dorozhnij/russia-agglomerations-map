@@ -1,0 +1,156 @@
+{
+  "title": "Казанская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 3.3895215995,
+    "population": 1.704708,
+    "shipments": 1.6066835275,
+    "employees": 0.437206,
+    "investments": 0.503962667,
+    "shipmentsPerCapita": 942.4977928771,
+    "investmentsPerCapita": 295.6299067054,
+    "employmentRate": 25.6469729713,
+    "efficiency": 0.5555510274,
+    "scale": 0.4441166192,
+    "integral": 0.4886903825
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 1.56902
+      },
+      {
+        "year": 2020,
+        "value": 1.583285
+      },
+      {
+        "year": 2021,
+        "value": 1.591851
+      },
+      {
+        "year": 2022,
+        "value": 1.604722
+      },
+      {
+        "year": 2023,
+        "value": 1.692172
+      },
+      {
+        "year": 2024,
+        "value": 1.704708
+      },
+      {
+        "year": 2025,
+        "value": 1.723986
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 1.4905035117022276
+      },
+      {
+        "year": 2020,
+        "value": 1.5644872318651126
+      },
+      {
+        "year": 2021,
+        "value": 1.5588099405062632
+      },
+      {
+        "year": 2022,
+        "value": 2.729132438394629
+      },
+      {
+        "year": 2023,
+        "value": 3.0222849864007495
+      },
+      {
+        "year": 2024,
+        "value": 3.3693736853671297
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.7982298327
+      },
+      {
+        "year": 2020,
+        "value": 0.7865456735000002
+      },
+      {
+        "year": 2021,
+        "value": 0.9672985248000002
+      },
+      {
+        "year": 2022,
+        "value": 1.1629263254
+      },
+      {
+        "year": 2023,
+        "value": 1.3361314040999999
+      },
+      {
+        "year": 2024,
+        "value": 1.6066835275
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.40526
+      },
+      {
+        "year": 2020,
+        "value": 0.403517
+      },
+      {
+        "year": 2021,
+        "value": 0.408278
+      },
+      {
+        "year": 2022,
+        "value": 0.421252
+      },
+      {
+        "year": 2023,
+        "value": 0.427316
+      },
+      {
+        "year": 2024,
+        "value": 0.437206
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.126425858
+      },
+      {
+        "year": 2020,
+        "value": 0.153132306
+      },
+      {
+        "year": 2021,
+        "value": 0.174003438
+      },
+      {
+        "year": 2022,
+        "value": 0.275832925
+      },
+      {
+        "year": 2023,
+        "value": 0.36497595
+      },
+      {
+        "year": 2024,
+        "value": 0.503962667
+      }
+    ]
+  },
+  "municipalityCount": 6,
+  "matchedCount": 6
+}

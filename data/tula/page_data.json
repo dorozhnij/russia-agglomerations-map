@@ -1,0 +1,156 @@
+{
+  "title": "Тульско-Новомосковская агломерация",
+  "year": 2024,
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "headline": {
+    "vgp": 1.4179114799,
+    "population": 0.98068,
+    "shipments": 1.617782013,
+    "employees": 0.263124,
+    "investments": 0.171851225,
+    "shipmentsPerCapita": 1649.6533150467,
+    "investmentsPerCapita": 175.2367999755,
+    "employmentRate": 26.8307704858,
+    "efficiency": 0.6368852188,
+    "scale": 0.2775604638,
+    "integral": 0.4212903658
+  },
+  "dynamics": {
+    "population": [
+      {
+        "year": 2019,
+        "value": 1.002106
+      },
+      {
+        "year": 2020,
+        "value": 0.994062
+      },
+      {
+        "year": 2021,
+        "value": 0.982556
+      },
+      {
+        "year": 2022,
+        "value": 0.998809
+      },
+      {
+        "year": 2023,
+        "value": 0.988263
+      },
+      {
+        "year": 2024,
+        "value": 0.98068
+      },
+      {
+        "year": 2025,
+        "value": 0.97142
+      }
+    ],
+    "vgp": [
+      {
+        "year": 2019,
+        "value": 0.8012311035690828
+      },
+      {
+        "year": 2020,
+        "value": 0.8107423642890457
+      },
+      {
+        "year": 2021,
+        "value": 0.9370964704097718
+      },
+      {
+        "year": 2022,
+        "value": 1.1744112749248796
+      },
+      {
+        "year": 2023,
+        "value": 1.3090905343317263
+      },
+      {
+        "year": 2024,
+        "value": 1.4099113804823225
+      }
+    ],
+    "shipments": [
+      {
+        "year": 2019,
+        "value": 0.6855892875000001
+      },
+      {
+        "year": 2020,
+        "value": 0.7962844705999998
+      },
+      {
+        "year": 2021,
+        "value": 1.0207470553
+      },
+      {
+        "year": 2022,
+        "value": 1.0854615875
+      },
+      {
+        "year": 2023,
+        "value": 1.2995538289000002
+      },
+      {
+        "year": 2024,
+        "value": 1.6177820129999998
+      }
+    ],
+    "employees": [
+      {
+        "year": 2019,
+        "value": 0.25939
+      },
+      {
+        "year": 2020,
+        "value": 0.259152
+      },
+      {
+        "year": 2021,
+        "value": 0.257914
+      },
+      {
+        "year": 2022,
+        "value": 0.259468
+      },
+      {
+        "year": 2023,
+        "value": 0.258006
+      },
+      {
+        "year": 2024,
+        "value": 0.263124
+      }
+    ],
+    "investments": [
+      {
+        "year": 2019,
+        "value": 0.10893711
+      },
+      {
+        "year": 2020,
+        "value": 0.081446117
+      },
+      {
+        "year": 2021,
+        "value": 0.10711477
+      },
+      {
+        "year": 2022,
+        "value": 0.12056717
+      },
+      {
+        "year": 2023,
+        "value": 0.134694
+      },
+      {
+        "year": 2024,
+        "value": 0.171851225
+      }
+    ]
+  },
+  "municipalityCount": 6,
+  "matchedCount": 6
+}

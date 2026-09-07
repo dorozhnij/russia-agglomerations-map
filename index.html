@@ -397,6 +397,18 @@
       transition: color 0.18s ease;
     }
 
+    .agglo-name a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .agglo-name a:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
     .score-cell {
       display: flex;
       align-items: center;
@@ -1498,6 +1510,19 @@
     return '<span class="score-bar" style="width:' + w + 'px"></span>';
   }
 
+  var PAGE_URLS = {
+    'Московская': 'moscow.html',
+    'Санкт-Петербургская': 'spb.html'
+  };
+
+  function aggloNameCell(name) {
+    var href = PAGE_URLS[name];
+    if (href) {
+      return '<td class="agglo-name"><a href="' + href + '">' + name + '</a></td>';
+    }
+    return '<td class="agglo-name">' + name + '</td>';
+  }
+
   /* ranks */
   DATA.forEach(function (d) {
     d.vgpPerCapita = parseFloat((d.vgp / d.population).toFixed(2));
@@ -1561,7 +1586,7 @@
       if (i % 2 === 1) tr.style.background = '#F9F9F9';
       tr.innerHTML =
         '<td class="' + rankClass + '">' + d.rank + '</td>' +
-        '<td class="agglo-name">' + d.name + '</td>' +
+        aggloNameCell(d.name) +
         '<td><span class="score-cell">' + scoreBar(d.integral50) + '<span class="score-text">' + formatNum(d.integral50) + '</span></span></td>' +
         '<td class="num">' + formatNum(d.scale) + '</td>' +
         '<td class="num">' + formatNum(d.efficiency) + '</td>';

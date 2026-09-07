@@ -1584,12 +1584,20 @@
       else if (d.rank === 3) rankClass += ' rank-3';
       var tr = document.createElement('tr');
       if (i % 2 === 1) tr.style.background = '#F9F9F9';
+      var pageHref = PAGE_URLS[d.name];
+      if (pageHref) tr.dataset.href = pageHref;
       tr.innerHTML =
         '<td class="' + rankClass + '">' + d.rank + '</td>' +
         aggloNameCell(d.name) +
         '<td><span class="score-cell">' + scoreBar(d.integral50) + '<span class="score-text">' + formatNum(d.integral50) + '</span></span></td>' +
         '<td class="num">' + formatNum(d.scale) + '</td>' +
         '<td class="num">' + formatNum(d.efficiency) + '</td>';
+      if (pageHref) {
+        tr.addEventListener('click', function (e) {
+          if (e.target.closest('a')) return;
+          window.location.href = pageHref;
+        });
+      }
       ratingBody.appendChild(tr);
     });
   }

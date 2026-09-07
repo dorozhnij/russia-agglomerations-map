@@ -1,7 +1,7 @@
 {
   "title": "Московская агломерация",
   "year": 2024,
-  "boundariesSource": "https://dorozhnij.github.io/russia-agglomerations-map/map",
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
   "headline": {
     "vgp": 62.1371640109,
     "population": 19.060792,

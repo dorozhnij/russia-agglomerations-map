@@ -52,23 +52,42 @@
     { name: "Златоустско-Миасская", href: "zlatoust.html", vgp: 0.51 },
     { name: "Улан-Удэнская", href: "ulanude.html", vgp: 0.51 },
     { name: "Абаканская", href: "abakan.html", vgp: 0.33 },
-  ];
+  ].map(function (page, i) {
+    return Object.assign({ rank: i + 1 }, page);
+  });
 
   function currentFile() {
     const parts = window.location.pathname.split("/").filter(Boolean);
-    const last = parts[parts.length - 1] || "";
-    return last.endsWith(".html") ? last : "";
+    let last = parts[parts.length - 1] || "";
+    if (last && !last.endsWith(".html")) last += ".html";
+    return last;
   }
 
-  function shuffle(items) {
-    const out = items.slice();
-    for (let i = out.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const tmp = out[i];
-      out[i] = out[j];
-      out[j] = tmp;
+  function neighborsOf(me, count) {
+    const index = PAGES.findIndex(function (page) {
+      return page.href === me;
+    });
+    if (index < 0) return PAGES.slice(0, count);
+    const picks = [];
+    for (let offset = 1; picks.length < count; offset += 1) {
+      const above = index - offset;
+      const below = index + offset;
+      let added = false;
+      if (above >= 0) {
+        picks.push(PAGES[above]);
+        added = true;
+        if (picks.length >= count) break;
+      }
+      if (below < PAGES.length) {
+        picks.push(PAGES[below]);
+        added = true;
+      }
+      if (!added) break;
     }
-    return out;
+    picks.sort(function (a, b) {
+      return a.rank - b.rank;
+    });
+    return picks;
   }
 
   function fmtVgp(value) {
@@ -81,17 +100,19 @@
   function render() {
     const root = document.getElementById("relatedAggs");
     if (!root) return;
-    const me = currentFile();
-    const picks = shuffle(PAGES.filter((page) => page.href !== me)).slice(0, 3);
+    if (root.querySelector("a")) return;
+    const picks = neighborsOf(currentFile(), 3);
     root.innerHTML =
-      '<p class="related-kicker">Другие агломерации</p>' +
+      '<p class="related-kicker">Соседи по рейтингу</p>' +
       '<div class="related-list">' +
       picks
         .map(function (page) {
           return (
             '<a href="' +
             page.href +
-            '"><span class="related-name">' +
+            '"><span class="related-rank">' +
+            page.rank +
+            " место</span><span class="related-name">' +
             page.name +
             " агломерация</span><span class="related-meta">ВГП " +
             fmtVgp(page.vgp) +

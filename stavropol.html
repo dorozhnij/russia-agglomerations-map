@@ -455,20 +455,37 @@
       font-size: 13px;
       font-weight: 500;
       color: var(--ink-subtle);
-      margin-bottom: 4px;
+      margin-bottom: 12px;
+    }
+
+    .related-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
     .related-list a {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 20px;
-      padding: 16px 0;
+      flex-direction: column;
+      gap: 8px;
+      padding: 22px 20px;
       text-decoration: none;
-      border-bottom: 1px solid var(--hairline);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      background: var(--surface);
+      min-height: 140px;
     }
 
-    .related-list a:last-child { border-bottom: none; }
+    .related-list a:hover {
+      border-color: var(--accent);
+    }
+
+    .related-rank {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
 
     .related-name {
       font-size: 22px;
@@ -478,10 +495,10 @@
     }
 
     .related-meta {
+      margin-top: auto;
       font-size: 14px;
       color: var(--ink-subtle);
       font-variant-numeric: tabular-nums;
-      white-space: nowrap;
     }
 
     .related-list a:hover .related-name { color: var(--accent); }
@@ -531,7 +548,8 @@
       .page { padding: 0 18px 72px; }
       body { font-size: 17px; }
       .metric-card { padding: 20px 18px 16px; }
-      .related-list a { flex-direction: column; gap: 4px; padding: 14px 0; }
+      .related-list { grid-template-columns: 1fr; }
+      .related-list a { min-height: 0; }
       .related-name { font-size: 20px; }
     }
   </style>
@@ -562,12 +580,31 @@
         <p class="panel-note">Источник: БДМО / расчет ВГП. Нулевые значения — нет данных или ЗАТО.</p>
       </aside>
     </section>
-
     <section class="agg-section" id="indicators" aria-label="Показатели агломерации">
       <div class="metric-charts" id="metricCharts"></div>
     </section>
 
-    <nav class="related" id="relatedAggs" aria-label="Другие агломерации"></nav>
+
+    <nav class="related" id="relatedAggs" aria-label="Соседи по рейтингу">
+      <p class="related-kicker">Соседи по рейтингу</p>
+      <div class="related-list">
+        <a href="barnaul.html">
+          <span class="related-rank">41 место</span>
+          <span class="related-name">Барнаульская агломерация</span>
+          <span class="related-meta">ВГП 0,9 трлн руб.</span>
+        </a>
+        <a href="astrakhan.html">
+          <span class="related-rank">42 место</span>
+          <span class="related-name">Астраханская агломерация</span>
+          <span class="related-meta">ВГП 1,1 трлн руб.</span>
+        </a>
+        <a href="penza.html">
+          <span class="related-rank">44 место</span>
+          <span class="related-name">Пензенская агломерация</span>
+          <span class="related-meta">ВГП 0,9 трлн руб.</span>
+        </a>
+      </div>
+    </nav>
 
     <footer class="page-foot">
       <span>Урбаника · Ставропольская агломерация</span>
@@ -987,6 +1024,6 @@
       console.error(err);
     });
   </script>
-  <script src="js/related-agglomerations.js"></script>
+  <script src="js/related-agglomerations.js?v=footer-cards"></script>
 </body>
 </html>

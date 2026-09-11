@@ -1,7 +1,7 @@
 {
   "title": "Санкт-Петербургская агломерация",
   "year": 2024,
-  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr",
+  "boundariesSource": "aglomeration_new.gpkg / aglomeration_ispr, OSM Ladoga 1754729",
   "headline": {
     "vgp": 15.6396594587,
     "population": 6.823197,

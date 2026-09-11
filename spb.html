@@ -976,8 +976,8 @@
 
     async function boot() {
       const [pageData, geojson] = await Promise.all([
-        fetch("data/spb/page_data.json").then((r) => r.json()),
-        fetch("data/spb/municipalities.geojson").then((r) => r.json()),
+        fetch("data/spb/page_data.json?v=ladoga-clip").then((r) => r.json()),
+        fetch("data/spb/municipalities.geojson?v=ladoga-clip").then((r) => r.json()),
       ]);
       renderMetricCharts(pageData.headline, pageData.dynamics);
       initMap(geojson);

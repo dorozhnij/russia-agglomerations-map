@@ -270,6 +270,13 @@
       font: 13px/1.4 var(--font);
     }
 
+    .leaflet-tile-pane,
+    .leaflet-tile-pane .leaflet-layer,
+    .leaflet-tile-pane .leaflet-tile {
+      filter: grayscale(1);
+      -webkit-filter: grayscale(1);
+    }
+
     .leaflet-control-attribution {
       background: rgba(255, 255, 255, 0.75) !important;
       font-size: 10px !important;
@@ -929,6 +936,7 @@
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
         maxZoom: 19,
+        className: "osm-bw",
       }).addTo(map);
 
       L.control.zoom({ position: "bottomright" }).addTo(map);

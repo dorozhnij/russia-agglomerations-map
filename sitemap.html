@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="star.svg" type="image/svg+xml">
+  <title>Карта сайта — Урбаника. Агломерации</title>
+  <meta name="description" content="Все страницы рейтинга 52 агломераций РФ: главная, материалы для СМИ, карта муниципалитетов и страницы агломераций.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #FE6643;
+      --orange-hover: #e05535;
+      --bg: #FAFAFA;
+      --white: #FFFFFF;
+      --text: #1A1A1A;
+      --muted: #666666;
+      --border: #EFEFEF;
+      --container: 1120px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+      border-bottom-color: #eee;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 24px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--orange); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .nav a:hover,
+    .nav a.is-current { color: var(--orange); }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+    }
+
+    .masthead {
+      padding: 56px 0 28px;
+    }
+
+    .masthead h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .masthead p {
+      color: var(--muted);
+      max-width: 46rem;
+    }
+
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px 64px;
+      padding: 12px 0 80px;
+    }
+
+    .sitemap-block h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .sitemap-block ol {
+      list-style: none;
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .sitemap-block--sections ol { columns: 1; }
+
+    .sitemap-block li {
+      break-inside: avoid;
+      margin: 0 0 8px;
+    }
+
+    .sitemap-block a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .sitemap-block a:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    footer {
+      background: #1A1A1A;
+      color: #aaa;
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-inner .logo { color: #fff; font-size: 18px; }
+    .footer-inner a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-inner a:hover { color: #fff; }
+
+    .site-legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+    }
+
+    @media (max-width: 900px) {
+      .sitemap-grid { grid-template-columns: 1fr; gap: 36px; }
+      .sitemap-block ol { columns: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 24px 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        gap: 4px;
+      }
+      .nav.open { display: flex; }
+      .header-inner { position: relative; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Урбаника<span>. Агломерации</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="index.html">Рейтинг</a>
+        <a href="media.html">Для СМИ</a>
+        <a href="map.html">Карта</a>
+        <a class="is-current" href="sitemap.html">Карта сайта</a>
+        <a href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <header class="masthead">
+        <h1>Карта сайта</h1>
+        <p>Разделы рейтинга и 52 страницы агломераций. Порядок как в рейтинге 2024 года.</p>
+      </header>
+
+      <div class="sitemap-grid">
+        <section class="sitemap-block sitemap-block--sections" aria-labelledby="sitemap-sections">
+          <h2 id="sitemap-sections">Разделы</h2>
+        <ol>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="index.html#rating">Таблица рейтинга</a></li>
+          <li><a href="index.html#clusters">Группы агломераций</a></li>
+          <li><a href="index.html#method">Методология</a></li>
+          <li><a href="media.html">Для СМИ</a></li>
+          <li><a href="map.html">Карта муниципалитетов</a></li>
+        </ol>
+        </section>
+
+        <section class="sitemap-block" aria-labelledby="sitemap-agglomerations">
+          <h2 id="sitemap-agglomerations">Агломерации</h2>
+        <ol>
+          <li><a href="moscow.html">1. Московская</a></li>
+          <li><a href="surgut.html">2. Сургутская</a></li>
+          <li><a href="spb.html">3. Санкт-Петербургская</a></li>
+          <li><a href="nabchelny.html">4. Набережночелнинская</a></li>
+          <li><a href="yuzhnosakhalinsk.html">5. Южно-Сахалинская</a></li>
+          <li><a href="perm.html">6. Пермская</a></li>
+          <li><a href="ekaterinburg.html">7. Екатеринбургская</a></li>
+          <li><a href="nizhny.html">8. Нижегородская</a></li>
+          <li><a href="murmansk.html">9. Мурманская</a></li>
+          <li><a href="kazan.html">10. Казанская</a></li>
+          <li><a href="almetyevsk.html">11. Альметьевская</a></li>
+          <li><a href="tula.html">12. Тульско-Новомосковская</a></li>
+          <li><a href="lipetsk.html">13. Липецкая</a></li>
+          <li><a href="vladivostok.html">14. Владивостокская</a></li>
+          <li><a href="irkutsk.html">15. Иркутская</a></li>
+          <li><a href="nizhnitagil.html">16. Нижнетагильская</a></li>
+          <li><a href="staryoskol.html">17. Старооскольская</a></li>
+          <li><a href="khabarovsk.html">18. Хабаровская</a></li>
+          <li><a href="ufa.html">19. Уфимская</a></li>
+          <li><a href="samara.html">20. Самарско-Тольяттинская</a></li>
+          <li><a href="krasnodar.html">21. Краснодарская</a></li>
+          <li><a href="novokuznetsk.html">22. Новокузнецкая</a></li>
+          <li><a href="rostov.html">23. Ростовская</a></li>
+          <li><a href="novosibirsk.html">24. Новосибирская</a></li>
+          <li><a href="chelyabinsk.html">25. Челябинская</a></li>
+          <li><a href="izhevsk.html">26. Ижевская</a></li>
+          <li><a href="orenburg.html">27. Оренбургская</a></li>
+          <li><a href="tyumen.html">28. Тюменская</a></li>
+          <li><a href="yaroslavl.html">29. Ярославско-Рыбинская</a></li>
+          <li><a href="orsk.html">30. Орская</a></li>
+          <li><a href="ryazan.html">31. Рязанская</a></li>
+          <li><a href="voronezh.html">32. Воронежская</a></li>
+          <li><a href="omsk.html">33. Омская</a></li>
+          <li><a href="krasnoyarsk.html">34. Красноярская</a></li>
+          <li><a href="kirov.html">35. Кировская</a></li>
+          <li><a href="volgograd.html">36. Волгоградская</a></li>
+          <li><a href="kemerovo.html">37. Кемеровская</a></li>
+          <li><a href="kaliningrad.html">38. Калининградская</a></li>
+          <li><a href="saratov.html">39. Саратовская</a></li>
+          <li><a href="ulyanovsk.html">40. Ульяновско-Димитровградская</a></li>
+          <li><a href="barnaul.html">41. Барнаульская</a></li>
+          <li><a href="astrakhan.html">42. Астраханская</a></li>
+          <li><a href="stavropol.html">43. Ставропольская</a></li>
+          <li><a href="penza.html">44. Пензенская</a></li>
+          <li><a href="tomsk.html">45. Томская</a></li>
+          <li><a href="cheboksary.html">46. Чебоксарская</a></li>
+          <li><a href="makhachkala.html">47. Махачкалинская</a></li>
+          <li><a href="sterlitamak.html">48. Стерлитамакская</a></li>
+          <li><a href="kavminvody.html">49. Кавминводская</a></li>
+          <li><a href="zlatoust.html">50. Златоустско-Миасская</a></li>
+          <li><a href="ulanude.html">51. Улан-Удэнская</a></li>
+          <li><a href="abakan.html">52. Абаканская</a></li>
+        </ol>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="logo">Урбаника<span>. Агломерации</span></a>
+      <nav class="site-legal" aria-label="Правовая информация">
+        <a href="privacy.html">Политика в отношении обработки персональных данных</a>
+        <a href="about.html">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>
+        <a href="sitemap.html" aria-current="page">Карта сайта</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById("header");
+      function onScroll() {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      var menuToggle = document.getElementById("menuToggle");
+      var nav = document.getElementById("nav");
+      menuToggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    })();
+  </script>
+  <script src="js/site-legal.js?v=3"></script>
+</body>
+</html>

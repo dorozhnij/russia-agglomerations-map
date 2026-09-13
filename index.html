@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="star.svg" type="image/svg+xml">
   <title>Рейтинг агломераций РФ по экономической эффективности — Урбаника</title>
   <meta name="description" content="Рейтинг 52 агломераций РФ по масштабу и экономической эффективности за 2024 год.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +27,10 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -165,71 +169,47 @@
     /* Hero */
     .hero {
       position: relative;
-      padding: 110px 0 100px;
-      text-align: left;
+      padding: 0;
       overflow: hidden;
       background: #FAFAFA;
     }
 
-    .hero-map {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image: url('hero-map.png');
-      background-repeat: no-repeat;
-      background-position: center 55%;
-      background-size: cover;
-      opacity: 0.55;
+    .hero-stage {
+      position: relative;
     }
-
-    .hero-map::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(250, 250, 250, 0.55) 0%,
-        rgba(250, 250, 250, 0.35) 40%,
-        rgba(250, 250, 250, 0.75) 100%
-      );
-    }
-
-    .hero .container { position: relative; z-index: 1; }
 
     .hero-copy {
       position: relative;
-      max-width: 720px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 132px 24px 32px;
     }
 
     .hero h1 {
-      position: relative;
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(28px, 4.2vw, 44px);
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      max-width: 720px;
-      margin: 0 0 20px;
+      max-width: 14em;
+      margin: 0 auto 18px;
       color: var(--text);
+      overflow-wrap: break-word;
     }
 
     .hero h1 .accent { color: var(--orange); }
 
     .hero .lead {
-      position: relative;
-      font-size: clamp(17px, 2vw, 20px);
+      font-size: clamp(16px, 1.8vw, 19px);
       color: var(--text-secondary);
-      max-width: 640px;
-      margin: 0 0 16px;
+      max-width: 34ch;
+      margin: 0 auto 28px;
       line-height: 1.55;
-    }
-
-    .hero .hero-desc {
-      position: relative;
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 640px;
-      margin: 0 0 36px;
-      line-height: 1.6;
     }
 
     /* Stats */
@@ -314,7 +294,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 15px;
-      min-width: 720px;
+      min-width: 480px;
     }
 
     th {
@@ -557,7 +537,7 @@
     .bubble-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 20px;
+      gap: 8px 28px;
       margin: 0 4px 14px;
       font-size: 13px;
       color: var(--muted);
@@ -570,12 +550,56 @@
     }
 
     .bubble-legend .swatch {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--orange);
-      opacity: 0.85;
+      width: 34px;
+      height: 26px;
+      border-radius: 0;
+      background-color: currentColor;
+      opacity: 1;
       flex-shrink: 0;
+      -webkit-mask: var(--animal) center / contain no-repeat;
+      mask: var(--animal) center / contain no-repeat;
+      mask-mode: alpha;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+    }
+
+    .bubble-legend .swatch--anchors {
+      color: #FE6643;
+      --animal: url("data/media/animals/legend-bear.svg");
+      width: 36px;
+      height: 28px;
+    }
+
+    .bubble-legend .swatch--large {
+      color: #B7E7FC;
+      --animal: url("data/media/animals/legend-moose.svg");
+      width: 40px;
+      height: 32px;
+      margin-left: 10px;
+    }
+
+    .bubble-legend .swatch--dense {
+      color: #FFD3F0;
+      --animal: url("data/media/animals/legend-lynx.svg");
+      width: 32px;
+      height: 24px;
+    }
+
+    .bubble-legend .swatch--weak {
+      color: #F5C700;
+      --animal: url("data/media/animals/legend-badger.svg");
+      width: 30px;
+      height: 22px;
+    }
+
+    .bubble-legend .swatch--median {
+      width: 22px;
+      height: 0;
+      color: #bbb;
+      background: none;
+      -webkit-mask: none;
+      mask: none;
+      border-top: 1.5px dashed #bbb;
     }
 
     .bubble-chart {
@@ -843,6 +867,24 @@
 
     .footer-links a:hover { color: #fff; }
 
+    .footer-links .site-legal a:hover { color: #fff; border-bottom-color: #fff; }
+
+    .site-telegram {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .site-telegram-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .footer-links .site-telegram:hover { color: var(--orange); }
+
     .share-btn {
       background: transparent;
       border: 1px solid #444;
@@ -882,7 +924,9 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-copy { max-width: 28rem; padding-left: 20px; padding-right: 20px; }
+    }
     @media (max-width: 900px) {
       .tops-grid { grid-template-columns: 1fr; }
       .chart-bar .label { width: 120px; font-size: 13px; }
@@ -892,7 +936,21 @@
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .two-col { grid-template-columns: 1fr; }
       .section { padding: 64px 0; }
-      .hero { padding: 64px 0 56px; }
+      .hero-copy {
+        padding: 96px 24px 24px;
+        align-items: stretch;
+      }
+
+      .hero h1,
+      .hero .lead,
+      .hero-cta {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .hero h1 {
+        font-size: clamp(24px, 7vw, 32px);
+      }
 
       .menu-toggle { display: flex; }
 
@@ -945,6 +1003,7 @@
     @media (max-width: 480px) {
       .stats-grid { grid-template-columns: 1fr; }
       .container { padding: 0 16px; }
+      .hero-explain { padding-left: 16px; padding-right: 16px; }
       .stat-card { padding: 28px 20px; }
       .method-card { padding: 24px; }
       .chart-container { padding: 20px; }
@@ -1004,6 +1063,24 @@
       gap: 14px;
     }
 
+    .hero-explain {
+      position: relative;
+      z-index: 2;
+      padding: 8px 24px 72px;
+    }
+
+    .hero-explain h2 {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 20px;
+      text-align: left;
+      color: var(--text);
+    }
+
+    .hero-explain h2 .accent { color: var(--orange); }
+
     .hero-scroll {
       display: inline-flex;
       align-items: center;
@@ -1048,9 +1125,51 @@
       margin-bottom: 18px;
     }
 
-    .prose-block p:last-child { margin-bottom: 0; }
+    .prose-block > p:last-child { margin-bottom: 0; }
 
     .prose-block strong { color: var(--text); font-weight: 600; }
+
+    .prose-block h3 {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 48px 0 16px;
+      color: var(--text);
+    }
+
+    .takeaways {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+
+    .takeaways li {
+      padding: 0 0 28px;
+      margin: 0 0 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .takeaways li:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .takeaways h4 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    .takeaways p {
+      margin-bottom: 12px;
+    }
+
+    .takeaways p:last-child { margin-bottom: 0; }
 
     .cluster-grid {
       display: grid;
@@ -1060,11 +1179,21 @@
     }
 
     .cluster-card {
+      position: relative;
+      overflow: hidden;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px 24px;
       box-shadow: var(--shadow);
+    }
+
+    .cluster-card h3,
+    .cluster-meta,
+    .cluster-desc,
+    .cluster-list {
+      position: relative;
+      z-index: 2;
     }
     .cluster-visual {
       display: flex;
@@ -1119,11 +1248,6 @@
       color: var(--muted);
     }
 
-    .bubble-legend .swatch--anchors { background: #FE6643; }
-    .bubble-legend .swatch--large { background: #B7E7FC; }
-    .bubble-legend .swatch--dense { background: #FFD3F0; }
-    .bubble-legend .swatch--weak { background: #F5C700; }
-
     .bubble-chart circle.bubble {
       fill-opacity: 0.88;
     }
@@ -1151,10 +1275,51 @@
       padding: 2px 0;
     }
 
+    .cluster-runner-animal {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 52%;
+      width: auto;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      transform: translate3d(100%, 0, 0);
+      will-change: transform;
+    }
+
+    .cluster-runner-animal[data-animal="moose"] { height: 58%; }
+    .cluster-runner-animal[data-animal="bear"] { height: 52%; }
+    .cluster-runner-animal[data-animal="lynx"] { height: 46%; }
+    .cluster-runner-animal[data-animal="badger"] { height: 38%; }
+
+    .cluster-runner-animal svg {
+      display: block;
+      height: 100%;
+      width: auto;
+      max-width: none;
+      transform: scaleX(-1);
+      transform-origin: center bottom;
+    }
+
+    .cluster-runner-animal .ground,
+    .cluster-runner-animal [id^="ground"] {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cluster-runner-animal { display: none; }
+    }
 
     @media (max-width: 768px) {
       .cluster-grid { grid-template-columns: 1fr; }
-      .hero-cta { flex-direction: row; gap: 16px; }
+      .hero-cta { flex-direction: row; justify-content: center; gap: 16px; }
+      .cluster-runner-animal[data-animal="moose"] { height: 50%; }
+      .cluster-runner-animal[data-animal="bear"] { height: 46%; }
+      .cluster-runner-animal[data-animal="lynx"] { height: 40%; }
+      .cluster-runner-animal[data-animal="badger"] { height: 36%; }
     }
 
 
@@ -1176,9 +1341,10 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav" id="nav">
-      <a href="#about">О рейтинге</a>
+      <a href="#explain">О рейтинге</a>
       <a href="#rating">Рейтинг</a>
       <a href="#clusters">Группы</a>
+      <a href="#moscow">Москва</a>
       <a href="#method">Методология</a>
       <a href="media.html">Для СМИ</a>
       <a class="nav-brand" href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
@@ -1189,14 +1355,20 @@
 <main>
   <!-- Hero -->
   <section class="hero" id="about">
-    <div class="hero-map" aria-hidden="true"></div>
-    <div class="container">
+    <div class="hero-stage">
       <div class="hero-copy">
         <h1>Рейтинг агломераций РФ по <span class="accent">экономической эффективности</span></h1>
         <p class="lead">Рассчитывается компанией «Урбаника». Позволяет сравнивать и анализировать агломерации, определять зоны развития.</p>
-        <p class="hero-desc">Рейтинг считается из двух индексов: масштаба — по объему ВГП (аналогу ВВП) каждой агломерации — и эффективности: насколько интенсивно экономика работает относительно населения — отгрузка товаров, инвестиции и уровень занятости.</p>
         <div class="hero-cta">
           <a href="#rating" class="btn-primary">Смотреть рейтинг</a>
+        </div>
+      </div>
+      <div class="hero-explain" id="explain">
+        <div class="prose-block">
+          <h2>Как читать <span class="accent">рейтинг</span></h2>
+          <p>Интегральный рейтинг состоит из двух субиндексов и отвечает на два вопроса: насколько велика экономика агломерации и какова ее интенсивность. Субиндекс масштаба рассчитывается как валовой городской продукт (далее — ВГП) — объем денег, который генерирует агломерация. Субиндекс интенсивности рассчитывается отдельно, исходя из объема отгрузки товаров и услуг (далее «отгрузка»), объема инвестиций в основной капитал на жителя (далее «инвестиции») и доли занятых в муниципалитетах.</p>
+          <p>Агломерации разделены на четыре группы по масштабу и интенсивности экономики: «медведи» (крупные и высокоэффективные), «лоси» (крупные и низкоэффективные), «рыси» (небольшие и высокоэффективные) и «барсуки» (небольшие и низкоэффективные).</p>
+          <p>Для удобства оценки интегрального рейтинга взята шкала от 0 до 100 баллов.</p>
         </div>
       </div>
     </div>
@@ -1206,7 +1378,7 @@
   <section class="section" id="rating">
     <div class="container">
       <h2 class="section-title">Рейтинг агломераций РФ — <span class="accent">2024</span></h2>
-      <p class="section-subtitle">Клик по заголовку столбца — сортировка</p>
+      <p class="section-subtitle">Кликните по столбцу и перейдите на страницу агломерации</p>
 
       <div class="table-wrapper">
         <table id="ratingTable" class="data-table">
@@ -1214,9 +1386,7 @@
             <tr>
               <th data-sort="rank" data-table="rating" class="active" data-dir="asc">Место <span class="sort-icon">▲</span></th>
               <th data-sort="name" data-table="rating">Агломерация <span class="sort-icon">▼</span></th>
-              <th data-sort="integral50" data-table="rating">Интегральный индекс, балл <span class="sort-icon">▼</span></th>
-              <th data-sort="scale" data-table="rating">Субиндекс по масштабу <span class="sort-icon">▼</span></th>
-              <th data-sort="efficiency" data-table="rating">Субиндекс по эффективности <span class="sort-icon">▼</span></th>
+              <th data-sort="integral50" data-table="rating">Интегральный индекс, баллов <span class="sort-icon">▼</span></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -1226,15 +1396,55 @@
     </div>
   </section>
 
-  <!-- How to read ranking -->
-  <section class="section section--alt" id="explain">
+  <!-- Sources, takeaways, why agglomerations -->
+  <section class="section section--alt" id="about-rating">
     <div class="container">
-      <h2 class="section-title">Как читать <span class="accent">рейтинг</span></h2>
+      <h2 class="section-title">Откуда взяты <span class="accent">данные</span></h2>
       <div class="prose-block">
-        <p>Рейтинг отвечает на вопрос: насколько агломерация важна для экономики страны — и по объему, и по эффективности работы. В выборке 52 агломерации с суммарным валовым городским продуктом 156,6 трлн руб. и населением 78,9 млн человек.</p>
-        <p>Высокая позиция — у тех, кто либо очень крупный, либо очень эффективный, либо и то и другое.</p>
-        <p>Лидеры 2024 года: Московская агломерация (около 40% ВГП всего набора), Сургутская, Санкт-Петербургская, Набережночелнинская и Южно-Сахалинская. Сургут и Набережные Челны показывают, что компактный промышленный узел может обойти многие миллионники по интегральному баллу. В Сургутской агломерации доля сектора добычи сырья составляет 70%, что и определяет высокие позиции в рейтинге. В Набережночелнинскую агломерацию входят как сами Челны, так и города Елабуга с особой экономической зоной, Нижнекамск (ПАО «Нижнекамскнефтехим») и другие населенные пункты.</p>
-        <p>В хвосте рейтинга — Абаканская, Улан-Удэнская, Златоустско-Миасская, Кавминводская и Стерлитамакская агломерации. У них небольшой масштаб и слабая интенсивность: вклад в экономику страны ограничен.</p>
+        <p>Границы агломераций, закрепленные в законодательных документах, и метод расчета ВГП взяты из исследования Института экономики города. Наиболее актуальные данные — за 2024 год (по состоянию на сентябрь 2026). Часть городов (ЗАТО) не вошла в исследование: по ним нет данных.</p>
+
+        <h3>Главное</h3>
+        <ol class="takeaways">
+          <li>
+            <h4>Вторая экономика страны — не Петербургская, а Сургутская агломерация</h4>
+            <p>Сургутская агломерация обошла Санкт-Петербургскую и стоит второй после Москвы. Играет роль эффект масштаба: население меньше миллиона человек, отгрузка товаров и услуг на человека — 8,2 млн руб. Это становится возможным благодаря управлению добычей важнейших для экономики страны полезных ископаемых (70% от всей экономики агломерации).</p>
+          </li>
+          <li>
+            <h4>Половина населения страны создает 84% экономики</h4>
+            <p>В исследуемых агломерациях живет почти 79 млн человек — больше половины населения России. Это 84% ВРП страны. ВРП — это наиболее сравнимый с валовым городским продуктом (ВГП) показатель, который показывает суммарную добавленную стоимость всех товаров и услуг, которые произвели резиденты всех регионов страны за год. За пределами этих агломераций живет половина людей, которые формируют лишь 1/6 часть экономики.</p>
+          </li>
+          <li>
+            <h4>Москва — безусловный лидер, но не менее четверти объема ее товаров фактически производится за МКАДом</h4>
+            <p>На Московскую агломерацию приходится почти 40% ВГП от всей выборки при почти четверти ее населения, на Петербург — вчетверо меньше. Но, по оценке «Урбаники», до 61% отгрузки обрабатывающих производств Москвы и 26% всей ее отгрузки за 2024 год приходится на отрасли, которые фиксируются статистикой в столице, хотя производственные мощности находятся в других регионах. Это происходит из-за комбинации особенностей статистического учета и расположения головных офисов в столице.</p>
+          </li>
+          <li>
+            <h4>Место Набережночелнинской агломерации в топ-5 — пример «незаметных» городов и их роли в экономике страны</h4>
+            <p>В составе агломерации — Набережные Челны со стратегическим автомобильным предприятием, Нижнекамск с нефтехимическим производством, Елабуга с передовой особой экономической зоной «Алабуга» и небольшой Менделеевск со сверхсовременным химзаводом. Набережночелнинская агломерация занимает четвертое место рейтинга после Москвы, Сургута и Петербурга.</p>
+          </li>
+          <li>
+            <h4>Компактные агломерации с четкой экономической функцией оказываются эффективнее Москвы</h4>
+            <p>Сургут отгружает на жителя в 4 раза больше, чем Москва, Альметьевск — в 2,5 раза больше столицы. Южно-Сахалинская агломерация занимает пятое место, Мурманская — девятое. В пирамиде «Москва, Санкт-Петербург, города-миллионники, вся остальная страна» появляется четвертый уровень — агломерации с населением 300–800 тысяч человек, где правильно выбранный трек развития может дать более привлекательные условия жизни, чем у больших городов.</p>
+          </li>
+          <li>
+            <h4>Татарстан — лидер страны по равномерности и системности развития экономики</h4>
+            <p>В верхних 20% рейтинга — все три агломерации республики. Татарстан — единственный регион страны, имеющий не только второе, но и третье густонаселенное и экономически эффективное ядро расселения. Секрет успеха — сочетание минеральных ресурсов, диверсифицированного промышленного комплекса и продуманной пространственной политики администрирования.</p>
+          </li>
+          <li>
+            <h4>В топ-20 рейтинга агломераций с городами-миллионниками — меньше половины (8 из 20)</h4>
+            <p>Наличие ядра агломерации с населением более миллиона — преимущество в экономическом лидерстве, но не решающий фактор. Часть агломераций: Воронежская, Омская, Красноярская, Волгоградская стоят ниже топ-30 в рейтинге по населению. В процессе трансформации миллионников из промышленных в постиндустриальные центры часть городов теряют старые драйверы экономики и не компенсируют их достаточным объемом новых.</p>
+          </li>
+          <li>
+            <h4>В семи агломерациях рейтинга периферия экономически сильнее центра</h4>
+            <p>В большинстве случаев ядро агломерации (город, чьим именем она названа) экономически мощнее ее периферии. Однако исследование выявило исключения, доля которых занимает 13,5%. В семи агломерациях из 52 ВГП на человека в пригороде выше, чем в ядре. Это связано с тем, что крупные производства — промышленные узлы, заводы, шахты и пр. — находятся за пределами центра.</p>
+            <p>Агломерации с сильными пригородами: Сургутская (нефтегазодобыча), Набережночелнинская (машиностроение, химия), Орская (металлургия), Новокузнецкая (уголь, металлургия), Старооскольская (металлургия), Стерлитамакская (химия), Альметьевская (нефть).</p>
+          </li>
+        </ol>
+
+        <h3>Почему считаем агломерации, а не города?</h3>
+        <p>Более половины населения страны (78,9 млн человек в 2024 году) проживает в городских агломерациях. В экономике есть понятие «агломерационного эффекта» — близко расположенные города и населенные пункты с регулярными экономическими, культурными, инфраструктурными связями увеличивают общий экономический результат и он больше, чем их простая сумма по отдельности. Это происходит за счет общего рынка труда, товаров и услуг.</p>
+        <p>Рейтинг экономик регионов «размазывает» показатели по территории и занижает их. Пример: средняя зарплата в Москве в апреле 2026 года по данным Росстата — 196&nbsp;825 рублей, в Московской области — 130&nbsp;556 рублей. Внутри региона зарплата тоже может сильно отличаться от муниципалитета к муниципалитету.</p>
+        <p>Рейтинг городов берет только административные границы и не учитывает территории вокруг, население которых вовлечено в экономику территории. Доля центров или ядер агломераций в экономических показателях колеблется от 70 до 80%. Рассмотрение просто крупных городов не позволит учесть крупную промышленность в городах-спутниках и пригородах, а обобщение на уровне регионов скрывает их сложные территориальные особенности.</p>
+        <p>Рейтинг агломераций показывает реальные центры экономики страны и корректнее оценить их экономический эффект.</p>
       </div>
     </div>
   </section>
@@ -1243,13 +1453,15 @@
   <section class="section" id="clusters">
     <div class="container">
       <h2 class="section-title">Четыре группы <span class="accent">агломераций</span></h2>
-      <p class="section-subtitle">Граница квадратов — медиана масштаба 0,26 и эффективности 0,34. Экспертные переносы: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в высокоинтенсивные узлы. Внутри группы — по убыванию интегрального индекса.</p>
+      <p class="section-subtitle">Агломерации разделены на группы по медиане масштаба и интенсивности. Крупные — выше медианы ВГП, небольшие — ниже. Высокоинтенсивные — выше медианы субиндекса интенсивности на жителя, низкоинтенсивные — ниже.</p>
+      <p class="section-subtitle">Шесть агломераций экспертно разнесены по группам: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в небольшие высокоинтенсивные. Пунктир на графике — медианы обоих индексов.</p>
 
       <div class="cluster-grid">
-        <article class="cluster-card cluster-card--anchors">
-          <h3>Экономические якоря <span class="cluster-count">(8)</span></h3>
-          <div class="cluster-meta">Высокий масштаб + высокая эффективность · ~62% ВГП · ~44% населения</div>
-          <p class="cluster-desc">Дают около 62% ВГП набора из 52 агломераций при ~44% населения: и крупные по объему экономики, и сильные по эффективности.</p>
+        <article class="cluster-card cluster-card--anchors" data-runner="bear">
+          <h3>«Медведи» — крупные высокоинтенсивные <span class="cluster-count">(8)</span></h3>
+          <div class="cluster-meta">62% ВГП, 44% населения всех агломераций</div>
+          <p class="cluster-desc">Медведь — хозяин леса, он всеяден и силен: как медведи стоят на вершине пищевой цепочки, так и эти агломерации доминируют в цепочках экономических. Они лидеры по масштабу и интенсивности, в них стекаются ресурсы и люди.</p>
+          <p class="cluster-desc">Москва дает 62,1 трлн руб. ВГП — больше, чем остальные семь вместе взятые. Петербург — 15,6 трлн и третье место. Вторая строка рейтинга — Сургутская агломерация: 5,4 трлн при 829 тыс. жителей, отгрузка на человека 8,2 млн руб., такой эффект достигается за счет высокой доли добычи полезных ископаемых (70%). Набережночелнинская (четвертое место) попадает за счет того, что включает крупные предприятия Набережных Челнов, Елабуги и Нижнекамска. В Пермской занятость 44% населения — максимум из всех, поэтому попадает в топ.</p>
           <ul class="cluster-list">
             <li>Московская</li>
             <li>Сургутская</li>
@@ -1260,12 +1472,14 @@
             <li>Нижегородская</li>
             <li>Казанская</li>
           </ul>
+          <div class="cluster-runner-animal" data-animal="bear" aria-hidden="true"></div>
         </article>
 
-        <article class="cluster-card cluster-card--large">
-          <h3>Крупные низкоинтенсивные <span class="cluster-count">(15)</span></h3>
-          <div class="cluster-meta">Высокий масштаб + низкая эффективность · ~21% ВГП · ~29% населения</div>
-          <p class="cluster-desc">Крупные региональные центры с заметным вкладом в экономику (~21% ВГП и ~29% населения), но с отгрузкой, инвестициями на жителя и занятостью ниже, чем у якорей. Сюда же экспертно отнесены Уфимская, Ижевская и Оренбургская.</p>
+        <article class="cluster-card cluster-card--large" data-runner="moose">
+          <h3>«Лоси» — крупные низкоинтенсивные <span class="cluster-count">(15)</span></h3>
+          <div class="cluster-meta">21% ВГП и почти треть населения всех агломераций</div>
+          <p class="cluster-desc">Лось — лесной великан, он большой и неповоротливый, ни на кого не охотится, но из-за размера влияет на всю экосистему леса. Сила этих агломераций тоже в размере. Это региональные центры с большим объемом экономики и интенсивностью на жителя ниже медианы. В крупных городах меньше отгрузки: много экономики в сфере услуг, которую этим методом сложнее отследить.</p>
+          <p class="cluster-desc">Краснодарская (21-е место), Ростовская (23-е) и Новосибирская (24-е) крупнее Пермской и Набережночелнинской по ВГП и стоят ниже по интегральному баллу. У Ставропольской субиндекс интенсивности очень низкий и близится к нулю. Это характерно для многих южных агломераций, где доля теневых доходов и занятость ниже.</p>
           <ul class="cluster-list">
             <li>Уфимская</li>
             <li>Самарско-Тольяттинская</li>
@@ -1283,12 +1497,14 @@
             <li>Саратовская</li>
             <li>Ставропольская</li>
           </ul>
+          <div class="cluster-runner-animal" data-animal="moose" aria-hidden="true"></div>
         </article>
 
-        <article class="cluster-card cluster-card--dense">
-          <h3>Высокоинтенсивные узлы <span class="cluster-count">(15)</span></h3>
-          <div class="cluster-meta">Низкий масштаб + высокая эффективность · ~10% ВГП · ~13% населения</div>
-          <p class="cluster-desc">Небольшой вклад в общий ВГП (~10%), но на жителя выше отгрузка, инвестиции и занятость.</p>
+        <article class="cluster-card cluster-card--dense" data-runner="lynx">
+          <h3>«Рыси» — небольшие высокоинтенсивные <span class="cluster-count">(15)</span></h3>
+          <div class="cluster-meta">10% ВГП, 13% населения всех агломераций</div>
+          <p class="cluster-desc">Рысь — идеальный лесной хищник, она маленькая, но быстрая: агломерации из этой категории при малом размере выдают высокий результат и держат баланс. Объем ВГП ниже среднего, отгрузка, инвестиции и занятость на жителя близки к «медведям».</p>
+          <p class="cluster-desc">В эту группу входят промышленные агломерации с высокой отгрузкой и занятостью. Южно-Сахалинская — пятое место при ВГП 1,27 трлн руб., Мурманская — девятое место. Отгрузка товаров и услуг в Альметьевской агломерации составляет 5,1 млн руб. на человека, что в 2,5 раза больше, чем в Москве.</p>
           <ul class="cluster-list">
             <li>Южно-Сахалинская</li>
             <li>Мурманская</li>
@@ -1306,12 +1522,14 @@
             <li>Рязанская</li>
             <li>Кировская</li>
           </ul>
+          <div class="cluster-runner-animal" data-animal="lynx" aria-hidden="true"></div>
         </article>
 
-        <article class="cluster-card cluster-card--weak">
-          <h3>Слабо вовлеченные агломерации <span class="cluster-count">(14)</span></h3>
-          <div class="cluster-meta">Низкий масштаб + низкая эффективность · ~7% ВГП · ~14% населения</div>
-          <p class="cluster-desc">Слабый вклад в ВГП (~7%) при заметной доле населения (~14%). Объем экономики невелик, а отгрузка, инвестиции на жителя и занятость ниже медианы. Для макроэкономики это скорее демографический и социальный контур, чем двигатель ВВП.</p>
+        <article class="cluster-card cluster-card--weak" data-runner="badger">
+          <h3>«Барсуки» — небольшие низкоинтенсивные <span class="cluster-count">(14)</span></h3>
+          <div class="cluster-meta">7% ВГП, 14% населения всех агломераций</div>
+          <p class="cluster-desc">Барсук — зверь небольшой и неторопливый: у таких агломераций есть своя роль в экосистеме экономики, но они слабо влияют на нее из-за размера и рода занятий. Доля людей в группе вдвое больше доли экономики. ВГП на жителя в два раза меньше среднего — 1 млн руб.</p>
+          <p class="cluster-desc">В этих агломерациях низкая доля занятых: в Махачкалинской она 13%, в Кавминводской 11% — минимум из всех обследованных агломераций, это связано с высокой долей рынка туристических услуг. В эту же группу попала Абаканская агломерация, которая замыкает рейтинг: 0,33 трлн руб. ВГП.</p>
           <ul class="cluster-list">
             <li>Кемеровская</li>
             <li>Калининградская</li>
@@ -1328,20 +1546,50 @@
             <li>Улан-Удэнская</li>
             <li>Абаканская</li>
           </ul>
+          <div class="cluster-runner-animal" data-animal="badger" aria-hidden="true"></div>
         </article>
       </div>
 
       <div class="chart-container chart-container--bubble">
-        <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб экономики, чем выше — тем больше интенсивность экономики, площадь круга — ВГП в 2024 году. Цвет круга — группа.</p>
+        <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб экономики, чем выше — тем больше интенсивность экономики. Оси — в баллах от 0 до 100, как в рейтинге. Площадь круга — ВГП в 2024 году. Цвет круга — группа. Наведите на круг, чтобы увидеть название, нажмите — откроется страница агломерации.</p>
         <div class="bubble-legend" aria-hidden="true">
-          <span><i class="swatch swatch--anchors"></i> Экономические якоря</span>
-          <span><i class="swatch swatch--large"></i> Крупные низкоинтенсивные</span>
-          <span><i class="swatch swatch--dense"></i> Высокоинтенсивные узлы</span>
-          <span><i class="swatch swatch--weak"></i> Слабо вовлеченные</span>
-          <span>Пунктир — медианы</span>
+          <span><i class="swatch swatch--anchors"></i> «Медведи»</span>
+          <span><i class="swatch swatch--large"></i> «Лоси»</span>
+          <span><i class="swatch swatch--dense"></i> «Рыси»</span>
+          <span><i class="swatch swatch--weak"></i> «Барсуки»</span>
+          <span><i class="swatch swatch--median"></i> Пунктир — медианы</span>
         </div>
-        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб экономики по оси X, интенсивность экономики по оси Y, цвет — группа, площадь круга — ВГП"></div>
+        <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб экономики по оси X, интенсивность экономики по оси Y в баллах от 0 до 100, цвет — группа, площадь круга — ВГП"></div>
         <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="moscow">
+    <div class="container">
+      <h2 class="section-title">Почему Москва <span class="accent">лидирует</span></h2>
+      <div class="prose-block">
+        <p>Москва занимает первое место в рейтинге, относится к группе крупных высокоинтенсивных. Генерирует почти 40% ВГП всех обследованных агломераций при почти четверти их населения.</p>
+        <p>Среди всех обследованных агломераций на Москву приходится 35% отгрузки, 39% инвестиций и 27% занятых. Петербург — вторая по величине агломерация в России — вчетверо меньше по ВГП. Москва дает ВГП больше, чем семь других крупных высокоинтенсивных агломераций вместе взятых.</p>
+        <p>Москва действительно является лидером со сложной постиндустриальной экономикой и значимым государственным сектором. Но часть ее показателей связана с деятельностью, которая в ней не происходит. Например, почти 40% этой отгрузки Москвы — обрабатывающие производства, 4% — добыча полезных ископаемых. В самом городе месторождений полезных ископаемых нет.</p>
+        <p>В добыче отгрузка связана не столько с нефтью и газом, сколько с услугами в этой сфере. Основной вклад дает нефтепереработка: по отгрузке этих товаров регион тоже лидер в стране. Московский НПЗ в 2024 году перерабатывал около 12 млн тонн нефти при общестрановом объеме порядка 260 млн тонн.</p>
+        <p>Москва также в лидерах по производству алюминия, драгоценных металлов и азотных удобрений — при том что крупных мощностей на территории нет. По летательным аппаратам и самолетам в 2024 году столица — абсолютный лидер по отгрузке.</p>
+        <p>Это происходит по нескольким причинам из-за особенностей статистического учета. Во-первых, регистрация компаний в Москве приводит к сдаче отчетности по предприятиям в ней. Во-вторых, факт отгрузки продукции попадает в отчетность головного офиса, особенно по товарам, которые близки к готовым изделиям. В статистику могут попадать и переданные полуфабрикаты, которые потом возвращаются на предприятия. Туда же попадают доходы и работа вахтовых и командируемых сотрудников.</p>
+        <p>Общий объем искажения — деятельность, зачтенная Москве, но ведущаяся не в ней — однозначно оценить нельзя. По оценке института «Урбаника», вклад таких отраслей может составлять 61% отгрузки товаров в обрабатывающих производствах и 26% всей отгрузки товаров, работ и услуг Москвы за 2024 год.</p>
+        <p>Завышение статистики объемов производимой продукции характерно и для других агломераций, в которых базируются крупные бизнес-холдинги или находятся центры принятия решений.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cores">
+    <div class="container">
+      <h2 class="section-title">Почему ядра агломераций <span class="accent">переоцениваются</span></h2>
+      <div class="prose-block">
+        <p>Южно-Сахалинская агломерация занимает пятое место в рейтинге, относится к группе небольших высокоинтенсивных («рыси»). Самая малочисленная из 52 агломераций: 270 тыс. жителей.</p>
+        <p>В составе — Южно-Сахалинск, Долинский, Корсаковский и Анивский округа. Это юг острова. Север Сахалина, где добывают нефть и газ, в агломерацию не входит: ВРП области 1,68 трлн руб., ВГП четырех южных округов — 1,27 трлн.</p>
+        <p>Природные ресурсы идут с севера на юг острова, природный газ сжижают и грузят в Пригородном, в Корсаковском округе, на заводе СПГ проекта «Сахалин-2». Южно-Сахалинск — административный центр: здесь живут люди, здесь регистрируются предприятия проектов, сюда же в статистике приписывается стоимость отгруженных товаров.</p>
+        <p>Из-за этой приписки ВГП внутри агломерации распределен неравномерно. Почти 88% ВГП, 96% инвестиций и 85% занятых дает Южно-Сахалинск — ядро, где живет 69% населения. Корсаковский округ — 15% населения, 7% ВГП и 8% занятых. При этом на Корсаков приходится 60% всей отгрузки агломерации.</p>
+        <p>Тот же механизм, что в Москве, только внутри одной агломерации. В столице в отгрузку попадает продукция мощностей из других регионов. На Сахалине мощность стоит в Корсакове, а ВГП пишет Южно-Сахалинск. Если считать только город-ядро, за скобками остается больше половины отгрузки.</p>
       </div>
     </div>
   </section>
@@ -1428,7 +1676,12 @@
   <div class="container footer-inner">
     <a href="https://www.urbanica.spb.ru/" class="logo" target="_blank" rel="noopener">Урбаника<span>. Агломерации</span></a>
     <div class="footer-links">
-      <a href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">© 2026 Урбаника</a>
+      <nav class="site-legal" aria-label="Правовая информация">
+        <a href="privacy.html">Политика в отношении обработки персональных данных</a>
+        <a href="about.html">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>
+        <a href="sitemap.html">Карта сайта</a>
+      </nav>
+      <a class="site-telegram" href="https://t.me/urbanica_spb" target="_blank" rel="noopener noreferrer" aria-label="Подписывайтесь на Telegram-канал Урбаники"><svg class="site-telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Подписывайтесь</span></a>
       <button type="button" class="share-btn" id="shareBtn">Поделиться</button>
     </div>
   </div>
@@ -1436,6 +1689,116 @@
 
 <div class="toast" id="toast" role="status"></div>
 
+<script>
+(function mountHeroForest() {
+  function load(files, slots, attr) {
+    if (!slots.length) return Promise.resolve();
+    var kinds = Object.keys(files);
+    return Promise.all(kinds.map(function (kind) {
+      return fetch(files[kind]).then(function (r) { return r.text(); }).then(function (text) {
+        var doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+        var svg = doc.documentElement;
+        svg.querySelectorAll('[id="ground"], [class="ground"], [class~="ground"]').forEach(function (el) {
+          el.remove();
+        });
+        svg.removeAttribute('aria-labelledby');
+        var title = svg.querySelector('title');
+        if (title) title.remove();
+        var desc = svg.querySelector('desc');
+        if (desc) desc.remove();
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        svg.setAttribute('preserveAspectRatio', 'xMidYMax meet');
+        var crop = {
+          moose: '0 0 1024 848',
+          bear: '0 0 1024 793',
+          lynx: '0 0 1024 852',
+          badger: '0 0 1024 756'
+        };
+        if (crop[kind]) svg.setAttribute('viewBox', crop[kind]);
+        return [kind, svg];
+      });
+    })).then(function (pairs) {
+      var map = {};
+      pairs.forEach(function (pair) { map[pair[0]] = pair[1]; });
+      slots.forEach(function (slot, i) {
+        var src = map[slot.getAttribute(attr)];
+        if (!src) return;
+        var node = src.cloneNode(true);
+        node.querySelectorAll('[id]').forEach(function (el) {
+          el.id = el.id + '-' + attr + '-' + i;
+        });
+        slot.appendChild(node);
+      });
+    });
+  }
+
+  load({
+    moose: 'data/media/animals/moose.svg',
+    bear: 'data/media/animals/bear.svg',
+    lynx: 'data/media/animals/lynx.svg',
+    badger: 'data/media/animals/badger.svg'
+  }, document.querySelectorAll('.cluster-runner-animal[data-animal]'), 'data-animal').then(function () {
+    runClusterAnimals();
+  });
+
+  function runClusterAnimals() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var actors = Array.prototype.slice.call(document.querySelectorAll('.cluster-card[data-runner] .cluster-runner-animal[data-animal]')).map(function (slot) {
+      var card = slot.closest('.cluster-card');
+      if (!card) return null;
+      return { slot: slot, card: card, peek: 0 };
+    }).filter(Boolean);
+
+    if (!actors.length) return;
+
+    var ticking = false;
+
+    function targetPeek(card) {
+      var rect = card.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var p = (vh - rect.top) / (vh + rect.height);
+      if (p <= 0 || p >= 1) return 0;
+      return Math.sin(p * Math.PI);
+    }
+
+    function applyPeek(actor, peek) {
+      var x = 100 - peek * 58;
+      actor.slot.style.transform = 'translate3d(' + x.toFixed(2) + '%, 0, 0)';
+    }
+
+    function tick() {
+      ticking = false;
+      var busy = false;
+      actors.forEach(function (actor) {
+        var goal = targetPeek(actor.card);
+        var k = goal < actor.peek ? 0.055 : 0.12;
+        var next = actor.peek + (goal - actor.peek) * k;
+        if (Math.abs(next - actor.peek) < 0.0008) next = goal;
+        actor.peek = next;
+        applyPeek(actor, next);
+        if (Math.abs(goal - next) > 0.002) busy = true;
+      });
+      if (busy) requestTick();
+    }
+
+    function requestTick() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick, { passive: true });
+    actors.forEach(function (actor) {
+      actor.peek = 0;
+      applyPeek(actor, 0);
+    });
+    requestTick();
+  }
+})();
+</script>
 <script>
 (function () {
   'use strict';
@@ -1503,6 +1866,10 @@
       return fixed.slice(0, -zeros.length);
     }
     return fixed.replace('.', ',');
+  }
+
+  function scorePoints(value) {
+    return Math.round(Number(value) * 100);
   }
 
   function scoreBar(value, maxW) {
@@ -1640,9 +2007,7 @@
       tr.innerHTML =
         '<td class="' + rankClass + '">' + d.rank + '</td>' +
         aggloNameCell(d.name) +
-        '<td><span class="score-cell">' + scoreBar(d.integral50) + '<span class="score-text">' + formatNum(d.integral50) + '</span></span></td>' +
-        '<td class="num">' + formatNum(d.scale) + '</td>' +
-        '<td class="num">' + formatNum(d.efficiency) + '</td>';
+        '<td><span class="score-cell">' + scoreBar(d.integral50) + '<span class="score-text">' + scorePoints(d.integral50) + '</span></span></td>';
       if (pageHref) {
         tr.addEventListener('click', function (e) {
           if (e.target.closest('a')) return;
@@ -1724,10 +2089,10 @@
     weak: '#F5C700'
   };
   var CLUSTER_LABELS = {
-    anchors: 'Экономические якоря',
-    large: 'Крупные низкоинтенсивные',
-    dense: 'Высокоинтенсивные узлы',
-    weak: 'Слабо вовлеченные'
+    anchors: '«Медведи»',
+    large: '«Лоси»',
+    dense: '«Рыси»',
+    weak: '«Барсуки»'
   };
 
   // Экспертные переносы поверх медианного правила
@@ -1835,7 +2200,7 @@
         y: margin.top + plotH + 18,
         'text-anchor': 'middle'
       });
-      xLabel.textContent = String(t).replace('.', ',');
+      xLabel.textContent = String(Math.round(t * 100));
       svg.appendChild(xLabel);
 
       var yLabel = el('text', {
@@ -1844,7 +2209,7 @@
         y: y + 4,
         'text-anchor': 'end'
       });
-      yLabel.textContent = String(t).replace('.', ',');
+      yLabel.textContent = String(Math.round(t * 100));
       svg.appendChild(yLabel);
     });
 
@@ -1922,12 +2287,9 @@
     }).sort(function (a, b) { return b.r - a.r; });
 
     var bubblesLayer = el('g', { class: 'bubbles' });
-    var labelsLayer = el('g', { class: 'labels' });
     var activeCircle = null;
-    var pinned = false;
 
     function hideTooltip() {
-      if (pinned) return;
       if (activeCircle) activeCircle.classList.remove('is-active');
       activeCircle = null;
       tooltip.hidden = true;
@@ -1942,12 +2304,12 @@
       var d = n.data;
       tooltip.innerHTML =
         '<strong>' + d.name + '</strong>' +
-        '<div class="row"><span>Масштаб</span><span>' + formatNum(d.scale) + '</span></div>' +
-        '<div class="row"><span>Эффективность</span><span>' + formatNum(d.efficiency) + '</span></div>' +
+        '<div class="row"><span>Масштаб</span><span>' + Math.round(d.scale * 100) + '</span></div>' +
+        '<div class="row"><span>Интенсивность</span><span>' + Math.round(d.efficiency * 100) + '</span></div>' +
         '<div class="row"><span>ВГП</span><span>' + formatNum(d.vgp) + ' трлн ₽</span></div>' +
         '<div class="row"><span>Место в рейтинге</span><span>' + d.rank + '</span></div>' +
         '<div class="row"><span>Группа</span><span>' + CLUSTER_LABELS[clusterKey(d)] + '</span></div>' +
-        '<div class="muted">Площадь круга ∝ ВГП</div>';
+        '<div class="muted">Нажмите, чтобы открыть страницу</div>';
       tooltip.hidden = false;
       positionTooltip(evt);
     }
@@ -1975,74 +2337,35 @@
       });
 
       circle.addEventListener('mouseenter', function (e) {
-        if (pinned) return;
         showTooltip(n, circle, e);
       });
       circle.addEventListener('mousemove', function (e) {
         if (tooltip.hidden) return;
-        if (pinned && activeCircle !== circle) return;
         positionTooltip(e);
       });
-      circle.addEventListener('mouseleave', function () {
-        if (!pinned) hideTooltip();
-      });
-      circle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (pinned && activeCircle === circle) {
-          pinned = false;
-          hideTooltip();
-          return;
-        }
-        pinned = true;
+      circle.addEventListener('mouseleave', hideTooltip);
+      circle.addEventListener('pointerdown', function (e) {
         showTooltip(n, circle, e);
       });
 
-      bubblesLayer.appendChild(circle);
+      var href = PAGE_URLS[n.data.name];
+      if (href) {
+        var link = el('a', {
+          href: href,
+          'aria-label': n.data.name
+        });
+        link.appendChild(circle);
+        bubblesLayer.appendChild(link);
+      } else {
+        circle.setAttribute('aria-label', n.data.name);
+        bubblesLayer.appendChild(circle);
+      }
     });
 
     svg.appendChild(bubblesLayer);
 
-    // Labels for largest and/or top-efficiency outliers that aren't tiny
-    var labelCandidates = nodes
-      .filter(function (n) { return n.r >= 10 || n.data.efficiency >= 0.9 || n.data.scale >= 0.9; })
-      .slice()
-      .sort(function (a, b) {
-        return (b.data.integral50 || 0) - (a.data.integral50 || 0);
-      })
-      .slice(0, 12);
-
-    labelCandidates.forEach(function (n) {
-      var name = shortAggloName(n.data.name);
-      if (name.length > 14) name = name.slice(0, 13) + '…';
-      var lx = n.x + n.r + 6;
-      var ly = n.y;
-      // Flip label left if near right edge
-      var anchor = 'start';
-      if (lx + name.length * 6.5 > margin.left + plotW - 4) {
-        lx = n.x - n.r - 6;
-        anchor = 'end';
-      }
-      var label = el('text', {
-        class: 'bubble-label',
-        x: lx.toFixed(1),
-        y: ly.toFixed(1),
-        'text-anchor': anchor
-      });
-      label.textContent = name;
-      labelsLayer.appendChild(label);
-    });
-
-    svg.appendChild(labelsLayer);
-
     wrap.innerHTML = '';
     wrap.appendChild(svg);
-
-    // Click empty space to unpin
-    svg.addEventListener('click', function () {
-      if (!pinned) return;
-      pinned = false;
-      hideTooltip();
-    });
   }
 
   var scaleAll = DATA.slice();
@@ -2114,5 +2437,6 @@
   });
 })();
 </script>
+<script src="js/site-legal.js?v=3"></script>
 </body>
 </html>

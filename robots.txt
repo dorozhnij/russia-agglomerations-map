@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dorozhnij.github.io/russia-agglomerations-map/sitemap.xml

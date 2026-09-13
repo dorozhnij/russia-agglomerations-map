@@ -188,7 +188,7 @@
       text-align: center;
       max-width: 34rem;
       margin: 0 auto;
-      padding: 132px 24px 32px;
+      padding: 132px 24px 80px;
     }
 
     .hero h1 {
@@ -270,6 +270,13 @@
     }
 
     .section-title .accent { color: var(--orange); }
+
+    .section-title--left {
+      text-align: left;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     .section-subtitle {
       text-align: center;
@@ -532,6 +539,25 @@
     .chart-subtitle {
       margin: 0 4px 16px;
       max-width: none;
+    }
+
+    .chart-heading {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    .chart-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 720px;
+      margin: 20px auto 0;
+      line-height: 1.55;
     }
 
     .bubble-legend {
@@ -843,26 +869,52 @@
     footer {
       background: #1A1A1A;
       color: #aaa;
-      padding: 48px 0;
+      padding: 40px 0 32px;
     }
 
     .footer-inner {
       display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .footer-top {
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       gap: 20px;
     }
 
     .footer-inner .logo { color: #fff; font-size: 18px; }
     .footer-inner .logo span { color: var(--orange); }
 
-    .footer-links {
+    .footer-actions {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
     }
+
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 12px 32px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      max-width: none;
+    }
+
+    .footer-legal a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1.35;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: #fff; }
 
     .footer-links a {
       color: #aaa;
@@ -943,7 +995,7 @@
       .two-col { grid-template-columns: 1fr; }
       .section { padding: 64px 0; }
       .hero-copy {
-        padding: 96px 24px 24px;
+        padding: 96px 24px 56px;
         align-items: stretch;
       }
 
@@ -1013,8 +1065,12 @@
       .stat-card { padding: 28px 20px; }
       .method-card { padding: 24px; }
       .chart-container { padding: 20px; }
-      .footer-inner { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+      .footer-top {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-actions { justify-content: center; }
+      .footer-legal { justify-content: center; text-align: center; }
     }
 
     .formula-row {
@@ -1072,7 +1128,7 @@
     .hero-explain {
       position: relative;
       z-index: 2;
-      padding: 8px 24px 72px;
+      padding: 48px 24px 72px;
     }
 
     .hero-explain h2 {
@@ -1355,7 +1411,7 @@
       <a href="#rating">Рейтинг</a>
       <a href="#clusters">Группы</a>
       <a href="#moscow">Москва</a>
-      <a href="#method">Методология</a>
+      <a href="method.html">Методология</a>
       <a href="media.html">Для СМИ</a>
       <a class="nav-brand" href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
     </nav>
@@ -1375,7 +1431,7 @@
       </div>
       <div class="hero-explain" id="explain">
         <div class="prose-block">
-          <h2>Как читать <span class="accent">рейтинг</span></h2>
+          <h2>Как читать рейтинг</h2>
           <p>Интегральный рейтинг состоит из двух субиндексов и отвечает на два вопроса: насколько велика экономика агломерации и какова ее интенсивность. Субиндекс масштаба рассчитывается как валовой городской продукт (далее — ВГП) — объем денег, который генерирует агломерация. Субиндекс интенсивности рассчитывается отдельно, исходя из объема отгрузки товаров и услуг (далее «отгрузка»), объема инвестиций в основной капитал на жителя (далее «инвестиции») и доли занятых в муниципалитетах.</p>
           <p>Агломерации разделены на четыре группы по масштабу и интенсивности экономики: «медведи» (крупные и высокоэффективные), «лоси» (крупные и низкоэффективные), «рыси» (небольшие и высокоэффективные) и «барсуки» (небольшие и низкоэффективные).</p>
           <p>Для удобства оценки интегрального рейтинга взята шкала от 0 до 100 баллов.</p>
@@ -1387,7 +1443,7 @@
   <!-- Interactive rating -->
   <section class="section" id="rating">
     <div class="container">
-      <h2 class="section-title">Рейтинг агломераций РФ — <span class="accent">2024</span></h2>
+      <h2 class="section-title">Рейтинг агломераций РФ — 2024</h2>
       <p class="section-subtitle">Кликните по столбцу и перейдите на страницу агломерации</p>
 
       <div class="table-wrapper">
@@ -1409,7 +1465,7 @@
   <!-- Takeaways and why agglomerations -->
   <section class="section section--alt" id="about-rating">
     <div class="container">
-      <h2 class="section-title">Главное</h2>
+      <h2 class="section-title section-title--left">Главные выводы исследования</h2>
       <div class="prose-block">
         <ol class="takeaways">
           <li>
@@ -1460,8 +1516,7 @@
   <section class="section" id="clusters">
     <div class="container">
       <h2 class="section-title">Четыре группы <span class="accent">агломераций</span></h2>
-      <p class="section-subtitle">Агломерации разделены на группы по медиане масштаба и интенсивности. Крупные — выше медианы ВГП, небольшие — ниже. Высокоинтенсивные — выше медианы субиндекса интенсивности на жителя, низкоинтенсивные — ниже.</p>
-      <p class="section-subtitle">Шесть агломераций экспертно разнесены по группам: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в небольшие высокоинтенсивные. Пунктир на графике — медианы обоих индексов.</p>
+      <p class="section-subtitle">Агломерации разделены на группы по медиане масштаба и интенсивности экономик агломераций</p>
 
       <div class="cluster-grid">
         <article class="cluster-card cluster-card--anchors" data-runner="bear">
@@ -1558,6 +1613,7 @@
       </div>
 
       <div class="chart-container chart-container--bubble">
+        <h3 class="chart-heading">Четыре группы агломераций на графике</h3>
         <p class="section-subtitle chart-subtitle">Чем правее — тем выше масштаб экономики, чем выше — тем больше интенсивность экономики. Оси — в баллах от 0 до 100, как в рейтинге. Площадь круга — ВГП в 2024 году. Цвет круга — группа. Наведите на круг, чтобы увидеть название, нажмите — откроется страница агломерации.</p>
         <div class="bubble-legend" aria-hidden="true">
           <span><i class="swatch swatch--anchors"></i> «Медведи»</span>
@@ -1568,13 +1624,14 @@
         </div>
         <div id="scaleChart" class="bubble-chart" role="img" aria-label="Пузырьковая диаграмма: масштаб экономики по оси X, интенсивность экономики по оси Y в баллах от 0 до 100, цвет — группа, площадь круга — ВГП"></div>
         <div id="bubbleTooltip" class="bubble-tooltip" hidden></div>
+        <p class="chart-note">Шесть агломераций экспертно разнесены по группам: Уфимская, Ижевская и Оренбургская — в крупные низкоинтенсивные; Владивостокская, Тульско-Новомосковская и Иркутская — в небольшие высокоинтенсивные.</p>
       </div>
     </div>
   </section>
 
   <section class="section section--alt" id="moscow">
     <div class="container">
-      <h2 class="section-title">Почему Москва <span class="accent">лидирует</span></h2>
+      <h2 class="section-title section-title--left">Почему Москва лидирует</h2>
       <div class="prose-block">
         <p>Москва занимает первое место в рейтинге, относится к группе крупных высокоинтенсивных. Генерирует почти 40% ВГП всех обследованных агломераций при почти четверти их населения.</p>
         <p>Среди всех обследованных агломераций на Москву приходится 35% отгрузки, 39% инвестиций и 27% занятых. Петербург — вторая по величине агломерация в России — вчетверо меньше по ВГП. Москва дает ВГП больше, чем семь других крупных высокоинтенсивных агломераций вместе взятых.</p>
@@ -1590,7 +1647,7 @@
 
   <section class="section" id="cores">
     <div class="container">
-      <h2 class="section-title">Почему ядра агломераций <span class="accent">переоцениваются</span></h2>
+      <h2 class="section-title section-title--left">Почему ядра агломераций переоцениваются</h2>
       <div class="prose-block">
         <p>Южно-Сахалинская агломерация занимает пятое место в рейтинге, относится к группе небольших высокоинтенсивных («рыси»). Самая малочисленная из 52 агломераций: 270 тыс. жителей.</p>
         <p>В составе — Южно-Сахалинск, Долинский, Корсаковский и Анивский округа. Это юг острова. Север Сахалина, где добывают нефть и газ, в агломерацию не входит: ВРП области 1,68 трлн руб., ВГП четырех южных округов — 1,27 трлн.</p>
@@ -1625,77 +1682,22 @@
       </div>
     </div>
   </section>
-
-  <!-- Methodology -->
-  <section class="section section--alt" id="method">
-    <div class="container">
-      <h2 class="section-title">Как мы <span class="accent">считали</span></h2>
-      <p class="section-subtitle">От границ агломераций до интегрального индекса: источники данных и логика расчета.</p>
-
-      <div class="method-card method-card--wide">
-        <h3>Откуда взяты данные</h3>
-        <p>Границы агломераций, закрепленные в законодательных документах, и метод расчета ВГП взяты из исследования Института экономики города. Наиболее актуальные данные — за 2024 год (по состоянию на сентябрь 2026). Часть городов (ЗАТО) не вошла в исследование: по ним нет данных.</p>
-      </div>
-
-      <div class="method-card method-card--wide" style="margin-top: 24px;">
-        <h3>Данные и границы</h3>
-        <ol class="method-steps">
-          <li>
-            Границы агломераций взяты из исследования Института экономики города
-            «Городские агломерации»
-            (<a href="https://www.urbaneconomics.ru/sites/default/files/gorodskie_aglomeracii.pdf" target="_blank" rel="noopener">PDF</a>).
-          </li>
-          <li>
-            По составу агломераций собраны коды ОКТМО муниципальных образований и выгружены показатели из базы данных муниципальных образований (БДМО)
-            (<a href="https://tochno.st/datasets/bdmo" target="_blank" rel="noopener">tochno.st/datasets/bdmo</a>.
-          </li>
-          <li>
-            Валовой городской продукт (ВГП) рассчитан по методу Института экономики города
-            (<a href="https://urbaneconomics.ru/sites/default/files/vebinar_vgp.pdf" target="_blank" rel="noopener">вебинар по методике ВГП, PDF</a>).
-          </li>
-        </ol>
-      </div>
-
-      <div class="two-col" style="margin-top: 24px;">
-        <div class="method-card">
-          <h3>Субиндекс по масштабу</h3>
-          <ul>
-            <li><strong>Показатель:</strong> валовой городской продукт (ВГП), трлн руб.</li>
-            <li><strong>Преобразование:</strong> натуральный логарифм ln(ВГП)</li>
-            <li><strong>Нормировка:</strong> линейная шкала от минимума к максимуму по 52 агломерациям, результат от 0 до 1</li>
-            <li><strong>Формула:</strong> (ln(ВГП) − ln(ВГП<sub>min</sub>)) / (ln(ВГП<sub>max</sub>) − ln(ВГП<sub>min</sub>))</li>
-            <li><strong>Зачем:</strong> логарифм сглаживает разрыв между Москвой и остальными, не обнуляя вклад средних и малых агломераций</li>
-          </ul>
-        </div>
-        <div class="method-card">
-          <h3>Субиндекс по эффективности</h3>
-          <ul>
-            <li><strong>1. Отгрузка товаров собственного производства на душу населения</strong> (тыс. руб. / чел.)</li>
-            <li><strong>2. Инвестиции в основной капитал на душу населения</strong> (тыс. руб. / чел.)</li>
-            <li><strong>3. Уровень занятости</strong> — доля занятых в численности населения агломерации, %</li>
-            <li><strong>Нормировка каждого показателя:</strong> перцентильная (P10–P90). Значения ниже P10 получают 0, выше P90 — 1, между ними — линейно</li>
-            <li><strong>Сводка:</strong> среднее арифметическое трех нормированных показателей (от 0 до 1)</li>
-            <li><strong>Зачем:</strong> перцентили срезают выбросы; три показателя отражают производство, вложения и вовлеченность населения в экономику</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
 </main>
 
 <footer>
   <div class="container footer-inner">
-    <a href="https://www.urbanica.spb.ru/" class="logo" target="_blank" rel="noopener">Урбаника<span>. Агломерации</span></a>
-    <div class="footer-links">
-      <nav class="site-legal" aria-label="Правовая информация">
-        <a href="privacy.html">Политика в отношении обработки персональных данных</a>
-        <a href="about.html">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>
-        <a href="sitemap.html">Карта сайта</a>
-      </nav>
-      <a class="site-telegram" href="https://t.me/urbanica_spb" target="_blank" rel="noopener noreferrer" aria-label="Подписывайтесь на Telegram-канал Урбаники"><svg class="site-telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Подписывайтесь</span></a>
-      <button type="button" class="share-btn" id="shareBtn">Поделиться</button>
+    <div class="footer-top">
+      <a href="https://www.urbanica.spb.ru/" class="logo" target="_blank" rel="noopener">Урбаника<span>. Агломерации</span></a>
+      <div class="footer-actions footer-links">
+        <a class="site-telegram" href="https://t.me/urbanica_spb" target="_blank" rel="noopener noreferrer" aria-label="Подписывайтесь на Telegram-канал Урбаники"><svg class="site-telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Подписывайтесь</span></a>
+        <button type="button" class="share-btn" id="shareBtn">Поделиться</button>
+      </div>
     </div>
+    <nav class="site-legal footer-legal" aria-label="Правовая информация">
+      <a href="privacy.html">Политика в отношении обработки персональных данных</a>
+      <a href="about.html">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>
+      <a href="sitemap.html">Карта сайта</a>
+    </nav>
   </div>
 </footer>
 

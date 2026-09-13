@@ -10,10 +10,10 @@
     weak: '#F5C700'
   };
   var DEFAULT_CLUSTER_LABELS = {
-    anchors: 'Экономические якоря',
-    large: 'Крупные низкоинтенсивные',
-    dense: 'Высокоинтенсивные узлы',
-    weak: 'Слабо вовлеченные'
+    anchors: '«Медведи»',
+    large: '«Лоси»',
+    dense: '«Рыси»',
+    weak: '«Барсуки»'
   };
   var CLUSTER_OVERRIDE = {
     'Уфимская': 'large',
@@ -198,6 +198,7 @@
     var yAxisTitle = opts.yAxisTitle || 'интенсивность экономики';
     var xAxisTitle = opts.xAxisTitle || 'масштаб экономики';
     var asPoints = !!opts.scoreAsPoints;
+    var pageUrls = opts.pageUrls || global.AGGLOMERATION_PAGE_URLS || {};
     if (!wrap || !tooltip) return;
 
     var width = wrap.clientWidth || 1000;
@@ -306,37 +307,16 @@
       'marker-end': 'url(#' + arrowId + ')'
     }));
 
-    var medX = xOf(MED_SCALE);
-    var medY = yOf(MED_EFF);
-
     svg.appendChild(el('line', {
       class: 'median-line',
-      x1: medX, y1: margin.top,
-      x2: medX, y2: margin.top + plotH
+      x1: xOf(MED_SCALE), y1: margin.top,
+      x2: xOf(MED_SCALE), y2: margin.top + plotH
     }));
     svg.appendChild(el('line', {
       class: 'median-line',
-      x1: margin.left, y1: medY,
-      x2: margin.left + plotW, y2: medY
+      x1: margin.left, y1: yOf(MED_EFF),
+      x2: margin.left + plotW, y2: yOf(MED_EFF)
     }));
-
-    var xMedLabel = el('text', {
-      class: 'median-label',
-      x: medX + 4,
-      y: margin.top + 14,
-      'text-anchor': 'start'
-    });
-    xMedLabel.textContent = 'медиана';
-    svg.appendChild(xMedLabel);
-
-    var yMedLabel = el('text', {
-      class: 'median-label',
-      x: margin.left + plotW - 4,
-      y: medY - 6,
-      'text-anchor': 'end'
-    });
-    yMedLabel.textContent = 'медиана';
-    svg.appendChild(yMedLabel);
 
     var xTitle = el('text', {
       class: 'axis-title',
@@ -344,7 +324,7 @@
       y: height - 8,
       'text-anchor': 'middle'
     });
-    xTitle.textContent = xAxisTitle + ' →';
+    xTitle.textContent = xAxisTitle;
     svg.appendChild(xTitle);
 
     var yTitle = el('text', {
@@ -354,7 +334,7 @@
       'text-anchor': 'middle',
       transform: 'rotate(-90 14 ' + (margin.top + plotH / 2) + ')'
     });
-    yTitle.textContent = yAxisTitle + ' →';
+    yTitle.textContent = yAxisTitle;
     svg.appendChild(yTitle);
 
     var nodes = items.map(function (d) {
@@ -367,12 +347,9 @@
     }).sort(function (a, b) { return b.r - a.r; });
 
     var bubblesLayer = el('g', { class: 'bubbles' });
-    var labelsLayer = el('g', { class: 'labels' });
     var activeCircle = null;
-    var pinned = false;
 
     function hideTooltip() {
-      if (pinned) return;
       if (activeCircle) activeCircle.classList.remove('is-active');
       activeCircle = null;
       tooltip.hidden = true;
@@ -392,7 +369,7 @@
         '<div class="row"><span>ВГП</span><span>' + formatNum(d.vgp) + ' трлн ₽</span></div>' +
         '<div class="row"><span>Место в рейтинге</span><span>' + d.rank + '</span></div>' +
         '<div class="row"><span>Группа</span><span>' + labels[clusterKey(d)] + '</span></div>' +
-        '<div class="muted">Площадь круга ∝ ВГП</div>';
+        '<div class="muted">Нажмите, чтобы открыть страницу</div>';
       tooltip.hidden = false;
       positionTooltip(evt);
     }
@@ -420,70 +397,34 @@
       });
 
       circle.addEventListener('mouseenter', function (e) {
-        if (pinned) return;
         showTooltip(n, circle, e);
       });
       circle.addEventListener('mousemove', function (e) {
         if (tooltip.hidden) return;
-        if (pinned && activeCircle !== circle) return;
         positionTooltip(e);
       });
-      circle.addEventListener('mouseleave', function () {
-        if (!pinned) hideTooltip();
-      });
-      circle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (pinned && activeCircle === circle) {
-          pinned = false;
-          hideTooltip();
-          return;
-        }
-        pinned = true;
+      circle.addEventListener('mouseleave', hideTooltip);
+      circle.addEventListener('pointerdown', function (e) {
         showTooltip(n, circle, e);
       });
 
-      bubblesLayer.appendChild(circle);
+      var href = pageUrls[n.data.name];
+      if (href) {
+        var link = el('a', {
+          href: href,
+          'aria-label': n.data.name
+        });
+        link.appendChild(circle);
+        bubblesLayer.appendChild(link);
+      } else {
+        circle.setAttribute('aria-label', n.data.name);
+        bubblesLayer.appendChild(circle);
+      }
     });
 
     svg.appendChild(bubblesLayer);
-
-    var labelCandidates = nodes
-      .filter(function (n) { return n.r >= 10 || n.data.efficiency >= 0.9 || n.data.scale >= 0.9; })
-      .slice()
-      .sort(function (a, b) {
-        return (b.data.integral50 || 0) - (a.data.integral50 || 0);
-      })
-      .slice(0, 12);
-
-    labelCandidates.forEach(function (n) {
-      var name = shortAggloName(n.data.name);
-      if (name.length > 14) name = name.slice(0, 13) + '…';
-      var lx = n.x + n.r + 6;
-      var ly = n.y;
-      var anchor = 'start';
-      if (lx + name.length * 6.5 > margin.left + plotW - 4) {
-        lx = n.x - n.r - 6;
-        anchor = 'end';
-      }
-      var label = el('text', {
-        class: 'bubble-label',
-        x: lx.toFixed(1),
-        y: ly.toFixed(1),
-        'text-anchor': anchor
-      });
-      label.textContent = name;
-      labelsLayer.appendChild(label);
-    });
-
-    svg.appendChild(labelsLayer);
     wrap.innerHTML = '';
     wrap.appendChild(svg);
-
-    svg.addEventListener('click', function () {
-      if (!pinned) return;
-      pinned = false;
-      hideTooltip();
-    });
   }
 
   function toCsv(items, opts) {

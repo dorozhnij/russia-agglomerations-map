@@ -101,6 +101,28 @@
     .nav a:hover,
     .nav a.is-current { color: var(--orange); }
 
+    .nav a.nav-company {
+      margin-left: 8px;
+      padding-left: 16px;
+      border-left: 1px solid #E5E5E5;
+      color: var(--text);
+      font-weight: 700;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+      line-height: 1.15;
+    }
+
+    .nav a.nav-company span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav a.nav-company:hover,
+    .nav a.nav-company:hover span { color: var(--orange); }
+
     .menu-toggle {
       display: none;
       background: none;
@@ -179,31 +201,72 @@
 
     footer {
       background: #1A1A1A;
-      color: #aaa;
-      padding: 48px 0;
+      color: #9a9a9a;
+      padding: 56px 0 40px;
     }
 
     .footer-inner {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
-    .footer-inner .logo { color: #fff; font-size: 18px; }
-    .footer-inner a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 14px;
+    .footer-inner .logo {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 22px;
     }
-    .footer-inner a:hover { color: #fff; }
+    .footer-inner .logo span { color: var(--orange); }
 
-    .site-legal {
+    .footer-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 32px;
+      align-items: center;
+      gap: 8px 24px;
+      margin-bottom: 28px;
     }
+
+    footer .footer-legal.site-legal,
+    .footer-legal {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      max-width: 28rem;
+      padding-top: 22px;
+      border-top: 1px solid #2e2e2e;
+    }
+
+    .footer-legal a {
+      color: #9a9a9a;
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .footer-legal a:hover { color: #fff; }
+
+    .site-telegram {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .site-telegram-icon {
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .site-telegram:hover { color: var(--orange); }
 
     @media (max-width: 900px) {
       .sitemap-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -226,6 +289,18 @@
         gap: 4px;
       }
       .nav.open { display: flex; }
+      .nav a {
+        padding: 12px 8px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .nav a.nav-company {
+        margin-left: 0;
+        padding-left: 8px;
+        border-left: none;
+        margin-top: 4px;
+        padding-top: 14px;
+        border-top: 1px solid #E5E5E5;
+      }
       .header-inner { position: relative; }
     }
   </style>
@@ -238,11 +313,11 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav" id="nav">
-        <a href="index.html">Рейтинг</a>
+        <a href="index.html#rating">Рейтинг</a>
+        <a href="index.html#clusters">Группы агломераций</a>
+        <a href="method.html">Методология</a>
         <a href="media.html">Для СМИ</a>
-        <a href="map.html">Карта</a>
-        <a class="is-current" href="sitemap.html">Карта сайта</a>
-        <a href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника</a>
+        <a class="nav-company" href="https://www.urbanica.spb.ru/" target="_blank" rel="noopener">Урбаника<span>сайт компании</span></a>
       </nav>
     </div>
   </header>
@@ -331,10 +406,12 @@
   <footer>
     <div class="container footer-inner">
       <a href="index.html" class="logo">Урбаника<span>. Агломерации</span></a>
-      <nav class="site-legal" aria-label="Правовая информация">
+      <div class="footer-meta footer-links">
+        <a class="site-telegram" href="https://t.me/urbanica_spb" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Урбаники"><svg class="site-telegram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram-канал Урбаники</span></a>
+      </div>
+      <nav class="site-legal footer-legal" aria-label="Правовая информация">
         <a href="privacy.html">Политика в отношении обработки персональных данных</a>
         <a href="about.html">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>
-        <a href="sitemap.html" aria-current="page">Карта сайта</a>
       </nav>
     </div>
   </footer>
@@ -356,6 +433,6 @@
       });
     })();
   </script>
-  <script src="js/site-legal.js?v=3"></script>
+  <script src="js/site-legal.js?v=4"></script>
 </body>
 </html>

@@ -15,9 +15,9 @@
     return (
       '<a class="site-telegram" href="' +
       TELEGRAM_HREF +
-      '" target="_blank" rel="noopener noreferrer" aria-label="Подписывайтесь на Telegram-канал Урбаники">' +
+      '" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал Урбаники">' +
       TELEGRAM_ICON +
-      "<span>Подписывайтесь</span></a>"
+      "<span>Telegram-канал Урбаники</span></a>"
     );
   }
 
@@ -27,6 +27,7 @@
     style.id = "site-legal-styles";
     style.textContent = [
       ".site-legal{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px 32px;max-width:46rem}",
+      "footer .footer-legal.site-legal{flex-direction:column;flex-wrap:nowrap;gap:10px;width:100%;max-width:28rem}",
       ".site-legal a{color:inherit;text-decoration:none;border-bottom:none;line-height:1.35}",
       ".site-legal a:hover{color:#FE6643}",
       ".site-legal-req{display:block;margin-top:3px;font-size:12px;opacity:.78;font-weight:400}",
@@ -39,7 +40,7 @@
       ".site-telegram-icon{width:20px;height:20px;display:block;flex-shrink:0}",
       "footer.page-foot .site-telegram{margin-left:auto;border-bottom:none}",
       "footer.page-foot .site-telegram:hover{border-bottom:none;color:#FE6643}",
-      "@media (max-width:560px){.footer-links .site-legal,.site-legal{justify-content:center;text-align:center}.site-telegram{justify-content:center}footer.page-foot .site-telegram{margin-left:0;width:100%;justify-content:center}}",
+      "@media (max-width:560px){footer.page-foot .site-telegram{margin-left:0}}",
       ".cookie-consent{position:fixed;z-index:4000;left:24px;bottom:24px;width:min(392px,calc(100vw - 32px));padding:22px 22px 20px;background:#fff;color:#1a1a1a;border:1px solid #e6e6e6;box-shadow:0 16px 48px rgba(0,0,0,.14);font-family:inherit;line-height:1.45;-webkit-font-smoothing:antialiased}",
       ".cookie-consent[hidden]{display:none}",
       ".cookie-consent-kicker{margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#888}",
@@ -77,25 +78,19 @@
       '">Политика в отношении обработки персональных данных</a>' +
       '<a href="' +
       ABOUT_HREF +
-      '">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>' +
-      '<a href="' +
-      SITEMAP_HREF +
-      '">Карта сайта</a>'
+      '">ИТП «Урбаника»<span class="site-legal-req">ИНН 7840413341 ОГРН 1097847144856</span></a>'
     );
   }
 
-  function ensureSitemapLink() {
-    var nav = document.querySelector(".site-legal");
-    if (!nav || nav.querySelector('a[href="' + SITEMAP_HREF + '"]')) return;
-    var link = document.createElement("a");
-    link.href = SITEMAP_HREF;
-    link.textContent = "Карта сайта";
-    nav.appendChild(link);
+  function stripSitemapLink() {
+    document.querySelectorAll('.site-legal a[href="' + SITEMAP_HREF + '"]').forEach(function (link) {
+      link.remove();
+    });
   }
 
   function ensureFooterLinks() {
     if (document.querySelector(".site-legal")) {
-      ensureSitemapLink();
+      stripSitemapLink();
       return;
     }
     var footer = document.querySelector("footer");

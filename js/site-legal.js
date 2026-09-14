@@ -2,7 +2,7 @@
   "use strict";
 
   var STORAGE_KEY = "urbanica_pd_cookie_consent";
-  var PRIVACY_HREF = "privacy.html";
+  var PRIVACY_HREF = "policy.html";
   var ABOUT_HREF = "about.html";
   var SITEMAP_HREF = "sitemap.html";
   var TELEGRAM_HREF = "https://t.me/urbanica_spb";
@@ -159,11 +159,16 @@
     });
   }
 
+  function isPolicyPage() {
+    var path = window.location.pathname || "";
+    return /\/(policy|privacy)(\.html)?$/i.test(path);
+  }
+
   function boot() {
     injectStyles();
     ensureFooterLinks();
     ensureTelegramLink();
-    showCookieDialog();
+    if (!isPolicyPage()) showCookieDialog();
   }
 
   if (document.readyState === "loading") {
